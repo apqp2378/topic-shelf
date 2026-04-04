@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
+  "name": "reddit-candidate-picker",
+  "permissions": {
+    "reddit": {
+      "enable": true,
+      "scope": "moderator"
+    },
+    "redis": true,
+    "menu": true
+  },
+  "post": {
+    "dir": "dist/client",
+    "entrypoints": {
+      "default": {
+        "height": "regular",
+        "inline": true,
+        "entry": "splash.html"
+      },
+      "game": {
+        "height": "tall",
+        "entry": "game.html"
+      }
+    }
+  },
+  "server": {
+    "dir": "dist/server",
+    "entry": "index.cjs"
+  },
+  "menu": {
+    "items": [
+      {
+        "label": "Open candidate picker dashboard",
+        "description": "Create a moderator dashboard post for candidate review",
+        "location": "subreddit",
+        "forUserType": "moderator",
+        "postFilter": "none",
+        "endpoint": "/internal/menu/create-dashboard-post"
+      }
+    ]
+  },
+  "scheduler": {
+    "tasks": {
+      "refresh-candidates": {
+        "endpoint": "/internal/scheduler/refresh-candidates",
+        "cron": "0 */2 * * *"
+      }
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "dev": {
+    "subreddit": "your_test_subreddit"
+  }
+}
