@@ -25,6 +25,7 @@ builds minimal card JSON for later expansion.
 - `run_pipeline.py --enable-translation`: Adds the optional translation scaffold and writes a third card export
 - `run_pipeline.py --enable-topic-classification`: Adds the optional topic classification scaffold and writes a fourth card export
 - `run_pipeline.py --enable-bundles`: Adds the optional bundle scaffold and writes a separate bundle export
+- `run_pipeline.py --enable-blog-drafts`: Adds the optional blog draft scaffold and writes a separate draft export
 
 ## Example commands
 
@@ -45,6 +46,12 @@ python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-bundles
 python python_pipeline/scripts/run_pipeline.py --enable-translation --enable-bundles python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-topic-classification --enable-bundles python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-translation --enable-topic-classification --enable-bundles python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-blog-drafts python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-blog-drafts python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-translation --enable-blog-drafts python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-topic-classification --enable-blog-drafts python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-bundles --enable-blog-drafts python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-translation --enable-topic-classification --enable-bundles --enable-blog-drafts python_pipeline/data/raw/devvit_keep_2026-04-05.json
 ```
 
 ## Execution order
@@ -81,6 +88,11 @@ Or run everything at once with `run_pipeline.py`.
 - topic bundle count
 - mixed bundle count
 - provider failure count
+- blog draft bundle input count
+- blog draft card input count
+- blog draft count
+- blog fallback draft count
+- blog provider failure count
 
 If validation issues are found, the pipeline still writes the normalized and cards outputs for the valid subset, then exits with status code `1`.
 
@@ -88,6 +100,7 @@ When `--enable-summary` is set, the pipeline keeps the existing `cards.json` out
 When `--enable-translation` is set, the pipeline writes `cards_with_translation_*.json` using `cards.json` or `cards_with_summary.json` as the source, depending on whether summary is enabled.
 When `--enable-topic-classification` is set, the pipeline writes `cards_with_topics_*.json` using the latest available card export as input.
 When `--enable-bundles` is set, the pipeline writes `bundles_*.json` using the latest available card export as input.
+When `--enable-blog-drafts` is set, the pipeline writes `blog_drafts_*.json` using bundles when available, otherwise it falls back to the latest available cards.
 
 ## Result files
 
@@ -103,6 +116,8 @@ When `--enable-bundles` is set, the pipeline writes `bundles_*.json` using the l
   `python_pipeline/data/cards/cards_with_topics_devvit_keep_2026-04-05.json`
 - Bundle example:
   `python_pipeline/data/cards/bundles_devvit_keep_2026-04-05.json`
+- Blog draft example:
+  `python_pipeline/data/cards/blog_drafts_devvit_keep_2026-04-05.json`
 
 ## Summary Stage
 
@@ -145,6 +160,17 @@ The V2-4 bundle stage is a scaffold for grouping cards into separate bundle outp
 - It writes only `bundles_*.json` and never changes the existing cards exports.
 - It is designed so a future LLM curator/provider can be added without changing the downstream `cards.json` contract.
 
+## Blog Draft Stage
+
+The V2-5 blog draft stage is a scaffold for pre-publish draft documents.
+
+- It uses a provider adapter interface so a future LLM writer can replace the rule-based provider later.
+- The default provider is `rule_based`.
+- It writes `blog_drafts_*.json` only and never changes the existing cards or bundles exports.
+- It prefers bundle input when bundles exist, and falls back to the latest cards when they do not.
+- It creates draft-shaped output only; it is not the final post content.
+- It is designed so a future LLM writer/provider can be added without changing the downstream `cards.json` or `bundles.json` contracts.
+
 ## What this version does not do
 
 - No LLM summarization
@@ -153,6 +179,7 @@ The V2-4 bundle stage is a scaffold for grouping cards into separate bundle outp
 - No multi-source integration
 - No database or web server
 - No LLM curator/provider
+- No LLM writer/provider
 
 ## Notes
 

@@ -10,8 +10,10 @@ if str(PIPELINE_ROOT) not in sys.path:
     sys.path.insert(0, str(PIPELINE_ROOT))
 
 from pipeline.card_builder import build_cards
+from pipeline.blog_drafters import build_blog_draft_provider, generate_blog_drafts_with_stats
 from pipeline.bundlers import build_bundle_provider, generate_bundles_with_stats
 from pipeline.io_utils import (
+    build_blog_drafts_output_path,
     build_bundles_output_path,
     build_cards_output_path,
     build_cards_with_summary_output_path,
@@ -82,6 +84,16 @@ def parse_args() -> argparse.Namespace:
         "--bundle-provider",
         default="rule_based",
         help="Bundle provider name.",
+    )
+    parser.add_argument(
+        "--enable-blog-drafts",
+        action="store_true",
+        help="Write blog_drafts output.",
+    )
+    parser.add_argument(
+        "--blog-draft-provider",
+        default="rule_based",
+        help="Blog draft provider name.",
     )
     return parser.parse_args()
 
@@ -196,6 +208,14 @@ def main() -> int:
     mixed_bundle_count = 0
     provider_failure_count = 0
 
+    blog_drafts_enabled = args.enable_blog_drafts
+    blog_draft_provider_name = args.blog_draft_provider
+    blog_bundle_records: list[dict[str, object]] = []
+    blog_bundle_input_path = bundle_input_path
+    blog_draft_count = 0
+    blog_fallback_draft_count = 0
+    blog_provider_failure_count = 0
+
     if summary_enabled:
         classification_input_cards = cards_with_summary
         classification_input_path = cards_with_summary_path
@@ -294,18 +314,61 @@ def main() -> int:
         )
         bundles_output_path = build_bundles_output_path(bundle_input_path)
         write_json_file(bundles_output_path, bundles)
+        blog_bundle_records = bundles
+        blog_bundle_input_path = bundles_output_path
         bundle_count = bundle_stats.bundle_count
         weekly_bundle_count = bundle_stats.weekly_bundle_count
         topic_bundle_count = bundle_stats.topic_bundle_count
         mixed_bundle_count = bundle_stats.mixed_bundle_count
         provider_failure_count = bundle_stats.provider_failure_count
         print(f"Bundles output path: {bundles_output_path}")
+    else:
+        candidate_bundles_path = build_bundles_output_path(bundle_input_path)
+        if candidate_bundles_path.exists():
+            try:
+                loaded_bundles = read_json_file(candidate_bundles_path)
+            except Exception:
+                loaded_bundles = []
+            if isinstance(loaded_bundles, list):
+                blog_bundle_records = loaded_bundles
+                blog_bundle_input_path = candidate_bundles_path
 
     print(f"Bundle count: {bundle_count}")
     print(f"Weekly bundle count: {weekly_bundle_count}")
     print(f"Topic bundle count: {topic_bundle_count}")
     print(f"Mixed bundle count: {mixed_bundle_count}")
     print(f"Provider failure count: {provider_failure_count}")
+
+    blog_card_input_cards = bundle_input_cards
+    blog_card_input_count = len(blog_card_input_cards) if blog_drafts_enabled else 0
+    blog_bundle_input_count = len(blog_bundle_records) if blog_drafts_enabled else 0
+    print(f"Blog drafts enabled: {'yes' if blog_drafts_enabled else 'no'}")
+    print(f"Blog draft provider: {blog_draft_provider_name}")
+    print(f"Blog draft bundle input count: {blog_bundle_input_count}")
+    print(f"Blog draft card input count: {blog_card_input_count}")
+
+    if blog_drafts_enabled:
+        try:
+            blog_draft_provider = build_blog_draft_provider(blog_draft_provider_name)
+        except ValueError as exc:
+            print(str(exc))
+            return 1
+
+        blog_drafts, blog_stats = generate_blog_drafts_with_stats(
+            blog_bundle_records,
+            blog_card_input_cards,
+            blog_draft_provider,
+        )
+        blog_drafts_output_path = build_blog_drafts_output_path(blog_bundle_input_path)
+        write_json_file(blog_drafts_output_path, blog_drafts)
+        blog_draft_count = blog_stats.draft_count
+        blog_fallback_draft_count = blog_stats.fallback_draft_count
+        blog_provider_failure_count = blog_stats.provider_failure_count
+        print(f"Blog drafts output path: {blog_drafts_output_path}")
+
+    print(f"Blog draft count: {blog_draft_count}")
+    print(f"Blog fallback draft count: {blog_fallback_draft_count}")
+    print(f"Blog provider failure count: {blog_provider_failure_count}")
 
     if issues:
         return 1

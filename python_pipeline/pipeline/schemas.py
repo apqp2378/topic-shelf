@@ -113,3 +113,19 @@ class BundleRecord(TypedDict, total=False):
     bundle_reason: str
     representative_title: str
     representative_summary: str
+
+
+class BlogDraftRecord(TypedDict, total=False):
+    draft_id: str
+    source_bundle_id: str
+    title: str
+    subtitle: str
+    intro: str
+    key_points: list[str]
+    recommended_cards: list[str]
+    primary_topic: str
+    related_topics: list[str]
+    body_sections: list[dict[str, str]]
+    closing: str
+    draft_status: str
+    draft_reason: str

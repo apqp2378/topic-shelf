@@ -1,0 +1,88 @@
+[
+  {
+    "draft_id": "draft_weekly_bundle_general_discussion_1",
+    "source_bundle_id": "weekly_bundle_general_discussion_1",
+    "title": "Weekly bundle (3 cards)",
+    "subtitle": "3 cards, focused on Coding, Productivity, Model Comparison",
+    "intro": "Grouped 3 cards from the latest export into one weekly bundle.",
+    "key_points": [
+      "Claude vs ChatGPT for daily work | For daily work, I use Claude more for long writing and document summaries, while ChatGPT is better for fast problem s...",
+      "Is Claude Pro worth it for coding? | I tried both for coding, and in my case Claude was better for reading large chunks of code, but ChatGPT felt faster f...",
+      "What does your AI workflow look like? | My workflow is usually simple: ChatGPT for fast interaction, Claude for longer reading or writing tasks."
+    ],
+    "recommended_cards": [
+      "reddit_card_2026-04-05_001",
+      "reddit_card_2026-04-05_002",
+      "reddit_card_2026-04-05_003"
+    ],
+    "primary_topic": "general_discussion",
+    "related_topics": [
+      "coding",
+      "productivity",
+      "model_comparison",
+      "workflow",
+      "pricing",
+      "api_and_tools"
+    ],
+    "body_sections": [
+      {
+        "heading": "Overview",
+        "summary": "Grouped 3 cards from the latest export into one weekly bundle."
+      },
+      {
+        "heading": "Representative card",
+        "summary": "Claude vs ChatGPT for daily work | For daily work, I use Claude more for long writing and document summaries, while ChatGPT is better for fast problem s..."
+      },
+      {
+        "heading": "Related topics",
+        "summary": "Keep the draft connected to: Coding, Productivity, Model Comparison."
+      }
+    ],
+    "closing": "Close with a short, practical takeaway for the General Discussion angle.",
+    "draft_status": "draft",
+    "draft_reason": "built from weekly_bundle weekly_bundle_general_discussion_1 using representative card Is Claude Pro worth it for coding? and 3 cards"
+  },
+  {
+    "draft_id": "draft_mixed_bundle_general_discussion_1",
+    "source_bundle_id": "mixed_bundle_general_discussion_1",
+    "title": "Mixed bundle (3 cards)",
+    "subtitle": "3 cards, focused on Coding, Productivity, Model Comparison",
+    "intro": "Fallback bundle for a small mixed-topic set: Coding, Productivity, Model Comparison.",
+    "key_points": [
+      "Claude vs ChatGPT for daily work | For daily work, I use Claude more for long writing and document summaries, while ChatGPT is better for fast problem s...",
+      "Is Claude Pro worth it for coding? | I tried both for coding, and in my case Claude was better for reading large chunks of code, but ChatGPT felt faster f...",
+      "What does your AI workflow look like? | My workflow is usually simple: ChatGPT for fast interaction, Claude for longer reading or writing tasks."
+    ],
+    "recommended_cards": [
+      "reddit_card_2026-04-05_001",
+      "reddit_card_2026-04-05_002",
+      "reddit_card_2026-04-05_003"
+    ],
+    "primary_topic": "general_discussion",
+    "related_topics": [
+      "coding",
+      "productivity",
+      "model_comparison",
+      "workflow",
+      "pricing",
+      "api_and_tools"
+    ],
+    "body_sections": [
+      {
+        "heading": "Overview",
+        "summary": "Fallback bundle for a small mixed-topic set: Coding, Productivity, Model Comparison."
+      },
+      {
+        "heading": "Representative card",
+        "summary": "Claude vs ChatGPT for daily work | For daily work, I use Claude more for long writing and document summaries, while ChatGPT is better for fast problem s..."
+      },
+      {
+        "heading": "Related topics",
+        "summary": "Keep the draft connected to: Coding, Productivity, Model Comparison."
+      }
+    ],
+    "closing": "Close with a short, practical takeaway for the General Discussion angle.",
+    "draft_status": "draft",
+    "draft_reason": "built from mixed_bundle mixed_bundle_general_discussion_1 using representative card Is Claude Pro worth it for coding? and 3 cards"
+  }
+]
