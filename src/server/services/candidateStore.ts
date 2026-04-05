@@ -7,42 +7,16 @@ import {
   type CandidateStatus,
   type CandidateStatusFilter,
 } from '../../shared/candidate';
+import {
+  getExcludedCandidateReason,
+  isDashboardPostTitle,
+} from '../config/exclusion';
 
 const CANDIDATE_HASH_KEY = 'candidate-picker:candidates';
 const REFRESH_META_KEY = 'candidate-picker:meta';
 
-const normalizeText = (value: string): string =>
-  value.replace(/\s+/g, ' ').trim().toLowerCase();
-
-const WRAPPER_TITLE = 'topic-shelf';
-const WRAPPER_AUTHOR = 'topic-shelf';
-
-export const getExcludedCandidateReason = (
-  candidate: Pick<Candidate, 'title' | 'author'>
-): string | null => {
-  const normalizedTitle = normalizeText(candidate.title);
-  const normalizedAuthor = normalizeText(candidate.author);
-
-  if (normalizedTitle === WRAPPER_TITLE) {
-    return 'exact_wrapper_title';
-  }
-
-  if (normalizedAuthor === WRAPPER_AUTHOR) {
-    return 'exact_wrapper_author';
-  }
-
-  return null;
-};
-
 export const isExcludedCandidateTitle = (title: string): boolean => {
-  const normalizedTitle = normalizeText(title);
-
-  return normalizedTitle === WRAPPER_TITLE;
-};
-
-export const isExcludedCandidateAuthor = (author: string): boolean => {
-  const normalizedAuthor = normalizeText(author);
-  return normalizedAuthor === WRAPPER_AUTHOR;
+  return isDashboardPostTitle(title);
 };
 
 export const isExcludedCandidate = (candidate: Pick<Candidate, 'title' | 'author'>): boolean =>
@@ -59,18 +33,29 @@ const parseTopComments = (value: unknown): Candidate['top_comments'] => {
         typeof comment === 'object' &&
         comment !== null &&
         typeof comment.comment_id === 'string' &&
-        typeof comment.body_excerpt === 'string' &&
         typeof comment.score === 'number'
     )
     .map((comment) => {
       const commentId = Reflect.get(comment, 'comment_id');
+      const author = Reflect.get(comment, 'author');
+      const body = Reflect.get(comment, 'body');
       const bodyExcerpt = Reflect.get(comment, 'body_excerpt');
       const score = Reflect.get(comment, 'score');
+      const createdUtc = Reflect.get(comment, 'created_utc');
+      const normalizedBody =
+        typeof body === 'string'
+          ? body
+          : typeof bodyExcerpt === 'string'
+            ? bodyExcerpt
+            : '';
 
       return {
         comment_id: typeof commentId === 'string' ? commentId : '',
+        author: typeof author === 'string' ? author : '[unknown]',
+        body: normalizedBody,
         body_excerpt: typeof bodyExcerpt === 'string' ? bodyExcerpt : '',
         score: typeof score === 'number' ? score : 0,
+        created_utc: typeof createdUtc === 'number' ? createdUtc : 0,
       };
     });
 };
@@ -104,6 +89,7 @@ const parseCandidate = (raw: string | undefined): Candidate | null => {
     const upvotesValue = Reflect.get(parsed, 'upvotes');
     const numCommentsValue = Reflect.get(parsed, 'num_comments');
     const bodyExcerptValue = Reflect.get(parsed, 'body_excerpt');
+    const postBodyValue = Reflect.get(parsed, 'post_body');
     const topCommentsValue = Reflect.get(parsed, 'top_comments');
     const scoreValue = Reflect.get(parsed, 'score');
     const reasonTagsValue = Reflect.get(parsed, 'reason_tags');
@@ -120,6 +106,12 @@ const parseCandidate = (raw: string | undefined): Candidate | null => {
       upvotes: typeof upvotesValue === 'number' ? upvotesValue : 0,
       num_comments:
         typeof numCommentsValue === 'number' ? numCommentsValue : 0,
+      post_body:
+        typeof postBodyValue === 'string'
+          ? postBodyValue
+          : typeof bodyExcerptValue === 'string'
+            ? bodyExcerptValue
+            : '',
       body_excerpt:
         typeof bodyExcerptValue === 'string' ? bodyExcerptValue : '',
       top_comments: parseTopComments(topCommentsValue),

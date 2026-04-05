@@ -1,6 +1,6 @@
 ## Reddit Candidate Picker V1
 
-Internal moderator-facing Devvit Web dashboard for reviewing recent posts in a test subreddit, scoring them with explicit rules, preserving human moderation decisions in Redis, and exporting `keep` links for manual downstream use.
+Internal moderator-facing Devvit Web dashboard for reviewing recent posts in a test subreddit, scoring them with explicit rules, preserving human moderation decisions in Redis, and exporting `keep` candidates for manual downstream use.
 
 ## Setup
 
@@ -22,7 +22,7 @@ Internal moderator-facing Devvit Web dashboard for reviewing recent posts in a t
 
 - `CandidateListPage`: Main moderation queue with status filter, score/latest/comment sorting, quick status actions, manual refresh, and detail navigation
 - `CandidateDetailPage`: Full candidate review view with metadata, reason tags, top comments, status controls, and moderator review note editing
-- `ExportPage`: Shows the current `keep` set and provides plain-text and Markdown copy actions
+- `ExportPage`: Shows the current `keep` set and provides plain-text and Markdown copy actions with title + link formatting
 
 ## Scheduler
 
@@ -30,6 +30,8 @@ Internal moderator-facing Devvit Web dashboard for reviewing recent posts in a t
 - The refresh fetches 30 recent posts plus top 5 comments per post from the installed subreddit
 - Candidate content, metrics, score, and reason tags are refreshed
 - Human-entered `status` and `review_note` are preserved and never overwritten
+- Recommended status is shown alongside moderator status in list and detail views
+- Export endpoints include `/api/export/keep-links`, `/api/export/keep-markdown`, and `/api/export/keep-raw-json`
 
 ## Run Checklist
 

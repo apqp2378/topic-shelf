@@ -5,6 +5,9 @@ import {
   POST_FETCH_LIMIT,
   TOP_COMMENT_LIMIT,
 } from '../config/keywords';
+import {
+  getExcludedCandidateReason,
+} from '../config/exclusion';
 import type { TopComment } from '../../shared/candidate';
 
 export type RedditPostRecord = {
@@ -21,27 +24,6 @@ export type RedditPostRecord = {
 
 const normalizeExcerpt = (value: string, maxLength: number): string =>
   value.replace(/\s+/g, ' ').trim().slice(0, maxLength);
-
-const normalizeTitle = (value: string): string => value.replace(/\s+/g, ' ').trim().toLowerCase();
-
-const shouldExcludePost = (postTitle: string, authorName: string, appUserName: string | undefined): boolean => {
-  const normalizedTitle = normalizeTitle(postTitle);
-  const normalizedAuthor = authorName.trim().toLowerCase();
-  const normalizedAppUser = appUserName?.trim().toLowerCase() ?? '';
-  const reason =
-    normalizedTitle === 'topic-shelf'
-      ? 'exact_wrapper_title'
-      : normalizedAuthor === 'topic-shelf' || normalizedAuthor === normalizedAppUser
-        ? 'exact_wrapper_author'
-        : null;
-
-  if (reason) {
-    console.debug('Skipping excluded candidate during ingest:', reason, postTitle, authorName);
-    return true;
-  }
-
-  return false;
-};
 
 export const resolveTargetSubreddit = async (): Promise<string> => {
   return context.subredditName;
@@ -60,7 +42,19 @@ export const fetchRecentPosts = async (
     .all();
 
   return posts
-    .filter((post) => !shouldExcludePost(post.title, post.authorName, appUser?.username))
+    .filter((post) => {
+      const reason = getExcludedCandidateReason(
+        { title: post.title, author: post.authorName },
+        appUser?.username
+      );
+
+      if (reason) {
+        console.debug('Skipping excluded candidate during ingest:', reason, post.title, post.authorName);
+        return false;
+      }
+
+      return true;
+    })
     .map((post) => ({
       post_id: post.id,
       permalink: post.permalink,
@@ -90,14 +84,20 @@ export const fetchTopComments = async (postId: T3): Promise<TopComment[]> => {
       try {
         return {
           comment_id: comment.id,
+          author: comment.authorName || '[deleted]',
+          body: comment.body ?? '',
           body_excerpt: normalizeExcerpt(comment.body, COMMENT_EXCERPT_LENGTH),
           score: comment.score,
+          created_utc: Math.floor(comment.createdAt.getTime() / 1000),
         };
       } catch {
         return {
           comment_id: comment.id,
+          author: comment.authorName || '[deleted]',
+          body: comment.body ?? '',
           body_excerpt: '',
           score: comment.score,
+          created_utc: Math.floor(comment.createdAt.getTime() / 1000),
         };
       }
     })
