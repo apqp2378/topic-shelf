@@ -1,0 +1,83 @@
+[
+  {
+    "card_id": "reddit_card_2026-04-05_001",
+    "source_id": "reddit_devvit_2026-04-05_001",
+    "title": "Claude vs ChatGPT for daily work",
+    "source_url": "https://reddit.com/r/topic_shelf_dev/comments/1scf90o/claude_vs_chatgpt_for_daily_work/",
+    "subreddit": "topic_shelf_dev",
+    "status": "keep",
+    "score": 12,
+    "reason_tags": [
+      "title_comparison_pattern",
+      "body_has_min_context",
+      "body_has_usage_context",
+      "body_has_comparison_context",
+      "body_has_specific_question",
+      "has_one_long_comment",
+      "has_two_long_comments",
+      "has_experience_comment",
+      "recent_3d"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "For daily work, I use Claude more for long writing and document summaries, while ChatGPT is better for fast problem solving. They overlap a ...",
+      "Compared to ChatGPT, Claude feels better when I want a more structured response for planning or writing. But for coding and quick iteration,...",
+      "In my workflow, Claude is useful, but I would not say it is clearly better for everything. For normal daily work, ChatGPT is often more conv..."
+    ],
+    "created_utc": 1775323792,
+    "collected_at": "2026-04-05T14:25:23.630Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-05_002",
+    "source_id": "reddit_devvit_2026-04-05_002",
+    "title": "Is Claude Pro worth it for coding?",
+    "source_url": "https://reddit.com/r/topic_shelf_dev/comments/1scf7s3/is_claude_pro_worth_it_for_coding/",
+    "subreddit": "topic_shelf_dev",
+    "status": "keep",
+    "score": 11,
+    "reason_tags": [
+      "title_worth_it_pattern",
+      "body_has_min_context",
+      "body_has_usage_context",
+      "body_has_specific_question",
+      "has_one_long_comment",
+      "has_two_long_comments",
+      "has_experience_comment",
+      "recent_3d"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "I use ChatGPT more often for coding, but Claude can be worth it if you deal with long files or want more structured explanations. For quick ...",
+      "I tried both for coding, and in my case Claude was better for reading large chunks of code, but ChatGPT felt faster for back-and-forth itera...",
+      "Honestly, I do not think Claude Pro is worth it for coding alone unless you already know why you need it. If you mainly want quick answers a..."
+    ],
+    "created_utc": 1775323712,
+    "collected_at": "2026-04-05T14:25:23.630Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-05_003",
+    "source_id": "reddit_devvit_2026-04-05_003",
+    "title": "What does your AI workflow look like?",
+    "source_url": "https://reddit.com/r/topic_shelf_dev/comments/1scf9dg/what_does_your_ai_workflow_look_like/",
+    "subreddit": "topic_shelf_dev",
+    "status": "keep",
+    "score": 11,
+    "reason_tags": [
+      "title_workflow_pattern",
+      "body_has_min_context",
+      "body_has_usage_context",
+      "body_has_specific_question",
+      "has_one_long_comment",
+      "has_experience_comment",
+      "recent_3d"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "I use ChatGPT for coding, quick research, and brainstorming. Claude is more useful for long documents, summarizing notes, and cleaning up ro...",
+      "My workflow is usually simple: ChatGPT for fast interaction, Claude for longer reading or writing tasks. If I need to compare tools or think...",
+      "For work, I usually start with ChatGPT because it is faster for small questions. If I am dealing with a large document or trying to organize..."
+    ],
+    "created_utc": 1775323814,
+    "collected_at": "2026-04-05T14:25:23.630Z"
+  }
+]
