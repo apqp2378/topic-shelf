@@ -54,6 +54,24 @@ def build_cards_with_translation_output_path(cards_path: Path) -> Path:
     return cards_path.parent / f"cards_with_translation_{suffix}"
 
 
+def build_cards_with_topics_output_path(cards_path: Path) -> Path:
+    cards_name = cards_path.name
+    prefixes = (
+        "cards_with_translation_",
+        "cards_with_summary_",
+        "cards_with_topics_",
+        "cards_",
+    )
+
+    suffix = cards_name
+    for prefix in prefixes:
+        if cards_name.startswith(prefix):
+            suffix = cards_name[len(prefix) :]
+            break
+
+    return cards_path.parent / f"cards_with_topics_{suffix}"
+
+
 def get_file_mtime(path: Path) -> float:
     return path.stat().st_mtime
 

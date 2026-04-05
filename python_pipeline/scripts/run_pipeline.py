@@ -14,11 +14,13 @@ from pipeline.io_utils import (
     build_cards_output_path,
     build_cards_with_summary_output_path,
     build_cards_with_translation_output_path,
+    build_cards_with_topics_output_path,
     build_normalized_output_path,
     find_latest_json_file,
     read_json_file,
     write_json_file,
 )
+from pipeline.classifiers import build_classification_provider, classify_cards_with_stats
 from pipeline.normalizers import normalize_records
 from pipeline.summarizers import enrich_cards_with_summary
 from pipeline.translators import build_translation_provider, translate_cards_with_stats
@@ -58,6 +60,16 @@ def parse_args() -> argparse.Namespace:
         "--translation-target",
         default="ko",
         help="Translation target language code.",
+    )
+    parser.add_argument(
+        "--enable-topic-classification",
+        action="store_true",
+        help="Write cards_with_topics output.",
+    )
+    parser.add_argument(
+        "--classification-provider",
+        default="rule_based",
+        help="Classification provider name.",
     )
     return parser.parse_args()
 
@@ -122,6 +134,8 @@ def main() -> int:
     summary_input_count = len(cards) if summary_enabled else 0
     summary_success_count = 0
     summary_empty_count = 0
+    cards_with_summary = cards
+    cards_with_summary_path = cards_path
 
     print(f"Summary enabled: {'yes' if summary_enabled else 'no'}")
     print(f"Summary input count: {summary_input_count}")
@@ -144,22 +158,29 @@ def main() -> int:
     translation_enabled = args.enable_translation
     translation_provider_name = args.translation_provider
     translation_target = args.translation_target
-    translation_input_cards = cards
-    translation_input_path = cards_path
+    translation_provider = None
+    translation_input_cards = cards_with_summary
+    translation_input_path = cards_with_summary_path
     translation_success_count = 0
     translation_empty_field_count = 0
     translation_card_failure_count = 0
 
-    if summary_enabled:
-        translation_input_cards = cards_with_summary
-        translation_input_path = cards_with_summary_path
+    topic_classification_enabled = args.enable_topic_classification
+    classification_provider_name = args.classification_provider
+    classification_input_cards = cards
+    classification_input_path = cards_path
+    classification_success_count = 0
+    classification_fallback_count = 0
+    classification_empty_text_count = 0
+    classification_card_failure_count = 0
 
-    translation_input_count = len(translation_input_cards) if translation_enabled else 0
+    if summary_enabled:
+        classification_input_cards = cards_with_summary
+        classification_input_path = cards_with_summary_path
 
     print(f"Translation enabled: {'yes' if translation_enabled else 'no'}")
     print(f"Translation provider: {translation_provider_name}")
     print(f"Translation target: {translation_target}")
-    print(f"Translation input count: {translation_input_count}")
 
     if translation_enabled:
         try:
@@ -180,11 +201,48 @@ def main() -> int:
         translation_success_count = translation_stats.success_count
         translation_empty_field_count = translation_stats.empty_field_count
         translation_card_failure_count = translation_stats.card_failure_count
+        classification_input_cards = translated_cards
+        classification_input_path = translation_output_path
         print(f"Translation output: {translation_output_path}")
 
+    translation_input_count = len(translation_input_cards) if translation_enabled else 0
+    print(f"Translation input count: {translation_input_count}")
     print(f"Translation success count: {translation_success_count}")
     print(f"Translation empty field count: {translation_empty_field_count}")
     print(f"Translation card failure count: {translation_card_failure_count}")
+
+    classification_input_count = (
+        len(classification_input_cards) if topic_classification_enabled else 0
+    )
+    print(f"Topic classification enabled: {'yes' if topic_classification_enabled else 'no'}")
+    print(f"Classification provider: {classification_provider_name}")
+    print(f"Classification input count: {classification_input_count}")
+
+    if topic_classification_enabled:
+        try:
+            classification_provider = build_classification_provider(
+                classification_provider_name
+            )
+        except ValueError as exc:
+            print(str(exc))
+            return 1
+
+        classified_cards, classification_stats = classify_cards_with_stats(
+            classification_input_cards,
+            classification_provider,
+        )
+        topics_output_path = build_cards_with_topics_output_path(classification_input_path)
+        write_json_file(topics_output_path, classified_cards)
+        classification_success_count = classification_stats.success_count
+        classification_fallback_count = classification_stats.fallback_count
+        classification_empty_text_count = classification_stats.empty_text_count
+        classification_card_failure_count = classification_stats.card_failure_count
+        print(f"Topic output path: {topics_output_path}")
+
+    print(f"Topic success count: {classification_success_count}")
+    print(f"Topic fallback count: {classification_fallback_count}")
+    print(f"Topic empty text count: {classification_empty_text_count}")
+    print(f"Topic card failure count: {classification_card_failure_count}")
 
     if issues:
         return 1

@@ -87,3 +87,14 @@ class TranslatedCardRecord(CardRecord):
     title_ko: str
     excerpt_ko: str
     summary_ko: str
+
+
+class TopicCardRecord(CardRecord, total=False):
+    summary: str
+    title_ko: str
+    excerpt_ko: str
+    summary_ko: str
+    topic_labels: list[str]
+    primary_topic: str
+    topic_confidence: float
+    topic_match_reason: str
