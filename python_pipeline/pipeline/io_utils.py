@@ -34,6 +34,15 @@ def build_cards_output_path(normalized_path: Path) -> Path:
     return normalized_path.parent.parent / "cards" / f"cards_{suffix}"
 
 
+def build_cards_with_summary_output_path(cards_path: Path) -> Path:
+    cards_name = cards_path.name
+    if cards_name.startswith("cards_"):
+        suffix = cards_name[len("cards_") :]
+    else:
+        suffix = cards_name
+    return cards_path.parent / f"cards_with_summary_{suffix}"
+
+
 def get_file_mtime(path: Path) -> float:
     return path.stat().st_mtime
 

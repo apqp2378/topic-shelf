@@ -77,3 +77,7 @@ class CardRecord(TypedDict):
     top_comment_snippets: list[str]
     created_utc: int
     collected_at: str
+
+
+class SummaryCardRecord(CardRecord):
+    summary: str
