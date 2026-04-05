@@ -98,3 +98,18 @@ class TopicCardRecord(CardRecord, total=False):
     primary_topic: str
     topic_confidence: float
     topic_match_reason: str
+
+
+class BundleRecord(TypedDict, total=False):
+    bundle_id: str
+    bundle_type: str
+    title: str
+    description: str
+    primary_topic: str
+    card_ids: list[str]
+    card_count: int
+    representative_card_id: str
+    related_topics: list[str]
+    bundle_reason: str
+    representative_title: str
+    representative_summary: str

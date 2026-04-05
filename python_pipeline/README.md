@@ -24,6 +24,7 @@ builds minimal card JSON for later expansion.
 - `run_pipeline.py --enable-summary`: Adds the optional heuristic summary stage and writes a second card export
 - `run_pipeline.py --enable-translation`: Adds the optional translation scaffold and writes a third card export
 - `run_pipeline.py --enable-topic-classification`: Adds the optional topic classification scaffold and writes a fourth card export
+- `run_pipeline.py --enable-bundles`: Adds the optional bundle scaffold and writes a separate bundle export
 
 ## Example commands
 
@@ -39,6 +40,11 @@ python python_pipeline/scripts/run_pipeline.py --enable-topic-classification pyt
 python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-topic-classification python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-translation --enable-topic-classification python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-translation --enable-topic-classification python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-bundles python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-bundles python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-translation --enable-bundles python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-topic-classification --enable-bundles python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-translation --enable-topic-classification --enable-bundles python_pipeline/data/raw/devvit_keep_2026-04-05.json
 ```
 
 ## Execution order
@@ -69,12 +75,19 @@ Or run everything at once with `run_pipeline.py`.
 - topic fallback count
 - topic empty text count
 - topic card failure count
+- bundle input count
+- bundle count
+- weekly bundle count
+- topic bundle count
+- mixed bundle count
+- provider failure count
 
 If validation issues are found, the pipeline still writes the normalized and cards outputs for the valid subset, then exits with status code `1`.
 
 When `--enable-summary` is set, the pipeline keeps the existing `cards.json` output unchanged and also writes `cards_with_summary_*.json`.
 When `--enable-translation` is set, the pipeline writes `cards_with_translation_*.json` using `cards.json` or `cards_with_summary.json` as the source, depending on whether summary is enabled.
 When `--enable-topic-classification` is set, the pipeline writes `cards_with_topics_*.json` using the latest available card export as input.
+When `--enable-bundles` is set, the pipeline writes `bundles_*.json` using the latest available card export as input.
 
 ## Result files
 
@@ -88,6 +101,8 @@ When `--enable-topic-classification` is set, the pipeline writes `cards_with_top
   `python_pipeline/data/cards/cards_with_translation_devvit_keep_2026-04-05.json`
 - Topic cards example:
   `python_pipeline/data/cards/cards_with_topics_devvit_keep_2026-04-05.json`
+- Bundle example:
+  `python_pipeline/data/cards/bundles_devvit_keep_2026-04-05.json`
 
 ## Summary Stage
 
@@ -119,14 +134,25 @@ The V2-3 topic classification stage is a scaffold, not a final LLM integration.
 - The current taxonomy is intentionally small: `pricing`, `model_comparison`, `coding`, `productivity`, `api_and_tools`, `prompt_engineering`, `workflow`, `general_discussion`.
 - It is designed so a future LLM classifier provider can replace the rule-based provider without changing the downstream `cards.json` contract.
 
+## Bundle Stage
+
+The V2-4 bundle stage is a scaffold for grouping cards into separate bundle outputs.
+
+- It uses a provider adapter interface so a future curator or LLM bundler can replace the rule-based provider later.
+- The default provider is `rule_based`.
+- It creates three bundle types for now: `weekly_bundle`, `topic_bundle`, and `mixed_bundle`.
+- It stores bundle references through `card_ids` instead of duplicating full cards.
+- It writes only `bundles_*.json` and never changes the existing cards exports.
+- It is designed so a future LLM curator/provider can be added without changing the downstream `cards.json` contract.
+
 ## What this version does not do
 
 - No LLM summarization
 - No translation
 - No blog generation
-- No weekly bundle generation
 - No multi-source integration
 - No database or web server
+- No LLM curator/provider
 
 ## Notes
 

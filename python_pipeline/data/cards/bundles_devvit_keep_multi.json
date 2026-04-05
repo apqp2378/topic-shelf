@@ -1,0 +1,52 @@
+[
+  {
+    "bundle_id": "weekly_bundle_general_discussion_1",
+    "bundle_type": "weekly_bundle",
+    "title": "Weekly bundle (3 cards)",
+    "description": "Grouped 3 cards from the latest export into one weekly bundle.",
+    "primary_topic": "general_discussion",
+    "card_ids": [
+      "reddit_card_2026-04-05_001",
+      "reddit_card_2026-04-05_002",
+      "reddit_card_2026-04-05_003"
+    ],
+    "card_count": 3,
+    "representative_card_id": "reddit_card_2026-04-05_002",
+    "related_topics": [
+      "coding",
+      "productivity",
+      "model_comparison",
+      "workflow",
+      "pricing",
+      "api_and_tools"
+    ],
+    "bundle_reason": "weekly bundle for 3 cards",
+    "representative_title": "Is Claude Pro worth it for coding?",
+    "representative_summary": "Is Claude Pro worth it for coding? | I tried both for coding, and in my case Claude was better for reading large chunks of code, but ChatGPT felt faster f..."
+  },
+  {
+    "bundle_id": "mixed_bundle_general_discussion_1",
+    "bundle_type": "mixed_bundle",
+    "title": "Mixed bundle (3 cards)",
+    "description": "Fallback bundle for a small mixed-topic set: Coding, Productivity, Model Comparison.",
+    "primary_topic": "general_discussion",
+    "card_ids": [
+      "reddit_card_2026-04-05_001",
+      "reddit_card_2026-04-05_002",
+      "reddit_card_2026-04-05_003"
+    ],
+    "card_count": 3,
+    "representative_card_id": "reddit_card_2026-04-05_002",
+    "related_topics": [
+      "coding",
+      "productivity",
+      "model_comparison",
+      "workflow",
+      "pricing",
+      "api_and_tools"
+    ],
+    "bundle_reason": "mixed fallback bundle for 3 cards",
+    "representative_title": "Is Claude Pro worth it for coding?",
+    "representative_summary": "Is Claude Pro worth it for coding? | I tried both for coding, and in my case Claude was better for reading large chunks of code, but ChatGPT felt faster f..."
+  }
+]

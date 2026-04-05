@@ -10,7 +10,9 @@ if str(PIPELINE_ROOT) not in sys.path:
     sys.path.insert(0, str(PIPELINE_ROOT))
 
 from pipeline.card_builder import build_cards
+from pipeline.bundlers import build_bundle_provider, generate_bundles_with_stats
 from pipeline.io_utils import (
+    build_bundles_output_path,
     build_cards_output_path,
     build_cards_with_summary_output_path,
     build_cards_with_translation_output_path,
@@ -70,6 +72,16 @@ def parse_args() -> argparse.Namespace:
         "--classification-provider",
         default="rule_based",
         help="Classification provider name.",
+    )
+    parser.add_argument(
+        "--enable-bundles",
+        action="store_true",
+        help="Write bundles output.",
+    )
+    parser.add_argument(
+        "--bundle-provider",
+        default="rule_based",
+        help="Bundle provider name.",
     )
     return parser.parse_args()
 
@@ -174,6 +186,16 @@ def main() -> int:
     classification_empty_text_count = 0
     classification_card_failure_count = 0
 
+    bundle_enabled = args.enable_bundles
+    bundle_provider_name = args.bundle_provider
+    bundle_input_cards = cards
+    bundle_input_path = cards_path
+    bundle_count = 0
+    weekly_bundle_count = 0
+    topic_bundle_count = 0
+    mixed_bundle_count = 0
+    provider_failure_count = 0
+
     if summary_enabled:
         classification_input_cards = cards_with_summary
         classification_input_path = cards_with_summary_path
@@ -243,6 +265,47 @@ def main() -> int:
     print(f"Topic fallback count: {classification_fallback_count}")
     print(f"Topic empty text count: {classification_empty_text_count}")
     print(f"Topic card failure count: {classification_card_failure_count}")
+
+    if topic_classification_enabled:
+        bundle_input_cards = classified_cards
+        bundle_input_path = topics_output_path
+    elif translation_enabled:
+        bundle_input_cards = translated_cards
+        bundle_input_path = translation_output_path
+    elif summary_enabled:
+        bundle_input_cards = cards_with_summary
+        bundle_input_path = cards_with_summary_path
+
+    bundle_input_count = len(bundle_input_cards) if bundle_enabled else 0
+    print(f"Bundles enabled: {'yes' if bundle_enabled else 'no'}")
+    print(f"Bundle provider: {bundle_provider_name}")
+    print(f"Bundle input count: {bundle_input_count}")
+
+    if bundle_enabled:
+        try:
+            bundle_provider = build_bundle_provider(bundle_provider_name)
+        except ValueError as exc:
+            print(str(exc))
+            return 1
+
+        bundles, bundle_stats = generate_bundles_with_stats(
+            bundle_input_cards,
+            bundle_provider,
+        )
+        bundles_output_path = build_bundles_output_path(bundle_input_path)
+        write_json_file(bundles_output_path, bundles)
+        bundle_count = bundle_stats.bundle_count
+        weekly_bundle_count = bundle_stats.weekly_bundle_count
+        topic_bundle_count = bundle_stats.topic_bundle_count
+        mixed_bundle_count = bundle_stats.mixed_bundle_count
+        provider_failure_count = bundle_stats.provider_failure_count
+        print(f"Bundles output path: {bundles_output_path}")
+
+    print(f"Bundle count: {bundle_count}")
+    print(f"Weekly bundle count: {weekly_bundle_count}")
+    print(f"Topic bundle count: {topic_bundle_count}")
+    print(f"Mixed bundle count: {mixed_bundle_count}")
+    print(f"Provider failure count: {provider_failure_count}")
 
     if issues:
         return 1
