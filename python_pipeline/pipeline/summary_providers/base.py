@@ -1,19 +1,17 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from typing import Any
 
 
-class TranslationProvider(ABC):
+class SummaryProvider(ABC):
     provider_name = "base"
 
     def is_available(self) -> bool:
         return True
 
-    def get_failure_count(self) -> int:
-        return 0
-
     @abstractmethod
-    def translate_text(self, text: str, target_lang: str = "ko") -> str:
+    def summarize_card(self, card: dict[str, Any], max_len: int = 180) -> str:
         raise NotImplementedError
 
 

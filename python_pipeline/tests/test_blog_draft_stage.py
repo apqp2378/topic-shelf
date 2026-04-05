@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import json
 import shutil
 import subprocess
@@ -23,6 +24,10 @@ from pipeline.io_utils import (
     build_cards_with_translation_output_path,
     build_normalized_output_path,
 )
+from pipeline.blog_draft_providers.openai import OpenAIBlogDraftProvider
+from pipeline.blog_drafters import build_blog_draft_provider, generate_blog_drafts_with_stats
+
+from unittest.mock import patch
 
 
 def write_json(path: Path, payload: object) -> None:
@@ -38,6 +43,271 @@ def read_json(path: Path) -> object:
 
 
 class BlogDraftStageTests(unittest.TestCase):
+    def test_default_provider_keeps_rule_based_behavior(self) -> None:
+        provider = build_blog_draft_provider("rule_based")
+        drafts, stats = generate_blog_drafts_with_stats(
+            [],
+            [
+                {
+                    "card_id": "card-1",
+                    "title": "Claude vs ChatGPT for coding",
+                    "summary": "A quick comparison of AI tools for coding.",
+                    "excerpt": "",
+                }
+            ],
+            provider,
+        )
+
+        self.assertEqual(provider.provider_name, "rule_based")
+        self.assertEqual(len(drafts), 1)
+        self.assertEqual(stats.provider_failure_count, 0)
+        self.assertEqual(drafts[0]["draft_status"], "draft")
+
+    def test_openai_provider_selection_and_fallback_branch(self) -> None:
+        provider = OpenAIBlogDraftProvider(api_key="test-key")
+        self.assertEqual(provider.provider_name, "openai")
+        self.assertTrue(provider.is_available())
+
+        bundle = {
+            "bundle_id": "bundle-1",
+            "bundle_type": "weekly_bundle",
+            "title": "Weekly bundle",
+            "description": "A compact weekly draft.",
+            "primary_topic": "coding",
+            "related_topics": ["coding"],
+            "card_ids": ["card-1"],
+            "representative_card_id": "card-1",
+            "representative_title": "Claude vs ChatGPT for coding",
+            "representative_summary": "A quick comparison of AI tools for coding.",
+        }
+        cards = [
+            {
+                "card_id": "card-1",
+                "title": "Claude vs ChatGPT for coding",
+                "summary": "A quick comparison of AI tools for coding.",
+                "excerpt": "",
+            }
+        ]
+
+        fake_response = {
+            "title": "AI tools for coding",
+            "subtitle": "A compact comparison draft",
+            "intro": "This draft compares the main tools and the most useful angle.",
+            "key_points": ["Compare the tools", "Keep the framing practical"],
+            "recommended_cards": ["card-1"],
+            "body_sections": [
+                {"heading": "Overview", "summary": "Start from the comparison angle."},
+                {"heading": "Practical takeaway", "summary": "Close with a useful recommendation."},
+            ],
+            "closing": "Keep the ending short and practical.",
+        }
+
+        with patch.object(provider, "request_completion", return_value=json.dumps(fake_response)):
+            drafts = provider.build_drafts([bundle], cards)
+
+        self.assertEqual(len(drafts), 1)
+        self.assertEqual(drafts[0]["title"], "AI tools for coding")
+        self.assertEqual(drafts[0]["recommended_cards"], ["card-1"])
+        self.assertEqual(provider.get_failure_count(), 0)
+
+    def test_missing_api_key_uses_fallback(self) -> None:
+        provider = OpenAIBlogDraftProvider(api_key="")
+        drafts = provider.build_drafts(
+            [
+                {
+                    "bundle_id": "bundle-1",
+                    "bundle_type": "weekly_bundle",
+                    "title": "Weekly bundle",
+                    "description": "A compact weekly draft.",
+                    "primary_topic": "coding",
+                    "related_topics": ["coding"],
+                    "card_ids": ["card-1"],
+                    "representative_card_id": "card-1",
+                    "representative_title": "Claude vs ChatGPT for coding",
+                    "representative_summary": "A quick comparison of AI tools for coding.",
+                }
+            ],
+            [
+                {
+                    "card_id": "card-1",
+                    "title": "Claude vs ChatGPT for coding",
+                    "summary": "A quick comparison of AI tools for coding.",
+                    "excerpt": "",
+                }
+            ],
+        )
+
+        self.assertFalse(provider.is_available())
+        self.assertEqual(len(drafts), 1)
+        self.assertGreater(provider.get_failure_count(), 0)
+        self.assertEqual(drafts[0]["draft_status"], "draft")
+
+    def test_provider_exception_falls_back_per_bundle(self) -> None:
+        provider = OpenAIBlogDraftProvider(api_key="test-key")
+        bundles = [
+            {
+                "bundle_id": "bundle-1",
+                "bundle_type": "weekly_bundle",
+                "title": "Weekly bundle",
+                "description": "A compact weekly draft.",
+                "primary_topic": "coding",
+                "related_topics": ["coding"],
+                "card_ids": ["card-1"],
+                "representative_card_id": "card-1",
+                "representative_title": "Claude vs ChatGPT for coding",
+                "representative_summary": "A quick comparison of AI tools for coding.",
+            },
+            {
+                "bundle_id": "bundle-2",
+                "bundle_type": "topic_bundle",
+                "title": "Topic bundle",
+                "description": "Another compact draft.",
+                "primary_topic": "productivity",
+                "related_topics": ["productivity"],
+                "card_ids": ["card-2"],
+                "representative_card_id": "card-2",
+                "representative_title": "Prompt workflow notes",
+                "representative_summary": "A quick productivity note.",
+            },
+        ]
+        cards = [
+            {
+                "card_id": "card-1",
+                "title": "Claude vs ChatGPT for coding",
+                "summary": "A quick comparison of AI tools for coding.",
+                "excerpt": "",
+            },
+            {
+                "card_id": "card-2",
+                "title": "Prompt workflow notes",
+                "summary": "A quick productivity note.",
+                "excerpt": "",
+            },
+        ]
+
+        responses = [
+            RuntimeError("temporary provider failure"),
+            json.dumps(
+                {
+                    "title": "A practical productivity draft",
+                    "subtitle": "Short outline",
+                    "intro": "Keep the draft focused and concrete.",
+                    "key_points": ["Point one", "Point two"],
+                    "recommended_cards": ["card-2"],
+                    "body_sections": [
+                        {"heading": "Overview", "summary": "Open with the core angle."},
+                        {"heading": "Close", "summary": "End with a practical takeaway."},
+                    ],
+                    "closing": "Wrap up with a short takeaway.",
+                }
+            ),
+        ]
+
+        def fake_request_completion(prompt: str) -> str:
+            response = responses.pop(0)
+            if isinstance(response, Exception):
+                raise response
+            return response
+
+        with patch.object(provider, "request_completion", side_effect=fake_request_completion):
+            drafts = provider.build_drafts(bundles, cards)
+
+        self.assertEqual(len(drafts), 2)
+        self.assertGreaterEqual(provider.get_failure_count(), 1)
+        self.assertTrue("fallback" in drafts[0]["draft_reason"].lower())
+        self.assertEqual(drafts[1]["title"], "A practical productivity draft")
+
+    def test_empty_bundle_input_creates_fallback_draft(self) -> None:
+        provider = build_blog_draft_provider("rule_based")
+        drafts, stats = generate_blog_drafts_with_stats(
+            [],
+            [
+                {
+                    "card_id": "card-1",
+                    "title": "Claude vs ChatGPT for coding",
+                    "summary": "A quick comparison of AI tools for coding.",
+                    "excerpt": "",
+                }
+            ],
+            provider,
+        )
+
+        self.assertEqual(len(drafts), 1)
+        self.assertEqual(stats.fallback_draft_count, 1)
+        self.assertIn("card-1", drafts[0]["recommended_cards"])
+
+    def test_run_pipeline_openai_blog_provider_flag_regression(self) -> None:
+        sample_payload = [
+            {
+                "raw_id": "reddit_devvit_blog_001",
+                "source": "reddit_devvit",
+                "subreddit": "topic_shelf_dev",
+                "post_title": "Claude vs ChatGPT for coding",
+                "post_url": "https://reddit.com/r/topic_shelf_dev/comments/blog_001/",
+                "post_author": "tester",
+                "post_created_utc": 1775323792,
+                "post_body": "I want to compare AI tools for coding and daily work.",
+                "num_comments": 2,
+                "upvotes": 1,
+                "top_comments": [
+                    {
+                        "comment_id": "t1_blog_001",
+                        "author": "tester",
+                        "body": "Coding is where I notice the biggest difference.",
+                        "score": 1,
+                        "created_utc": 1775323966,
+                    }
+                ],
+                "devvit_score": 12,
+                "devvit_reason_tags": ["title_comparison_pattern", "body_has_min_context"],
+                "moderator_status": "keep",
+                "review_note": "",
+                "collected_at": "2026-04-05T10:00:00Z",
+            }
+        ]
+
+        script_path = PIPELINE_ROOT / "scripts" / "run_pipeline.py"
+        tmp_root = PIPELINE_ROOT / "tests" / f".blog_openai_{uuid4().hex}"
+
+        try:
+            tmp_root.mkdir(parents=True, exist_ok=False)
+            raw_path = tmp_root / "raw" / "sample_keep.json"
+            write_json(raw_path, sample_payload)
+
+            env = os.environ.copy()
+            env.pop("OPENAI_API_KEY", None)
+            env.pop("BLOG_DRAFT_OPENAI_MODEL", None)
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(script_path),
+                    "--enable-blog-drafts",
+                    "--blog-draft-provider",
+                    "openai",
+                    str(raw_path),
+                ],
+                cwd=PROJECT_ROOT,
+                capture_output=True,
+                text=True,
+                env=env,
+            )
+
+            self.assertEqual(
+                result.returncode,
+                0,
+                msg=f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}",
+            )
+            blog_path = build_blog_drafts_output_path(
+                build_cards_output_path(build_normalized_output_path(raw_path))
+            )
+            self.assertTrue(blog_path.exists())
+            blog_drafts = read_json(blog_path)
+            self.assertEqual(len(blog_drafts), 1)
+            self.assertIn("draft_status", blog_drafts[0])
+        finally:
+            shutil.rmtree(tmp_root, ignore_errors=True)
+
     def test_run_pipeline_blog_drafts_with_and_without_bundles(self) -> None:
         sample_payload = [
             {

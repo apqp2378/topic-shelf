@@ -1,19 +1,19 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from typing import Any
 
 
-class TranslationProvider(ABC):
+class QualityReviewProvider(ABC):
     provider_name = "base"
 
-    def is_available(self) -> bool:
-        return True
-
-    def get_failure_count(self) -> int:
-        return 0
-
     @abstractmethod
-    def translate_text(self, text: str, target_lang: str = "ko") -> str:
+    def review(
+        self,
+        cards: list[dict[str, Any]],
+        bundles: list[dict[str, Any]],
+        blog_drafts: list[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
         raise NotImplementedError
 
 

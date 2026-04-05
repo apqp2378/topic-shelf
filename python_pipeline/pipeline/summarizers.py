@@ -1,27 +1,119 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from typing import Any
+
+from pipeline.summary_providers.base import SummaryProvider, clean_text
+
+
+@dataclass
+class SummaryStats:
+    input_count: int = 0
+    success_count: int = 0
+    empty_count: int = 0
+    fallback_count: int = 0
+    provider_failure_count: int = 0
+
+
+def build_summary_provider(provider_name: str) -> SummaryProvider:
+    cleaned_provider_name = clean_text(provider_name).lower()
+    if cleaned_provider_name in ("", "rule_based", "rule-based"):
+        from pipeline.summary_providers.rule_based import RuleBasedSummaryProvider
+
+        return RuleBasedSummaryProvider()
+
+    if cleaned_provider_name == "openai":
+        from pipeline.summary_providers.openai import OpenAISummaryProvider
+
+        return OpenAISummaryProvider()
+
+    raise ValueError(f"Unsupported summary provider: {provider_name}")
 
 
 def enrich_cards_with_summary(
     cards: list[dict[str, Any]],
     max_len: int = 180,
+    provider_name: str = "rule_based",
 ) -> list[dict[str, Any]]:
+    enriched_cards, _ = enrich_cards_with_summary_with_stats(
+        cards,
+        max_len=max_len,
+        provider_name=provider_name,
+    )
+    return enriched_cards
+
+
+def enrich_cards_with_summary_with_stats(
+    cards: list[dict[str, Any]],
+    max_len: int = 180,
+    provider_name: str = "rule_based",
+) -> tuple[list[dict[str, Any]], SummaryStats]:
+    provider = build_summary_provider(provider_name)
+    fallback_provider = None
+    stats = SummaryStats(input_count=len(cards))
+
+    if hasattr(provider, "is_available") and not provider.is_available():
+        print(f"Summary provider fallback: {provider_name} is not configured; using rule_based.")
+        stats.provider_failure_count += 1
+        fallback_provider = build_summary_provider("rule_based")
+
     enriched_cards: list[dict[str, Any]] = []
 
     for index, card in enumerate(cards):
         summary = ""
+        provider_used_fallback = False
         try:
-            summary = build_heuristic_summary(card, max_len=max_len)
+            if fallback_provider is not None:
+                summary = summarize_card_with_provider(
+                    fallback_provider,
+                    card,
+                    max_len=max_len,
+                )
+                provider_used_fallback = True
+            else:
+                summary = summarize_card_with_provider(
+                    provider,
+                    card,
+                    max_len=max_len,
+                )
         except Exception as exc:  # pragma: no cover - defensive guard for handoff stability
             print(f"Summary stage fallback for card index {index}: {exc}")
+            stats.provider_failure_count += 1
+            summary = build_heuristic_summary(card, max_len=max_len)
+            provider_used_fallback = True
+
+        if not clean_text(summary):
+            if fallback_provider is None:
+                try:
+                    summary = build_heuristic_summary(card, max_len=max_len)
+                    provider_used_fallback = True
+                except Exception as exc:  # pragma: no cover - defensive guard for handoff stability
+                    print(f"Summary stage fallback for card index {index}: {exc}")
+                    stats.provider_failure_count += 1
+                    summary = ""
+                    provider_used_fallback = True
+
+        if provider_used_fallback:
+            stats.fallback_count += 1
 
         enriched_card = dict(card)
-        enriched_card["summary"] = summary
+        enriched_card["summary"] = normalize_summary_output(summary, max_len=max_len)
         enriched_cards.append(enriched_card)
 
-    return enriched_cards
+    stats.success_count = sum(1 for card in enriched_cards if clean_text(card.get("summary")))
+    stats.empty_count = len(enriched_cards) - stats.success_count
+
+    return enriched_cards, stats
+
+
+def summarize_card_with_provider(
+    provider: SummaryProvider,
+    card: dict[str, Any],
+    max_len: int = 180,
+) -> str:
+    summary = provider.summarize_card(card, max_len=max_len)
+    return normalize_summary_output(summary, max_len=max_len)
 
 
 def build_heuristic_summary(card: dict[str, Any], max_len: int = 180) -> str:
@@ -45,6 +137,23 @@ def build_heuristic_summary(card: dict[str, Any], max_len: int = 180) -> str:
         summary = append_segment(summary, comment, " | ", max_len)
 
     return summary[:max_len] if len(summary) > max_len else summary
+
+
+def normalize_summary_output(summary: object, max_len: int = 180) -> str:
+    if not isinstance(summary, str):
+        return ""
+
+    cleaned = clean_text(summary)
+    if not cleaned:
+        return ""
+
+    if len(cleaned) <= max_len:
+        return cleaned
+
+    if max_len <= 3:
+        return cleaned[:max_len]
+
+    return cleaned[: max_len - 3].rstrip() + "..."
 
 
 def pick_excerpt_text(card: dict[str, Any]) -> str:

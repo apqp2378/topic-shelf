@@ -22,10 +22,14 @@ builds minimal card JSON for later expansion.
 - `make_cards.py`: Converts normalized records into small card objects
 - `run_pipeline.py`: Runs validation, normalization, and card generation in one command and prints stage counts
 - `run_pipeline.py --enable-summary`: Adds the optional heuristic summary stage and writes a second card export
+- `run_pipeline.py --enable-summary --summary-provider openai`: Uses the optional summary provider adapter with safe fallback
 - `run_pipeline.py --enable-translation`: Adds the optional translation scaffold and writes a third card export
 - `run_pipeline.py --enable-topic-classification`: Adds the optional topic classification scaffold and writes a fourth card export
 - `run_pipeline.py --enable-bundles`: Adds the optional bundle scaffold and writes a separate bundle export
 - `run_pipeline.py --enable-blog-drafts`: Adds the optional blog draft scaffold and writes a separate draft export
+- `run_pipeline.py --enable-blog-drafts --blog-draft-provider openai`: Uses the optional blog draft provider adapter with safe fallback
+- `run_pipeline.py --enable-quality-review`: Adds the optional quality review scaffold and writes a separate review export
+- `run_pipeline.py --enable-publish-export`: Adds the optional publish export scaffold and writes a separate Markdown export
 
 ## Example commands
 
@@ -35,6 +39,7 @@ python python_pipeline/scripts/normalize_devvit_raw.py python_pipeline/data/raw/
 python python_pipeline/scripts/make_cards.py python_pipeline/data/normalized/normalized_devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-summary python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-summary --summary-provider openai python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-translation python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-translation python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-topic-classification python_pipeline/data/raw/devvit_keep_2026-04-05.json
@@ -52,6 +57,8 @@ python python_pipeline/scripts/run_pipeline.py --enable-translation --enable-blo
 python python_pipeline/scripts/run_pipeline.py --enable-topic-classification --enable-blog-drafts python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-bundles --enable-blog-drafts python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-translation --enable-topic-classification --enable-bundles --enable-blog-drafts python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-quality-review python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-translation --enable-topic-classification --enable-bundles --enable-blog-drafts --enable-quality-review python_pipeline/data/raw/devvit_keep_2026-04-05.json
 ```
 
 ## Execution order
@@ -73,6 +80,8 @@ Or run everything at once with `run_pipeline.py`.
 - summary input count
 - summary success count
 - summary empty count
+- summary fallback count
+- summary provider failure count
 - translation input count
 - translation success count
 - translation empty field count
@@ -93,6 +102,14 @@ Or run everything at once with `run_pipeline.py`.
 - blog draft count
 - blog fallback draft count
 - blog provider failure count
+- quality review card input count
+- quality review bundle input count
+- quality review blog draft input count
+- quality review count
+- quality review pass count
+- quality review warning count
+- quality review fail count
+- quality provider failure count
 
 If validation issues are found, the pipeline still writes the normalized and cards outputs for the valid subset, then exits with status code `1`.
 
@@ -101,6 +118,8 @@ When `--enable-translation` is set, the pipeline writes `cards_with_translation_
 When `--enable-topic-classification` is set, the pipeline writes `cards_with_topics_*.json` using the latest available card export as input.
 When `--enable-bundles` is set, the pipeline writes `bundles_*.json` using the latest available card export as input.
 When `--enable-blog-drafts` is set, the pipeline writes `blog_drafts_*.json` using bundles when available, otherwise it falls back to the latest available cards.
+When `--blog-draft-provider openai` is set, the provider reads `OPENAI_API_KEY` and optionally `BLOG_DRAFT_OPENAI_MODEL`. If the key is missing or the request fails, the pipeline falls back to the existing rule-based draft path.
+When `--enable-quality-review` is set, the pipeline writes `quality_reviews_*.json` using the latest available cards for card-level review, plus bundles and blog drafts when those outputs exist in the current run.
 
 ## Result files
 
@@ -118,6 +137,10 @@ When `--enable-blog-drafts` is set, the pipeline writes `blog_drafts_*.json` usi
   `python_pipeline/data/cards/bundles_devvit_keep_2026-04-05.json`
 - Blog draft example:
   `python_pipeline/data/cards/blog_drafts_devvit_keep_2026-04-05.json`
+- Quality review example:
+  `python_pipeline/data/cards/quality_reviews_devvit_keep_2026-04-05.json`
+- Publish export example:
+  `python_pipeline/data/publish/publish_blog_draft_devvit_keep_2026-04-05.md`
 
 ## Summary Stage
 
@@ -127,6 +150,8 @@ The V2-1 summary stage is a deterministic heuristic placeholder.
 - It prefers `title`, then excerpt-like text, then top comments.
 - It safely handles missing fields, empty strings, and `null` values.
 - It is designed so a future LLM provider adapter can replace the heuristic builder without changing the `cards.json` contract.
+- The summary stage now also supports an optional real provider adapter, currently `openai`, behind `--summary-provider`.
+- If `OPENAI_API_KEY` is missing or the provider fails, the pipeline falls back to the existing heuristic summary path.
 
 ## Translation Stage
 
@@ -134,10 +159,13 @@ The V2-2 translation stage is a scaffold, not a final API integration.
 
 - It uses a provider adapter interface so a real translation backend can be swapped in later.
 - The default provider is `passthrough`, which returns cleaned input text.
+- The optional real provider is `openai`, behind `--translation-provider openai`.
+- It reads `OPENAI_API_KEY` and optionally `TRANSLATION_OPENAI_MODEL` when the OpenAI provider is selected.
 - It adds `title_ko`, `excerpt_ko`, and `summary_ko` only in `cards_with_translation_*.json`.
 - It never overwrites the original card fields.
 - Empty strings, `null`, and missing fields are handled safely.
 - A future LLM or translation provider adapter can be added without changing the downstream `cards.json` contract.
+- If the OpenAI provider fails or is not configured, the stage falls back to the existing passthrough translation path.
 
 ## Topic Classification Stage
 
@@ -166,10 +194,34 @@ The V2-5 blog draft stage is a scaffold for pre-publish draft documents.
 
 - It uses a provider adapter interface so a future LLM writer can replace the rule-based provider later.
 - The default provider is `rule_based`.
+- The optional real provider is `openai`, behind `--blog-draft-provider openai`.
 - It writes `blog_drafts_*.json` only and never changes the existing cards or bundles exports.
 - It prefers bundle input when bundles exist, and falls back to the latest cards when they do not.
 - It creates draft-shaped output only; it is not the final post content.
 - It is designed so a future LLM writer/provider can be added without changing the downstream `cards.json` or `bundles.json` contracts.
+
+## Quality Review Stage
+
+The V2-6 quality review stage is a scaffold for post-generation checks.
+
+- It uses a provider adapter interface so a future LLM reviewer can replace the rule-based provider later.
+- The default provider is `rule_based`.
+- It can review cards, bundles, and blog drafts without changing the source outputs.
+- It writes `quality_reviews_*.json` as a separate review artifact.
+- It uses `pass`, `warning`, and `fail` as the only status values.
+- It is designed so a future LLM reviewer/provider can be added without changing the downstream `cards.json`, `bundles.json`, or `blog_drafts.json` contracts.
+
+## Publish Export Stage
+
+The V2-9 publish export stage is a scaffold for human-readable Markdown handoff files.
+
+- It uses a provider adapter interface so a future template or LLM export writer can replace the rule-based provider later.
+- The default provider is `rule_based`.
+- It writes Markdown only and never changes the existing JSON exports.
+- It prefers `blog_drafts` when available, then `bundles`, then the latest card export.
+- It keeps the output simple enough to paste into a draft document without extra cleanup.
+- It writes into `python_pipeline/data/publish/`.
+- The current output names are `publish_blog_draft_*.md`, `publish_bundles_*.md`, and `publish_cards_*.md`.
 
 ## What this version does not do
 
@@ -179,7 +231,9 @@ The V2-5 blog draft stage is a scaffold for pre-publish draft documents.
 - No multi-source integration
 - No database or web server
 - No LLM curator/provider
-- No LLM writer/provider
+- No mandatory LLM writer/provider
+- No LLM reviewer/provider
+- No mandatory publish template/provider
 
 ## Notes
 

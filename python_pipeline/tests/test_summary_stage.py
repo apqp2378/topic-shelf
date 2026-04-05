@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
 import unittest
+from unittest import mock
 from pathlib import Path
 from uuid import uuid4
 
@@ -19,7 +21,13 @@ from pipeline.io_utils import (
     build_cards_with_summary_output_path,
     build_normalized_output_path,
 )
-from pipeline.summarizers import build_heuristic_summary, enrich_cards_with_summary
+from pipeline.summary_providers.openai import OpenAISummaryProvider
+from pipeline.summarizers import (
+    build_heuristic_summary,
+    build_summary_provider,
+    enrich_cards_with_summary,
+    enrich_cards_with_summary_with_stats,
+)
 
 
 def write_json(path: Path, payload: object) -> None:
@@ -73,6 +81,103 @@ class SummaryStageTests(unittest.TestCase):
         self.assertEqual(enriched_cards[0]["summary"], "Daily workflow question")
         self.assertTrue(enriched_cards[1]["summary"].startswith("Claude vs ChatGPT for daily work"))
         self.assertLessEqual(len(enriched_cards[1]["summary"]), 90)
+
+    def test_openai_provider_selection_uses_provider_branch(self) -> None:
+        cards = [
+            {
+                "card_id": "card-1",
+                "title": "Claude vs ChatGPT for coding",
+                "excerpt": "A short excerpt.",
+                "top_comment_snippets": ["Useful comment."],
+            }
+        ]
+
+        with mock.patch.dict(
+            os.environ,
+            {"OPENAI_API_KEY": "test-key", "SUMMARY_OPENAI_MODEL": "test-model"},
+            clear=False,
+        ):
+            provider = build_summary_provider("openai")
+            self.assertEqual(provider.provider_name, "openai")
+            with mock.patch.object(
+                OpenAISummaryProvider,
+                "request_summary",
+                return_value="OpenAI summary result",
+            ):
+                enriched_cards, stats = enrich_cards_with_summary_with_stats(
+                    cards,
+                    max_len=90,
+                    provider_name="openai",
+                )
+
+        self.assertEqual(enriched_cards[0]["summary"], "OpenAI summary result")
+        self.assertEqual(stats.provider_failure_count, 0)
+        self.assertEqual(stats.fallback_count, 0)
+        self.assertEqual(stats.success_count, 1)
+
+    def test_openai_provider_missing_key_falls_back_safely(self) -> None:
+        cards = [
+            {
+                "card_id": "card-1",
+                "title": "Claude vs ChatGPT for coding",
+                "excerpt": "A short excerpt.",
+                "top_comment_snippets": ["Useful comment."],
+            }
+        ]
+
+        with mock.patch.dict("os.environ", {}, clear=True):
+            enriched_cards, stats = enrich_cards_with_summary_with_stats(
+                cards,
+                max_len=90,
+                provider_name="openai",
+            )
+
+        self.assertEqual(len(enriched_cards), 1)
+        self.assertNotEqual(enriched_cards[0]["summary"], "")
+        self.assertGreaterEqual(stats.provider_failure_count, 1)
+        self.assertGreaterEqual(stats.fallback_count, 1)
+
+    def test_openai_provider_exception_falls_back_for_partial_failures(self) -> None:
+        cards = [
+            {
+                "card_id": "card-1",
+                "title": "Claude vs ChatGPT for coding",
+                "excerpt": "A short excerpt.",
+                "top_comment_snippets": ["Useful comment."],
+            },
+            {
+                "card_id": "card-2",
+                "title": "Second card",
+                "excerpt": "",
+                "top_comment_snippets": [],
+            },
+        ]
+
+        with mock.patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=False):
+            provider = build_summary_provider("openai")
+            self.assertEqual(provider.provider_name, "openai")
+            with mock.patch.object(
+                OpenAISummaryProvider,
+                "request_summary",
+                side_effect=[RuntimeError("temporary failure"), "OpenAI summary result"],
+            ):
+                enriched_cards, stats = enrich_cards_with_summary_with_stats(
+                    cards,
+                    max_len=90,
+                    provider_name="openai",
+                )
+
+        self.assertEqual(len(enriched_cards), 2)
+        self.assertNotEqual(enriched_cards[0]["summary"], "")
+        self.assertNotEqual(enriched_cards[1]["summary"], "")
+        self.assertGreaterEqual(stats.provider_failure_count, 1)
+        self.assertGreaterEqual(stats.fallback_count, 1)
+
+    def test_empty_input_is_safe(self) -> None:
+        enriched_cards, stats = enrich_cards_with_summary_with_stats([], provider_name="openai")
+        self.assertEqual(enriched_cards, [])
+        self.assertEqual(stats.input_count, 0)
+        self.assertEqual(stats.success_count, 0)
 
     def test_run_pipeline_without_summary_and_with_summary(self) -> None:
         sample_payload = [
@@ -188,6 +293,7 @@ class SummaryStageTests(unittest.TestCase):
             self.assertIn("summary", summary_cards[1])
             self.assertNotEqual(summary_cards[0]["summary"], "")
             self.assertEqual(summary_cards[1]["summary"], "Short title only")
+            self.assertIsInstance(summary_cards, list)
         finally:
             shutil.rmtree(tmp_root, ignore_errors=True)
 

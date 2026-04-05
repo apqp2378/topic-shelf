@@ -129,3 +129,24 @@ class BlogDraftRecord(TypedDict, total=False):
     closing: str
     draft_status: str
     draft_reason: str
+
+
+class QualityReviewIssue(TypedDict, total=False):
+    severity: str
+    field: str
+    message: str
+
+
+class QualityReviewRecord(TypedDict, total=False):
+    review_id: str
+    review_level: str
+    source_id: str
+    title: str
+    status: str
+    score: float
+    issues: list[QualityReviewIssue]
+    warnings: list[str]
+    checks: dict[str, dict[str, str]]
+    review_notes: list[str]
+    recommended_actions: list[str]
+    review_reason: str

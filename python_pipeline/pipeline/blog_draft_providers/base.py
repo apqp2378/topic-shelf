@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from typing import Any
 
 
-class TranslationProvider(ABC):
+class BlogDraftProvider(ABC):
     provider_name = "base"
 
     def is_available(self) -> bool:
@@ -13,7 +14,11 @@ class TranslationProvider(ABC):
         return 0
 
     @abstractmethod
-    def translate_text(self, text: str, target_lang: str = "ko") -> str:
+    def build_drafts(
+        self,
+        bundles: list[dict[str, Any]],
+        cards: list[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
         raise NotImplementedError
 
 

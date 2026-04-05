@@ -12,6 +12,12 @@ if str(PIPELINE_ROOT) not in sys.path:
 from pipeline.card_builder import build_cards
 from pipeline.blog_drafters import build_blog_draft_provider, generate_blog_drafts_with_stats
 from pipeline.bundlers import build_bundle_provider, generate_bundles_with_stats
+from pipeline.publish_exports import build_publish_export_provider, generate_publish_export
+from pipeline.quality_reviewers import (
+    build_quality_review_provider,
+    build_quality_review_output,
+    generate_quality_reviews_with_stats,
+)
 from pipeline.io_utils import (
     build_blog_drafts_output_path,
     build_bundles_output_path,
@@ -19,14 +25,17 @@ from pipeline.io_utils import (
     build_cards_with_summary_output_path,
     build_cards_with_translation_output_path,
     build_cards_with_topics_output_path,
+    build_quality_reviews_output_path,
+    build_publish_export_output_path,
     build_normalized_output_path,
     find_latest_json_file,
     read_json_file,
+    write_text_file,
     write_json_file,
 )
 from pipeline.classifiers import build_classification_provider, classify_cards_with_stats
 from pipeline.normalizers import normalize_records
-from pipeline.summarizers import enrich_cards_with_summary
+from pipeline.summarizers import enrich_cards_with_summary_with_stats
 from pipeline.translators import build_translation_provider, translate_cards_with_stats
 from pipeline.validators import validate_raw_payload
 
@@ -49,6 +58,11 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=180,
         help="Maximum length for heuristic summaries.",
+    )
+    parser.add_argument(
+        "--summary-provider",
+        default="rule_based",
+        help="Summary provider name.",
     )
     parser.add_argument(
         "--enable-translation",
@@ -94,6 +108,26 @@ def parse_args() -> argparse.Namespace:
         "--blog-draft-provider",
         default="rule_based",
         help="Blog draft provider name.",
+    )
+    parser.add_argument(
+        "--enable-quality-review",
+        action="store_true",
+        help="Write quality_reviews output.",
+    )
+    parser.add_argument(
+        "--quality-review-provider",
+        default="rule_based",
+        help="Quality review provider name.",
+    )
+    parser.add_argument(
+        "--enable-publish-export",
+        action="store_true",
+        help="Write publish markdown export.",
+    )
+    parser.add_argument(
+        "--publish-export-provider",
+        default="rule_based",
+        help="Publish export provider name.",
     )
     return parser.parse_args()
 
@@ -155,29 +189,44 @@ def main() -> int:
     print(f"Cards count: {len(cards)}")
 
     summary_enabled = args.enable_summary
+    summary_provider_name = args.summary_provider
     summary_input_count = len(cards) if summary_enabled else 0
     summary_success_count = 0
     summary_empty_count = 0
+    summary_fallback_count = 0
+    summary_provider_failure_count = 0
     cards_with_summary = cards
     cards_with_summary_path = cards_path
 
     print(f"Summary enabled: {'yes' if summary_enabled else 'no'}")
+    print(f"Summary provider: {summary_provider_name}")
     print(f"Summary input count: {summary_input_count}")
 
     if summary_enabled:
-        cards_with_summary = enrich_cards_with_summary(cards, max_len=args.summary_max_len)
+        try:
+            cards_with_summary, summary_stats = enrich_cards_with_summary_with_stats(
+                cards,
+                max_len=args.summary_max_len,
+                provider_name=summary_provider_name,
+            )
+        except ValueError as exc:
+            print(str(exc))
+            return 1
+
         cards_with_summary_path = build_cards_with_summary_output_path(cards_path)
         write_json_file(cards_with_summary_path, cards_with_summary)
-        summary_success_count = sum(
-            1 for card in cards_with_summary if clean_string_value(card.get("summary"))
-        )
-        summary_empty_count = len(cards_with_summary) - summary_success_count
+        summary_success_count = summary_stats.success_count
+        summary_empty_count = summary_stats.empty_count
+        summary_fallback_count = summary_stats.fallback_count
+        summary_provider_failure_count = summary_stats.provider_failure_count
         print(f"Summary output: {cards_with_summary_path}")
     else:
         summary_empty_count = 0
 
     print(f"Summary success count: {summary_success_count}")
     print(f"Summary empty count: {summary_empty_count}")
+    print(f"Summary fallback count: {summary_fallback_count}")
+    print(f"Summary provider failure count: {summary_provider_failure_count}")
 
     translation_enabled = args.enable_translation
     translation_provider_name = args.translation_provider
@@ -187,6 +236,10 @@ def main() -> int:
     translation_input_path = cards_with_summary_path
     translation_success_count = 0
     translation_empty_field_count = 0
+    translation_translated_field_count = 0
+    translation_passthrough_count = 0
+    translation_fallback_count = 0
+    translation_provider_failure_count = 0
     translation_card_failure_count = 0
 
     topic_classification_enabled = args.enable_topic_classification
@@ -207,14 +260,42 @@ def main() -> int:
     topic_bundle_count = 0
     mixed_bundle_count = 0
     provider_failure_count = 0
+    bundles: list[dict[str, object]] = []
+    bundles_output_path = cards_path
 
     blog_drafts_enabled = args.enable_blog_drafts
     blog_draft_provider_name = args.blog_draft_provider
     blog_bundle_records: list[dict[str, object]] = []
     blog_bundle_input_path = bundle_input_path
+    blog_drafts: list[dict[str, object]] = []
+    blog_drafts_output_path = cards_path
     blog_draft_count = 0
     blog_fallback_draft_count = 0
     blog_provider_failure_count = 0
+
+    quality_review_enabled = args.enable_quality_review
+    quality_review_provider_name = args.quality_review_provider
+    quality_review_cards = cards
+    quality_review_cards_path = cards_path
+    quality_review_cards_count = len(quality_review_cards)
+    quality_review_source_label = "cards"
+    quality_review_source_file = str(cards_path)
+    quality_reviews: list[dict[str, object]] = []
+    quality_review_count = 0
+    quality_pass_count = 0
+    quality_warning_count = 0
+    quality_fail_count = 0
+    quality_provider_failure_count = 0
+
+    publish_export_enabled = args.enable_publish_export
+    publish_export_provider_name = args.publish_export_provider
+    publish_source_type = "cards"
+    publish_source_items = cards
+    publish_source_path = cards_path
+    publish_markdown = ""
+    publish_output_path = cards_path.parent.parent / "publish" / f"publish_cards_{cards_path.name}"
+    publish_generated_file_count = 0
+    publish_fallback_section_count = 0
 
     if summary_enabled:
         classification_input_cards = cards_with_summary
@@ -242,6 +323,10 @@ def main() -> int:
         write_json_file(translation_output_path, translated_cards)
         translation_success_count = translation_stats.success_count
         translation_empty_field_count = translation_stats.empty_field_count
+        translation_translated_field_count = translation_stats.translated_field_count
+        translation_passthrough_count = translation_stats.passthrough_count
+        translation_fallback_count = translation_stats.fallback_count
+        translation_provider_failure_count = translation_stats.provider_failure_count
         translation_card_failure_count = translation_stats.card_failure_count
         classification_input_cards = translated_cards
         classification_input_path = translation_output_path
@@ -249,6 +334,10 @@ def main() -> int:
 
     translation_input_count = len(translation_input_cards) if translation_enabled else 0
     print(f"Translation input count: {translation_input_count}")
+    print(f"Translation translated field count: {translation_translated_field_count}")
+    print(f"Translation passthrough count: {translation_passthrough_count}")
+    print(f"Translation fallback count: {translation_fallback_count}")
+    print(f"Translation provider failure count: {translation_provider_failure_count}")
     print(f"Translation success count: {translation_success_count}")
     print(f"Translation empty field count: {translation_empty_field_count}")
     print(f"Translation card failure count: {translation_card_failure_count}")
@@ -366,9 +455,137 @@ def main() -> int:
         blog_provider_failure_count = blog_stats.provider_failure_count
         print(f"Blog drafts output path: {blog_drafts_output_path}")
 
+    print(f"Blog draft generated count: {blog_draft_count}")
     print(f"Blog draft count: {blog_draft_count}")
     print(f"Blog fallback draft count: {blog_fallback_draft_count}")
     print(f"Blog provider failure count: {blog_provider_failure_count}")
+
+    if summary_enabled:
+        quality_review_cards = cards_with_summary
+        quality_review_cards_path = cards_with_summary_path
+        quality_review_source_label = "cards_with_summary"
+        quality_review_source_file = str(cards_with_summary_path)
+    if translation_enabled:
+        quality_review_cards = translated_cards
+        quality_review_cards_path = translation_output_path
+        quality_review_source_label = "cards_with_translation"
+        quality_review_source_file = str(translation_output_path)
+    if topic_classification_enabled:
+        quality_review_cards = classified_cards
+        quality_review_cards_path = topics_output_path
+        quality_review_source_label = "cards_with_topics"
+        quality_review_source_file = str(topics_output_path)
+
+    if bundle_enabled and bundles:
+        quality_review_source_label = "bundles"
+        quality_review_source_file = str(bundles_output_path)
+
+    if blog_drafts_enabled and blog_drafts:
+        quality_review_source_label = "blog_drafts"
+        quality_review_source_file = str(blog_drafts_output_path)
+
+    quality_review_cards_count = len(quality_review_cards)
+    quality_bundles = bundles if bundle_enabled else []
+    quality_blog_drafts = blog_drafts if blog_drafts_enabled else []
+
+    quality_review_card_input_count = len(quality_review_cards) if quality_review_enabled else 0
+    quality_review_bundle_input_count = len(quality_bundles) if quality_review_enabled else 0
+    quality_review_blog_input_count = len(quality_blog_drafts) if quality_review_enabled else 0
+
+    print(f"Quality review enabled: {'yes' if quality_review_enabled else 'no'}")
+    print(f"Quality review provider: {quality_review_provider_name}")
+    print(f"Quality review card input count: {quality_review_card_input_count}")
+    print(f"Quality review bundle input count: {quality_review_bundle_input_count}")
+    print(f"Quality review blog draft input count: {quality_review_blog_input_count}")
+
+    if quality_review_enabled:
+        try:
+            quality_review_provider = build_quality_review_provider(
+                quality_review_provider_name
+            )
+        except ValueError as exc:
+            print(str(exc))
+            return 1
+
+        quality_reviews, quality_stats = generate_quality_reviews_with_stats(
+            quality_review_cards,
+            quality_bundles,
+            quality_blog_drafts,
+            quality_review_provider,
+        )
+        quality_reviews_output_path = build_quality_reviews_output_path(quality_review_cards_path)
+        quality_review_output = build_quality_review_output(
+            source_file=quality_review_source_file,
+            review_provider=quality_review_provider_name,
+            reviews=quality_reviews,
+            stats=quality_stats,
+            input_summary={
+                "source_priority": quality_review_source_label,
+                "card_input_count": quality_review_cards_count,
+                "bundle_input_count": len(quality_bundles),
+                "blog_draft_input_count": len(quality_blog_drafts),
+            },
+        )
+        write_json_file(quality_reviews_output_path, quality_review_output)
+        quality_review_count = quality_stats.review_count
+        quality_pass_count = quality_stats.pass_count
+        quality_warning_count = quality_stats.warning_count
+        quality_fail_count = quality_stats.fail_count
+        quality_provider_failure_count = quality_stats.provider_failure_count
+        print(f"Quality reviews output path: {quality_reviews_output_path}")
+
+    print(f"Quality review count: {quality_review_count}")
+    print(f"Quality review pass count: {quality_pass_count}")
+    print(f"Quality review warning count: {quality_warning_count}")
+    print(f"Quality review fail count: {quality_fail_count}")
+    print(f"Quality provider failure count: {quality_provider_failure_count}")
+
+    publish_quality_reviews = quality_reviews if quality_review_enabled else []
+
+    if blog_drafts_enabled and blog_drafts:
+        publish_source_type = "blog_drafts"
+        publish_source_items = blog_drafts
+        publish_source_path = blog_drafts_output_path
+    elif bundle_enabled and bundles:
+        publish_source_type = "bundles"
+        publish_source_items = bundles
+        publish_source_path = bundles_output_path
+    elif topic_classification_enabled and classified_cards:
+        publish_source_items = classified_cards
+        publish_source_path = topics_output_path
+    elif translation_enabled and translated_cards:
+        publish_source_items = translated_cards
+        publish_source_path = translation_output_path
+    elif summary_enabled and cards_with_summary:
+        publish_source_items = cards_with_summary
+        publish_source_path = cards_with_summary_path
+
+    print(f"Publish export enabled: {'yes' if publish_export_enabled else 'no'}")
+    print(f"Publish export source type: {publish_source_type}")
+    print(f"Publish export input count: {len(publish_source_items) if publish_export_enabled else 0}")
+
+    if publish_export_enabled:
+        try:
+            publish_export_provider = build_publish_export_provider(publish_export_provider_name)
+        except ValueError as exc:
+            print(str(exc))
+            return 1
+
+        publish_markdown, publish_stats = generate_publish_export(
+            publish_source_type,
+            publish_source_items,
+            cards,
+            publish_export_provider,
+            quality_reviews=publish_quality_reviews,
+        )
+        publish_output_path = build_publish_export_output_path(publish_source_path, publish_source_type)
+        write_text_file(publish_output_path, publish_markdown)
+        publish_generated_file_count = publish_stats.generated_file_count
+        publish_fallback_section_count = publish_stats.fallback_section_count
+        print(f"Publish output path: {publish_output_path}")
+
+    print(f"Publish generated file count: {publish_generated_file_count}")
+    print(f"Publish fallback section count: {publish_fallback_section_count}")
 
     if issues:
         return 1

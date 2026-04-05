@@ -21,6 +21,12 @@ def write_json_file(path: Path, data: Any) -> None:
         file.write("\n")
 
 
+def write_text_file(path: Path, text: str) -> None:
+    ensure_parent_dir(path)
+    with path.open("w", encoding="utf-8") as file:
+        file.write(text)
+
+
 def build_normalized_output_path(raw_path: Path) -> Path:
     return raw_path.parent.parent / "normalized" / f"normalized_{raw_path.name}"
 
@@ -109,6 +115,55 @@ def build_blog_drafts_output_path(cards_path: Path) -> Path:
             break
 
     return cards_path.parent / f"blog_drafts_{suffix}"
+
+
+def build_quality_reviews_output_path(cards_path: Path) -> Path:
+    cards_name = cards_path.name
+    prefixes = (
+        "blog_drafts_",
+        "bundles_",
+        "cards_with_topics_",
+        "cards_with_translation_",
+        "cards_with_summary_",
+        "cards_",
+        "quality_reviews_",
+    )
+
+    suffix = cards_name
+    for prefix in prefixes:
+        if cards_name.startswith(prefix):
+            suffix = cards_name[len(prefix) :]
+            break
+
+    return cards_path.parent / f"quality_reviews_{suffix}"
+
+
+def build_publish_export_output_path(source_path: Path, source_type: str) -> Path:
+    source_name = source_path.name
+    prefixes = (
+        "blog_drafts_",
+        "bundles_",
+        "cards_with_topics_",
+        "cards_with_translation_",
+        "cards_with_summary_",
+        "cards_",
+    )
+
+    suffix = source_name
+    for prefix in prefixes:
+        if source_name.startswith(prefix):
+            suffix = source_name[len(prefix) :]
+            break
+
+    safe_source_type = source_type.strip().lower().replace(" ", "_")
+    if safe_source_type == "blog_drafts":
+        file_tag = "blog_draft"
+    elif safe_source_type in ("bundles", "cards"):
+        file_tag = safe_source_type
+    else:
+        file_tag = "cards"
+
+    return source_path.parent.parent / "publish" / f"publish_{file_tag}_{suffix}.md"
 
 
 def get_file_mtime(path: Path) -> float:
