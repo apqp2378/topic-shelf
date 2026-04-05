@@ -22,6 +22,7 @@ builds minimal card JSON for later expansion.
 - `make_cards.py`: Converts normalized records into small card objects
 - `run_pipeline.py`: Runs validation, normalization, and card generation in one command and prints stage counts
 - `run_pipeline.py --enable-summary`: Adds the optional heuristic summary stage and writes a second card export
+- `run_pipeline.py --enable-translation`: Adds the optional translation scaffold and writes a third card export
 
 ## Example commands
 
@@ -31,6 +32,8 @@ python python_pipeline/scripts/normalize_devvit_raw.py python_pipeline/data/raw/
 python python_pipeline/scripts/make_cards.py python_pipeline/data/normalized/normalized_devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-summary python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-translation python_pipeline/data/raw/devvit_keep_2026-04-05.json
+python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-translation python_pipeline/data/raw/devvit_keep_2026-04-05.json
 ```
 
 ## Execution order
@@ -52,10 +55,15 @@ Or run everything at once with `run_pipeline.py`.
 - summary input count
 - summary success count
 - summary empty count
+- translation input count
+- translation success count
+- translation empty field count
+- translation card failure count
 
 If validation issues are found, the pipeline still writes the normalized and cards outputs for the valid subset, then exits with status code `1`.
 
 When `--enable-summary` is set, the pipeline keeps the existing `cards.json` output unchanged and also writes `cards_with_summary_*.json`.
+When `--enable-translation` is set, the pipeline writes `cards_with_translation_*.json` using `cards.json` or `cards_with_summary.json` as the source, depending on whether summary is enabled.
 
 ## Result files
 
@@ -65,6 +73,8 @@ When `--enable-summary` is set, the pipeline keeps the existing `cards.json` out
   `python_pipeline/data/cards/cards_devvit_keep_2026-04-05.json`
 - Summary cards example:
   `python_pipeline/data/cards/cards_with_summary_devvit_keep_2026-04-05.json`
+- Translation cards example:
+  `python_pipeline/data/cards/cards_with_translation_devvit_keep_2026-04-05.json`
 
 ## Summary Stage
 
@@ -74,6 +84,17 @@ The V2-1 summary stage is a deterministic heuristic placeholder.
 - It prefers `title`, then excerpt-like text, then top comments.
 - It safely handles missing fields, empty strings, and `null` values.
 - It is designed so a future LLM provider adapter can replace the heuristic builder without changing the `cards.json` contract.
+
+## Translation Stage
+
+The V2-2 translation stage is a scaffold, not a final API integration.
+
+- It uses a provider adapter interface so a real translation backend can be swapped in later.
+- The default provider is `passthrough`, which returns cleaned input text.
+- It adds `title_ko`, `excerpt_ko`, and `summary_ko` only in `cards_with_translation_*.json`.
+- It never overwrites the original card fields.
+- Empty strings, `null`, and missing fields are handled safely.
+- A future LLM or translation provider adapter can be added without changing the downstream `cards.json` contract.
 
 ## What this version does not do
 

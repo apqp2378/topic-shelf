@@ -13,6 +13,7 @@ from pipeline.card_builder import build_cards
 from pipeline.io_utils import (
     build_cards_output_path,
     build_cards_with_summary_output_path,
+    build_cards_with_translation_output_path,
     build_normalized_output_path,
     find_latest_json_file,
     read_json_file,
@@ -20,6 +21,7 @@ from pipeline.io_utils import (
 )
 from pipeline.normalizers import normalize_records
 from pipeline.summarizers import enrich_cards_with_summary
+from pipeline.translators import build_translation_provider, translate_cards_with_stats
 from pipeline.validators import validate_raw_payload
 
 
@@ -41,6 +43,21 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=180,
         help="Maximum length for heuristic summaries.",
+    )
+    parser.add_argument(
+        "--enable-translation",
+        action="store_true",
+        help="Write cards_with_translation output.",
+    )
+    parser.add_argument(
+        "--translation-provider",
+        default="passthrough",
+        help="Translation provider name.",
+    )
+    parser.add_argument(
+        "--translation-target",
+        default="ko",
+        help="Translation target language code.",
     )
     return parser.parse_args()
 
@@ -123,6 +140,51 @@ def main() -> int:
 
     print(f"Summary success count: {summary_success_count}")
     print(f"Summary empty count: {summary_empty_count}")
+
+    translation_enabled = args.enable_translation
+    translation_provider_name = args.translation_provider
+    translation_target = args.translation_target
+    translation_input_cards = cards
+    translation_input_path = cards_path
+    translation_success_count = 0
+    translation_empty_field_count = 0
+    translation_card_failure_count = 0
+
+    if summary_enabled:
+        translation_input_cards = cards_with_summary
+        translation_input_path = cards_with_summary_path
+
+    translation_input_count = len(translation_input_cards) if translation_enabled else 0
+
+    print(f"Translation enabled: {'yes' if translation_enabled else 'no'}")
+    print(f"Translation provider: {translation_provider_name}")
+    print(f"Translation target: {translation_target}")
+    print(f"Translation input count: {translation_input_count}")
+
+    if translation_enabled:
+        try:
+            translation_provider = build_translation_provider(translation_provider_name)
+        except ValueError as exc:
+            print(str(exc))
+            return 1
+
+        translated_cards, translation_stats = translate_cards_with_stats(
+            translation_input_cards,
+            translation_provider,
+            target_lang=translation_target,
+        )
+        translation_output_path = build_cards_with_translation_output_path(
+            translation_input_path
+        )
+        write_json_file(translation_output_path, translated_cards)
+        translation_success_count = translation_stats.success_count
+        translation_empty_field_count = translation_stats.empty_field_count
+        translation_card_failure_count = translation_stats.card_failure_count
+        print(f"Translation output: {translation_output_path}")
+
+    print(f"Translation success count: {translation_success_count}")
+    print(f"Translation empty field count: {translation_empty_field_count}")
+    print(f"Translation card failure count: {translation_card_failure_count}")
 
     if issues:
         return 1

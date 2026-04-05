@@ -81,3 +81,9 @@ class CardRecord(TypedDict):
 
 class SummaryCardRecord(CardRecord):
     summary: str
+
+
+class TranslatedCardRecord(CardRecord):
+    title_ko: str
+    excerpt_ko: str
+    summary_ko: str
