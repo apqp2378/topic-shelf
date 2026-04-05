@@ -1,0 +1,58 @@
+[
+  {
+    "raw_id": "reddit_devvit_2026-04-05_001",
+    "source": "reddit_devvit",
+    "subreddit": "topic_shelf_dev",
+    "post_title": "Claude vs ChatGPT for daily work",
+    "post_url": "https://reddit.com/r/topic_shelf_dev/comments/1scf90o/claude_vs_chatgpt_for_daily_work/",
+    "post_author": "Physical-Power5257",
+    "post_created_utc": 1775323792,
+    "post_body": "I use AI tools for work, writing, and coding, and I want to understand the real difference in daily use. Compared to ChatGPT, does Claude feel better for long-form work, summaries, or planning? What do people actually use each one for in a normal workflow?",
+    "num_comments": 3,
+    "upvotes": 1,
+    "top_comments": [
+      {
+        "comment_id": "t1_oeafn5t",
+        "author": "[unknown]",
+        "body": "For daily work, I use Claude more for long writing and document summaries, while ChatGPT is better for fast problem solving. They overlap a lot, but I still notice a difference depending on the task.",
+        "score": 1,
+        "created_utc": 0
+      },
+      {
+        "comment_id": "t1_oeafntt",
+        "author": "[unknown]",
+        "body": "Compared to ChatGPT, Claude feels better when I want a more structured response for planning or writing. But for coding and quick iteration, ChatGPT fits my workflow better.",
+        "score": 1,
+        "created_utc": 0
+      },
+      {
+        "comment_id": "t1_oeafok2",
+        "author": "[unknown]",
+        "body": "In my workflow, Claude is useful, but I would not say it is clearly better for everything. For normal daily work, ChatGPT is often more convenient, especially when I need short and fast answers.",
+        "score": 1,
+        "created_utc": 0
+      }
+    ],
+    "devvit_score": 12,
+    "devvit_reason_tags": [
+      "title_comparison_pattern",
+      "body_has_min_context",
+      "body_has_usage_context",
+      "body_has_comparison_context",
+      "body_has_specific_question",
+      "has_one_long_comment",
+      "has_two_long_comments",
+      "has_experience_comment",
+      "recent_3d"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-05T10:37:58.002Z",
+    "recommended_status": "keep",
+    "candidate_rank": 1,
+    "post_id": "t3_1scf90o",
+    "candidate_id": "t3_1scf90o",
+    "body_excerpt": "I use AI tools for work, writing, and coding, and I want to understand the real difference in daily use. Compared to ChatGPT, does Claude feel better for long-form work, summaries, or planning? What do people actually use each one for in a normal workflow?",
+    "devvit_version": "v1.1"
+  }
+]

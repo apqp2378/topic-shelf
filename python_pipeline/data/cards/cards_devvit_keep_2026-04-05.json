@@ -1,0 +1,30 @@
+[
+  {
+    "card_id": "reddit_card_2026-04-05_001",
+    "source_id": "reddit_devvit_2026-04-05_001",
+    "title": "Claude vs ChatGPT for daily work",
+    "source_url": "https://reddit.com/r/topic_shelf_dev/comments/1scf90o/claude_vs_chatgpt_for_daily_work/",
+    "subreddit": "topic_shelf_dev",
+    "status": "keep",
+    "score": 12,
+    "reason_tags": [
+      "title_comparison_pattern",
+      "body_has_min_context",
+      "body_has_usage_context",
+      "body_has_comparison_context",
+      "body_has_specific_question",
+      "has_one_long_comment",
+      "has_two_long_comments",
+      "has_experience_comment",
+      "recent_3d"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "For daily work, I use Claude more for long writing and document summaries, while ChatGPT is better for fast problem solving. They overlap a ...",
+      "Compared to ChatGPT, Claude feels better when I want a more structured response for planning or writing. But for coding and quick iteration,...",
+      "In my workflow, Claude is useful, but I would not say it is clearly better for everything. For normal daily work, ChatGPT is often more conv..."
+    ],
+    "created_utc": 1775323792,
+    "collected_at": "2026-04-05T10:37:58.002Z"
+  }
+]
