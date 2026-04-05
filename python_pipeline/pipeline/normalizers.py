@@ -63,7 +63,9 @@ def normalize_top_comments(value: Any) -> list[RawTopComment]:
 def string_value(record: dict[str, Any], key: str) -> str:
     value = record.get(key)
     if isinstance(value, str):
-        return value
+        cleaned = value.strip()
+        if cleaned:
+            return cleaned
     return ""
 
 
@@ -82,4 +84,13 @@ def string_list_value(record: dict[str, Any], key: str) -> list[str]:
     value = record.get(key)
     if not isinstance(value, list):
         return []
-    return [item for item in value if isinstance(item, str)]
+
+    cleaned_values: list[str] = []
+    for item in value:
+        if not isinstance(item, str):
+            continue
+        cleaned = item.strip()
+        if cleaned:
+            cleaned_values.append(cleaned)
+
+    return cleaned_values

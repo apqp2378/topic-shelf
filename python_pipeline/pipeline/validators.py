@@ -52,7 +52,7 @@ def validate_raw_payload(payload: Any) -> tuple[list[dict[str, Any]], list[Valid
                 ValidationIssue(
                     record_index=index,
                     field_name="record",
-                    message="Each item must be an object.",
+                    message="Excluded from pipeline: each record must be an object.",
                 )
             )
             continue
@@ -76,19 +76,27 @@ def validate_raw_record(index: int, record: dict[str, Any]) -> list[ValidationIs
                 ValidationIssue(
                     record_index=index,
                     field_name=field_name,
-                    message="Missing required field.",
+                    message=f"Excluded from pipeline: missing required field `{field_name}`.",
+                )
+            )
+        elif record[field_name] is None:
+            issues.append(
+                ValidationIssue(
+                    record_index=index,
+                    field_name=field_name,
+                    message=f"Excluded from pipeline: required field `{field_name}` is null.",
                 )
             )
 
     if issues:
         return issues
 
-    if record.get("moderator_status") != "keep":
+    if clean_string_value(record.get("moderator_status")) != "keep":
         issues.append(
             ValidationIssue(
                 record_index=index,
                 field_name="moderator_status",
-                message="Expected moderator_status to be 'keep'.",
+                message="Excluded from pipeline: moderator_status must be 'keep' for keep exports.",
             )
         )
 
@@ -98,7 +106,7 @@ def validate_raw_record(index: int, record: dict[str, Any]) -> list[ValidationIs
             ValidationIssue(
                 record_index=index,
                 field_name="top_comments",
-                message="top_comments must be a list.",
+                message="Excluded from pipeline: top_comments must be a list.",
             )
         )
 
@@ -108,8 +116,16 @@ def validate_raw_record(index: int, record: dict[str, Any]) -> list[ValidationIs
             ValidationIssue(
                 record_index=index,
                 field_name="devvit_reason_tags",
-                message="devvit_reason_tags must be a list.",
+                message="Excluded from pipeline: devvit_reason_tags must be a list.",
             )
         )
 
     return issues
+
+
+def clean_string_value(value: object) -> str:
+    if isinstance(value, str):
+        cleaned = value.strip()
+        if cleaned:
+            return cleaned
+    return ""

@@ -20,7 +20,7 @@ builds minimal card JSON for later expansion.
 - `validate_raw.py`: Checks JSON shape, required fields, keep status, and `top_comments`
 - `normalize_devvit_raw.py`: Converts Devvit raw JSON into the internal normalized structure
 - `make_cards.py`: Converts normalized records into small card objects
-- `run_pipeline.py`: Runs validation, normalization, and card generation in one command
+- `run_pipeline.py`: Runs validation, normalization, and card generation in one command and prints stage counts
 
 ## Example commands
 
@@ -38,6 +38,17 @@ python python_pipeline/scripts/run_pipeline.py python_pipeline/data/raw/devvit_k
 3. Build cards from the normalized JSON
 
 Or run everything at once with `run_pipeline.py`.
+
+`run_pipeline.py` prints a compact handoff summary:
+
+- raw input count
+- keep count
+- validated count
+- dropped count
+- normalized count
+- cards count
+
+If validation issues are found, the pipeline still writes the normalized and cards outputs for the valid subset, then exits with status code `1`.
 
 ## Result files
 
