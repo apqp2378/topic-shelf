@@ -1,5 +1,7 @@
 import { navigateTo } from '@devvit/web/client';
+import { getRecommendedStatus } from '../../shared/candidate';
 import { ScoreBadge } from './ScoreBadge';
+import { StatusBadge } from './StatusBadge';
 import { StatusButtons } from './StatusButtons';
 import type { Candidate, CandidateStatus } from '../types/candidate';
 
@@ -28,10 +30,21 @@ export const CandidateCard = ({
             {candidate.title}
           </button>
           <p className="mt-1 text-xs text-slate-500">
-            u/{candidate.author} • {candidate.num_comments} comments • {candidate.upvotes} upvotes
+            u/{candidate.author} · {candidate.num_comments} comments · {candidate.upvotes} upvotes
           </p>
         </div>
-        <ScoreBadge score={candidate.score} />
+        <div className="flex flex-col items-end gap-2">
+          <ScoreBadge score={candidate.score} />
+          <StatusBadge
+            label="Recommended"
+            status={getRecommendedStatus(candidate.score)}
+            kind="recommended"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        <StatusBadge label="Moderator status" status={candidate.status} kind="moderator" />
       </div>
 
       <p className="text-sm leading-6 text-slate-700">

@@ -20,6 +20,7 @@ export const mapToCandidate = (
   created_utc: post.created_utc,
   upvotes: post.upvotes,
   num_comments: post.num_comments,
+  post_body: post.body,
   body_excerpt: normalizeExcerpt(post.body, 300),
   top_comments: topComments,
   score: scoreResult.score,

@@ -8,6 +8,8 @@ export type {
   CandidateStatus,
   CandidateStatusFilter,
   KeepExportResponse,
+  KeepRawJsonCandidate,
+  KeepRawJsonTopComment,
   RefreshCandidatesResponse,
   TopComment,
 } from '../../shared/candidate';

@@ -1,13 +1,12 @@
 {
   "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
-  "name": "reddit-candidate-picker",
+  "name": "topic-shelf",
   "permissions": {
     "reddit": {
       "enable": true,
       "scope": "moderator"
     },
-    "redis": true,
-    "menu": true
+    "redis": true
   },
   "post": {
     "dir": "dist/client",
@@ -52,6 +51,6 @@
     "build": "vite build"
   },
   "dev": {
-    "subreddit": "your_test_subreddit"
+    "subreddit": "topic_shelf_dev"
   }
 }

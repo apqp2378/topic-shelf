@@ -1,6 +1,7 @@
 import { navigateTo } from '@devvit/web/client';
 import { getRecommendedStatus } from '../../shared/candidate';
 import { ScoreBadge } from '../components/ScoreBadge';
+import { StatusBadge } from '../components/StatusBadge';
 import { StatusButtons } from '../components/StatusButtons';
 import { TopCommentList } from '../components/TopCommentList';
 import type { Candidate, CandidateStatus } from '../types/candidate';
@@ -50,14 +51,21 @@ export const CandidateDetailPage = ({
           </p>
           <h1 className="mt-2 text-2xl font-bold text-slate-900">{candidate.title}</h1>
           <p className="mt-2 text-sm text-slate-500">
-            u/{candidate.author} • r/{candidate.subreddit}
+            u/{candidate.author} · r/{candidate.subreddit}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <ScoreBadge score={candidate.score} />
-          <span className="rounded-md border border-sky-200 bg-sky-50 px-2 py-1 text-xs font-semibold text-sky-800">
-            Recommended: {getRecommendedStatus(candidate.score)}
-          </span>
+          <StatusBadge
+            label="Recommended"
+            status={getRecommendedStatus(candidate.score)}
+            kind="recommended"
+          />
+          <StatusBadge
+            label="Moderator status"
+            status={candidate.status}
+            kind="moderator"
+          />
         </div>
       </div>
 

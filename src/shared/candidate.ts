@@ -6,8 +6,11 @@ export type CandidateStatusFilter = CandidateStatus | 'all';
 
 export type TopComment = {
   comment_id: string;
+  author: string;
+  body: string;
   body_excerpt: string;
   score: number;
+  created_utc: number;
 };
 
 export type Candidate = {
@@ -20,6 +23,7 @@ export type Candidate = {
   created_utc: number;
   upvotes: number;
   num_comments: number;
+  post_body: string;
   body_excerpt: string;
   top_comments: TopComment[];
   score: number;
@@ -53,6 +57,40 @@ export type CandidateMutationResponse = {
 export type KeepExportResponse = {
   count: number;
   content: string;
+  refreshed_at: number | null;
+};
+
+export type KeepRawJsonTopComment = {
+  comment_id: string;
+  author: string;
+  body: string;
+  score: number;
+  created_utc: number;
+};
+
+export type KeepRawJsonCandidate = {
+  raw_id: string;
+  source: 'reddit_devvit';
+  subreddit: string;
+  post_title: string;
+  post_url: string;
+  post_author: string;
+  post_created_utc: number;
+  post_body: string;
+  num_comments: number;
+  upvotes: number;
+  top_comments: KeepRawJsonTopComment[];
+  devvit_score: number;
+  devvit_reason_tags: string[];
+  moderator_status: CandidateStatus;
+  review_note: string;
+  collected_at: string;
+  recommended_status: CandidateStatus;
+  candidate_rank: number;
+  post_id: string;
+  candidate_id: string;
+  body_excerpt: string;
+  devvit_version: 'v1.1';
 };
 
 export type RefreshCandidatesResponse = {

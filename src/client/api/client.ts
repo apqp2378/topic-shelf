@@ -7,6 +7,7 @@ import type {
   CandidateStatus,
   CandidateStatusFilter,
   KeepExportResponse,
+  KeepRawJsonCandidate,
   RefreshCandidatesResponse,
 } from '../types/candidate';
 
@@ -102,6 +103,9 @@ export const getKeepLinksExport = async (): Promise<KeepExportResponse> =>
 
 export const getKeepMarkdownExport = async (): Promise<KeepExportResponse> =>
   readJson<KeepExportResponse>(await fetch('/api/export/keep-markdown'));
+
+export const getKeepRawJsonExport = async (): Promise<KeepRawJsonCandidate[]> =>
+  readJson<KeepRawJsonCandidate[]>(await fetch('/api/export/keep-raw-json'));
 
 export const refreshCandidates = async (): Promise<RefreshCandidatesResponse> =>
   readJson<RefreshCandidatesResponse>(

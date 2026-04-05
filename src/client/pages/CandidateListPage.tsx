@@ -51,14 +51,12 @@ export const CandidateListPage = ({
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
         Moderator Dashboard
       </p>
-      <h1 className="mt-2 text-2xl font-bold text-slate-900">
-        Reddit candidate picker
-      </h1>
+      <h1 className="mt-2 text-2xl font-bold text-slate-900">Reddit candidate picker</h1>
       <p className="mt-2 text-sm leading-6 text-slate-600">
         Reviewing r/{subreddit} candidates with human-owned statuses and notes.
       </p>
       <p className="mt-3 text-xs text-slate-500">
-        {count} candidates • Last refresh: {formatRefreshTime(refreshedAt)}
+        {count} candidates · Last refresh: {formatRefreshTime(refreshedAt)}
       </p>
     </section>
 

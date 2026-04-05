@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import {
   getCandidate,
   getCandidates,
-  getKeepLinksExport,
-  getKeepMarkdownExport,
+  getKeepRawJsonExport,
   refreshCandidates,
   updateCandidateNote,
   updateCandidateStatus,
@@ -12,6 +11,7 @@ import {
 import { CandidateDetailPage } from './pages/CandidateDetailPage';
 import { CandidateListPage } from './pages/CandidateListPage';
 import { ExportPage } from './pages/ExportPage';
+import type { KeepRawJsonCandidate } from './types/candidate';
 import type {
   Candidate,
   CandidateSort,
@@ -29,6 +29,17 @@ const copyText = async (value: string, successMessage: string): Promise<void> =>
   showToast(successMessage);
 };
 
+const formatPlainTextExport = (candidates: KeepRawJsonCandidate[]): string =>
+  candidates.map((candidate) => `${candidate.post_title}\n${candidate.post_url}`).join('\n\n');
+
+const formatMarkdownExport = (candidates: KeepRawJsonCandidate[]): string =>
+  candidates
+    .map((candidate) => `- ${candidate.post_title}\n  - ${candidate.post_url}`)
+    .join('\n\n');
+
+const formatRawJsonExport = (candidates: KeepRawJsonCandidate[]): string =>
+  JSON.stringify(candidates, null, 2);
+
 export const App = () => {
   const [page, setPage] = useState<PageState>({ name: 'list' });
   const [candidates, setCandidates] = useState<Candidate[]>([]);
@@ -36,6 +47,7 @@ export const App = () => {
   const [noteDraft, setNoteDraft] = useState('');
   const [plainTextExport, setPlainTextExport] = useState('');
   const [markdownExport, setMarkdownExport] = useState('');
+  const [rawJsonExport, setRawJsonExport] = useState('');
   const [keepCount, setKeepCount] = useState(0);
   const [sort, setSort] = useState<CandidateSort>('score');
   const [status, setStatus] = useState<CandidateStatusFilter>('all');
@@ -89,13 +101,11 @@ export const App = () => {
     setError('');
 
     try {
-      const [plainTextResponse, markdownResponse] = await Promise.all([
-        getKeepLinksExport(),
-        getKeepMarkdownExport(),
-      ]);
-      setPlainTextExport(plainTextResponse.content);
-      setMarkdownExport(markdownResponse.content);
-      setKeepCount(plainTextResponse.count);
+      const rawJsonResponse = await getKeepRawJsonExport();
+      setPlainTextExport(formatPlainTextExport(rawJsonResponse));
+      setMarkdownExport(formatMarkdownExport(rawJsonResponse));
+      setRawJsonExport(formatRawJsonExport(rawJsonResponse));
+      setKeepCount(rawJsonResponse.length);
       setPage({ name: 'export' });
     } catch (loadError) {
       const message =
@@ -254,8 +264,10 @@ export const App = () => {
         {page.name === 'export' ? (
           <ExportPage
             keepCount={keepCount}
+            refreshedAt={refreshedAt}
             plainText={plainTextExport}
             markdown={markdownExport}
+            rawJson={rawJsonExport}
             loading={saving}
             onBack={() => setPage({ name: 'list' })}
             onCopyPlainText={() =>
@@ -264,6 +276,7 @@ export const App = () => {
             onCopyMarkdown={() =>
               void copyText(markdownExport, 'Markdown links copied')
             }
+            onCopyRawJson={() => void copyText(rawJsonExport, 'Raw JSON copied')}
           />
         ) : null}
       </div>
