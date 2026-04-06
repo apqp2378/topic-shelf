@@ -1,0 +1,30 @@
+[
+  {
+    "raw_id": "reddit_devvit_smoke_001",
+    "source": "reddit_devvit",
+    "subreddit": "topic_shelf_dev",
+    "post_title": "Smoke test thread",
+    "post_url": "https://reddit.com/r/topic_shelf_dev/comments/smoke_001/smoke_test_thread/",
+    "post_author": "tester",
+    "post_created_utc": 1775323792,
+    "post_body": "This is a tiny local raw input for the pipeline smoke test.",
+    "num_comments": 1,
+    "upvotes": 2,
+    "top_comments": [
+      {
+        "comment_id": "t1_smoke_001",
+        "author": "tester",
+        "body": "Helpful smoke-test comment.",
+        "score": 1,
+        "created_utc": 1775323966
+      }
+    ],
+    "devvit_score": 4,
+    "devvit_reason_tags": [
+      "smoke_test"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-05T10:00:00Z"
+  }
+]

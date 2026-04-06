@@ -4,6 +4,8 @@ This pipeline is the Python post-processing layer for Topic Shelf.
 
 See also: `../docs/architecture.md`
 
+It also has a small smoke test for the raw -> normalized -> cards path.
+
 It reads keep-style raw Reddit JSON and turns it into structured downstream assets such as normalized records, cards, summaries, translations, topic labels, bundles, blog drafts, quality reviews, and publish-ready Markdown.
 
 ## Purpose
