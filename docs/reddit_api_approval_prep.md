@@ -29,6 +29,7 @@ The current implementation keeps scope narrow:
 - additive metadata on raw records
 - preflight / doctor validation
 - raw purge helper for generated URL-ingestion output
+- canonical example URL-list file: `python_pipeline/data/url_lists/claude_code_tips.txt`
 
 ## Still Needed For Production-Ready OAuth
 

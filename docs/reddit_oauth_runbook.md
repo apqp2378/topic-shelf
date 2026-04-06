@@ -88,15 +88,15 @@ These fields are safe to ignore downstream, but they make setup and incident rev
 Public path:
 
 ~~~bash
-python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_public --url-list python_pipeline/data/url_lists/my_threads.txt
-python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/my_threads.txt
+python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_public --url-list python_pipeline/data/url_lists/claude_code_tips.txt
+python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/claude_code_tips.txt
 ~~~
 
 OAuth path:
 
 ~~~bash
-TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_oauth --url-list python_pipeline/data/url_lists/my_threads.txt
-TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/my_threads.txt
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_oauth --url-list python_pipeline/data/url_lists/claude_code_tips.txt
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/claude_code_tips.txt
 ~~~
 
 ## Operational Notes

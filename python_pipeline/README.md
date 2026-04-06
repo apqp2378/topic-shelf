@@ -27,7 +27,7 @@ Expected raw input folder:
 
 Example raw input files:
 
-- `python_pipeline/data/raw/raw_from_urls_my_threads.json`
+- `python_pipeline/data/raw/raw_from_urls_claude_code_tips.json`
 - `python_pipeline/data/raw/devvit_keep_2026-04-05.json`
 - `python_pipeline/data/raw/devvit_keep_multi.json`
 
@@ -97,8 +97,8 @@ python python_pipeline/scripts/run_pipeline.py python_pipeline/data/raw/devvit_k
 ### V3 URL bridge flow
 
 ~~~bash
-python python_pipeline/scripts/ingest_reddit_urls.py python_pipeline/data/url_lists/my_threads.txt
-python python_pipeline/scripts/run_pipeline.py python_pipeline/data/raw/raw_from_urls_my_threads.json
+python python_pipeline/scripts/ingest_reddit_urls.py python_pipeline/data/url_lists/claude_code_tips.txt
+python python_pipeline/scripts/run_pipeline.py python_pipeline/data/raw/raw_from_urls_claude_code_tips.json
 ~~~
 
 ### Choosing a fetcher
@@ -113,8 +113,8 @@ Default behavior stays the same:
 Examples:
 
 ~~~bash
-python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/my_threads.txt
-TOPIC_SHELF_FETCHER=reddit_oauth python python_pipeline/scripts/ingest_reddit_urls.py python_pipeline/data/url_lists/my_threads.txt
+python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/claude_code_tips.txt
+TOPIC_SHELF_FETCHER=reddit_oauth python python_pipeline/scripts/ingest_reddit_urls.py python_pipeline/data/url_lists/claude_code_tips.txt
 ~~~
 
 Current fetchers:
@@ -138,8 +138,24 @@ To run the MVP OAuth path, provide a bearer token in:
 Example:
 
 ~~~bash
-TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/my_threads.txt
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/claude_code_tips.txt
 ~~~
+
+### Batch review scaffold
+
+After cards are generated, create review sidecars for a completed batch:
+
+~~~bash
+python python_pipeline/scripts/init_batch_review.py claude_code_tips
+python python_pipeline/scripts/init_batch_review.py python_pipeline/data/cards/cards_raw_from_urls_claude_code_tips.json
+~~~
+
+The review scaffold writes two human-editable files under `python_pipeline/data/reviews/`:
+
+- `<stem>_review.md`
+- `<stem>_decisions.json`
+
+It does not modify raw, normalized, or cards outputs.
 
 ### Runtime config
 
@@ -159,16 +175,16 @@ Example commands:
 
 ~~~bash
 # Default public prototype
-python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/my_threads.txt
+python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/claude_code_tips.txt
 
 # MVP OAuth path with a bearer token
-TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/my_threads.txt
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/claude_code_tips.txt
 
 # Disable bounded MoreComments expansion for OAuth
-TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... TOPIC_SHELF_REDDIT_MORECOMMENTS_ENABLED=false python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/my_threads.txt
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... TOPIC_SHELF_REDDIT_MORECOMMENTS_ENABLED=false python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/claude_code_tips.txt
 
 # Raise the shared top-comment cap
-TOPIC_SHELF_REDDIT_TOP_COMMENT_LIMIT=8 python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/my_threads.txt
+TOPIC_SHELF_REDDIT_TOP_COMMENT_LIMIT=8 python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/claude_code_tips.txt
 ~~~
 
 This MVP path:
@@ -202,13 +218,13 @@ Examples:
 
 ~~~bash
 # Public path
-python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_public --url-list python_pipeline/data/url_lists/my_threads.txt
+python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_public --url-list python_pipeline/data/url_lists/claude_code_tips.txt
 
 # OAuth path
-TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_oauth --url-list python_pipeline/data/url_lists/my_threads.txt
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_oauth --url-list python_pipeline/data/url_lists/claude_code_tips.txt
 
 # Check a specific URL list file
-python python_pipeline/scripts/check_reddit_ingestion_setup.py --url-list python_pipeline/data/url_lists/my_threads.txt
+python python_pipeline/scripts/check_reddit_ingestion_setup.py --url-list python_pipeline/data/url_lists/claude_code_tips.txt
 ~~~
 
 Blocking errors are things that would prevent a successful ingestion run, such as an invalid fetcher, missing OAuth token, invalid config, or a missing URL list file. Warnings are non-blocking setup notes, such as not providing a URL list for inspection.
@@ -245,5 +261,6 @@ It does not delete arbitrary raw files, fixtures, or sample inputs.
 - The stable center of the pipeline is the same in both cases: `raw JSON -> normalized -> cards`.
 - The public URL fetcher is intentionally still the local prototype path until the OAuth flow is implemented.
 - `reddit_public` remains the default current path unless `--fetcher reddit_oauth` or `TOPIC_SHELF_FETCHER=reddit_oauth` is selected.
+- Use `python_pipeline/data/url_lists/claude_code_tips.txt` as the canonical example URL-list file in docs and tests.
 - The local URL-list files under `python_pipeline/data/url_lists/` that are meant only for personal churn are ignored intentionally.
 - During stabilization, prefer fixture-backed tests and stubbed fetchers over live network fetches.

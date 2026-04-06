@@ -48,5 +48,6 @@ You are writing a Devvit web application that will be executed on Reddit.com.
 
 - You may find code that references blocks or `@devvit/public-api` while building a feature. Do NOT use this code as this project is configured to use Devvit web only.
 - Whenever you add an endpoint for a new menu item action, ensure that you've added the corresponding mapping to `devvit.json` so that it is properly registered
+- Use `python_pipeline/data/url_lists/claude_code_tips.txt` as the canonical example URL-list file in repo guidance and tests.
 
 Docs: https://developers.reddit.com/docs/llms.txt.
