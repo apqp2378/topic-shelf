@@ -26,7 +26,8 @@ class RedditPublicJsonFetcher:
             raise ValueError("Reddit public JSON response must be a non-empty list.")
 
         post_data = extract_post_data(payload)
-        top_comments = extract_top_comments(payload)
+        top_comment_nodes = extract_top_comment_nodes(payload)
+        top_comments = normalize_top_comment_nodes(top_comment_nodes)
         post_permalink = clean_string(post_data.get("permalink"))
         post_url = canonical_url
         if post_permalink:
@@ -59,9 +60,15 @@ class RedditPublicJsonFetcher:
             post_id=post_id,
             fetch_metadata={
                 "fetch_mode": "public",
-                "comment_fetch_count": len(top_comments),
+                "comment_fetch_mode": "initial_only",
+                "comment_fetch_count": len(top_comment_nodes),
                 "comment_fetch_depth": 0,
+                "expandable_comment_ids_found": [],
+                "expandable_comment_ids_requested": [],
+                "morechildren_expansion_attempted": False,
+                "morechildren_expansion_succeeded": False,
                 "ratelimit_snapshot": {},
+                "morechildren_ratelimit_snapshot": {},
             },
         )
 
@@ -125,6 +132,10 @@ def extract_post_data(payload: list[Any]) -> dict[str, Any]:
 
 
 def extract_top_comments(payload: list[Any]) -> list[dict[str, object]]:
+    return cap_comments(normalize_top_comment_nodes(extract_top_comment_nodes(payload)), limit=TOP_COMMENT_LIMIT)
+
+
+def extract_top_comment_nodes(payload: list[Any]) -> list[dict[str, object]]:
     if len(payload) < 2:
         return []
 
@@ -140,8 +151,7 @@ def extract_top_comments(payload: list[Any]) -> list[dict[str, object]]:
     if not isinstance(children, list):
         return []
 
-    top_comments: list[dict[str, object]] = []
-
+    top_comment_nodes: list[dict[str, object]] = []
     for child in children:
         if not isinstance(child, dict):
             continue
@@ -152,13 +162,18 @@ def extract_top_comments(payload: list[Any]) -> list[dict[str, object]]:
         if not isinstance(comment_data, dict):
             continue
 
+        top_comment_nodes.append(comment_data)
+
+    return top_comment_nodes
+
+
+def normalize_top_comment_nodes(top_comment_nodes: list[dict[str, object]]) -> list[dict[str, object]]:
+    normalized_comments: list[dict[str, object]] = []
+    for comment_data in top_comment_nodes:
         comment = normalize_comment_node(comment_data)
-        if comment is None:
-            continue
-
-        top_comments.append(comment)
-
-    return cap_comments(top_comments, limit=TOP_COMMENT_LIMIT)
+        if comment is not None:
+            normalized_comments.append(comment)
+    return normalized_comments
 
 
 def extract_post_fullname(post_data: dict[str, Any]) -> str:

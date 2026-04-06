@@ -62,7 +62,7 @@ def extract_comment_thread_snapshot(
             expandable_comment_ids.extend(extract_more_comment_ids(data))
 
     return CommentThreadSnapshot(
-        initial_comment_nodes=cap_comment_nodes(initial_comment_nodes, limit=limit),
+        initial_comment_nodes=initial_comment_nodes,
         expandable_comment_ids=dedupe_preserving_order(expandable_comment_ids),
         comment_fetch_count=len(initial_comment_nodes),
         comment_fetch_depth=0,
@@ -115,6 +115,40 @@ def normalize_comment_nodes(
     return cap_comments(normalized_comments, limit=limit)
 
 
+def merge_comment_nodes(
+    initial_nodes: Iterable[Any],
+    expanded_nodes: Iterable[Any] | None = None,
+    limit: int = TOP_COMMENT_LIMIT,
+) -> list[dict[str, object]]:
+    """Normalize, merge, dedupe, and cap comment nodes in one shared place."""
+
+    merged_comments: list[dict[str, object]] = []
+    seen_comment_ids: set[str] = set()
+
+    for node in initial_nodes:
+        normalized = normalize_comment_node(node)
+        if normalized is None:
+            continue
+        comment_id = clean_string(normalized.get("comment_id"))
+        if not comment_id or comment_id in seen_comment_ids:
+            continue
+        seen_comment_ids.add(comment_id)
+        merged_comments.append(normalized)
+
+    if expanded_nodes is not None:
+        for node in expanded_nodes:
+            normalized = normalize_comment_node(node)
+            if normalized is None:
+                continue
+            comment_id = clean_string(normalized.get("comment_id"))
+            if not comment_id or comment_id in seen_comment_ids:
+                continue
+            seen_comment_ids.add(comment_id)
+            merged_comments.append(normalized)
+
+    return cap_comments(merged_comments, limit=limit)
+
+
 def cap_comment_nodes(
     comments: list[dict[str, object]],
     limit: int = TOP_COMMENT_LIMIT,
@@ -148,6 +182,38 @@ def extract_more_comment_ids(node: dict[str, object]) -> list[str]:
                     more_ids.append(comment_id)
 
     return more_ids
+
+
+def extract_morechildren_comment_nodes(payload: Any) -> list[dict[str, object]]:
+    """Extract expanded comment nodes from a ``morechildren`` response payload."""
+
+    if not isinstance(payload, dict):
+        return []
+
+    json_data = payload.get("json")
+    if isinstance(json_data, dict):
+        payload_data = json_data.get("data")
+    else:
+        payload_data = payload.get("data")
+
+    if not isinstance(payload_data, dict):
+        return []
+
+    things = payload_data.get("things")
+    if not isinstance(things, list):
+        return []
+
+    comment_nodes: list[dict[str, object]] = []
+    for thing in things:
+        if not isinstance(thing, dict):
+            continue
+        if clean_string(thing.get("kind")) != "t1":
+            continue
+        comment_data = thing.get("data")
+        if isinstance(comment_data, dict):
+            comment_nodes.append(comment_data)
+
+    return comment_nodes
 
 
 def dedupe_preserving_order(values: Iterable[str]) -> list[str]:

@@ -146,9 +146,10 @@ This MVP path:
 - uses an already-supplied bearer token
 - fetches the initial thread payload with the standard library only
 - parses the post and initial top-level comments
+- performs one bounded `MoreComments` expansion pass when expandable ids are present
 - keeps the current `top_comments` raw field and shared comment cap
-- attaches additive metadata such as `fetch_mode`, `comment_fetch_count`, `comment_fetch_depth`, `ratelimit_snapshot`, and `expandable_comment_ids`
-- detects initial `MoreComments` placeholders and preserves their ids in metadata, but does not recurse into deep pagination yet
+- attaches additive metadata such as `fetch_mode`, `comment_fetch_mode`, `comment_fetch_count`, `comment_fetch_depth`, `ratelimit_snapshot`, and `expandable_comment_ids`
+- detects initial `MoreComments` placeholders, requests a small bounded follow-up batch, and preserves the requested ids in metadata
 
 Not implemented yet:
 
@@ -156,7 +157,8 @@ Not implemented yet:
 - approval workflow
 - secret exchange
 - deep comment pagination
-- `MoreComments` expansion
+- recursive `MoreComments` expansion beyond one batch
+- a broad Reddit API client abstraction
 
 ### Raw retention and purge
 

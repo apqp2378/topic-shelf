@@ -66,7 +66,7 @@ class RedditOAuthFetcherTests(unittest.TestCase):
         self.assertEqual(request.full_url, build_oauth_reddit_json_url(canonical_url))
         self.assertEqual(request.get_header("Authorization"), "bearer token")
 
-    def test_expanded_comment_placeholders_are_preserved_in_metadata(self) -> None:
+    def test_one_morechildren_pass_merges_expanded_comments(self) -> None:
         payload = [
             {
                 "data": {
@@ -112,17 +112,91 @@ class RedditOAuthFetcherTests(unittest.TestCase):
                 }
             },
         ]
+        morechildren_payload = {
+            "json": {
+                "data": {
+                    "things": [
+                        {
+                            "kind": "t1",
+                            "data": {
+                                "id": "more_1",
+                                "name": "t1_more_1",
+                                "author": "helper_2",
+                                "body": "Comment 2",
+                                "score": 2,
+                                "created_utc": 1712222224,
+                            },
+                        }
+                    ]
+                }
+            }
+        }
         fetcher = RedditOAuthFetcher(token_provider=StaticTokenProvider("token"))
 
         with mock.patch(
             "pipeline.url_fetchers.reddit_oauth.urlopen",
-            return_value=FakeHTTPResponse(payload),
+            side_effect=[
+                FakeHTTPResponse(payload),
+                FakeHTTPResponse(morechildren_payload),
+            ],
         ):
             result = fetcher.fetch_thread("https://reddit.com/r/python/comments/more001/more_comments_thread")
 
-        self.assertEqual(len(result.top_comments), 1)
-        self.assertEqual(result.fetch_metadata["expandable_comment_ids"], ["t1_more_1", "t1_more_2"])
-        self.assertEqual(result.fetch_metadata["comment_fetch_count"], 1)
+        self.assertEqual(len(result.top_comments), 2)
+        self.assertEqual([item["comment_id"] for item in result.top_comments], ["t1_comment_1", "t1_more_1"])
+        self.assertEqual(result.fetch_metadata["comment_fetch_mode"], "initial_plus_morechildren")
+        self.assertTrue(result.fetch_metadata["morechildren_expansion_attempted"])
+        self.assertTrue(result.fetch_metadata["morechildren_expansion_succeeded"])
+        self.assertEqual(result.fetch_metadata["expandable_comment_ids_found"], ["t1_more_1", "t1_more_2"])
+        self.assertEqual(result.fetch_metadata["expandable_comment_ids_requested"], ["more_1", "more_2"])
+        self.assertEqual(result.fetch_metadata["comment_fetch_count"], 2)
+
+    def test_morechildren_merge_still_respects_shared_cap(self) -> None:
+        payload = load_fixture("reddit_oauth_thread.json")
+        payload[1]["data"]["children"] = [
+            payload[1]["data"]["children"][0],
+            {
+                "kind": "more",
+                "data": {
+                    "children": ["t1_more_1", "t1_more_2", "t1_more_3", "t1_more_4", "t1_more_5", "t1_more_6"],
+                },
+            },
+        ]
+        morechildren_payload = {
+            "json": {
+                "data": {
+                    "things": [
+                        {
+                            "kind": "t1",
+                            "data": {
+                                "id": f"more_{index + 1}",
+                                "name": f"t1_more_{index + 1}",
+                                "author": f"helper_{index + 1}",
+                                "body": f"Comment {index + 2}",
+                                "score": index,
+                                "created_utc": 1712222230 + index,
+                            },
+                        }
+                        for index in range(6)
+                    ]
+                }
+            }
+        }
+        fetcher = RedditOAuthFetcher(token_provider=StaticTokenProvider("token"))
+
+        with mock.patch(
+            "pipeline.url_fetchers.reddit_oauth.urlopen",
+            side_effect=[
+                FakeHTTPResponse(payload),
+                FakeHTTPResponse(morechildren_payload),
+            ],
+        ):
+            result = fetcher.fetch_thread("https://reddit.com/r/python/comments/oauth001/oauth_thread")
+
+        self.assertEqual(len(result.top_comments), TOP_COMMENT_LIMIT)
+        self.assertEqual(result.fetch_metadata["comment_fetch_mode"], "initial_plus_morechildren")
+        self.assertTrue(result.fetch_metadata["morechildren_expansion_succeeded"])
+        self.assertEqual(result.fetch_metadata["comment_fetch_count"], 7)
 
     def test_missing_token_raises_clear_error(self) -> None:
         fetcher = RedditOAuthFetcher()
@@ -181,6 +255,79 @@ class RedditOAuthFetcherTests(unittest.TestCase):
                 self.assertEqual(len(result.top_comments), TOP_COMMENT_LIMIT)
                 self.assertEqual(urlopen_mock.call_count, 2)
                 sleep_mock.assert_called_once()
+
+    def test_failed_morechildren_expansion_preserves_initial_comments(self) -> None:
+        payload = [
+            {
+                "data": {
+                    "children": [
+                        {
+                            "data": {
+                                "name": "t3_fail001",
+                                "id": "fail001",
+                                "subreddit": "python",
+                                "title": "Failed expansion thread",
+                                "permalink": "/r/python/comments/fail001/failed_expansion_thread/",
+                                "author": "tester",
+                                "created_utc": 1713333333,
+                                "selftext": "Body text.",
+                                "num_comments": 1,
+                                "ups": 10,
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "children": [
+                        {
+                            "kind": "t1",
+                            "data": {
+                                "id": "comment_1",
+                                "name": "t1_comment_1",
+                                "author": "helper",
+                                "body": "Initial comment",
+                                "score": 1,
+                                "created_utc": 1713333334,
+                            },
+                        },
+                        {
+                            "kind": "more",
+                            "data": {
+                                "children": ["t1_more_1"],
+                            },
+                        },
+                    ]
+                }
+            },
+        ]
+        fetcher = RedditOAuthFetcher(token_provider=StaticTokenProvider("token"), backoff_seconds=0.0, max_attempts=2)
+        rate_headers = {
+            "x-ratelimit-remaining": "0",
+            "x-ratelimit-reset": "2.5",
+        }
+
+        with mock.patch(
+            "pipeline.url_fetchers.reddit_oauth.urlopen",
+            side_effect=[
+                FakeHTTPResponse(payload),
+                HTTPError("https://oauth.reddit.com/api/morechildren", 429, "retry", hdrs=rate_headers, fp=None),
+                HTTPError("https://oauth.reddit.com/api/morechildren", 429, "retry", hdrs=rate_headers, fp=None),
+            ],
+        ):
+            with mock.patch("pipeline.url_fetchers.reddit_oauth.time.sleep") as sleep_mock:
+                result = fetcher.fetch_thread("https://reddit.com/r/python/comments/fail001/failed_expansion_thread")
+
+        self.assertEqual(len(result.top_comments), 1)
+        self.assertEqual(result.top_comments[0]["comment_id"], "t1_comment_1")
+        self.assertEqual(result.fetch_metadata["comment_fetch_mode"], "initial_plus_morechildren_failed")
+        self.assertTrue(result.fetch_metadata["morechildren_expansion_attempted"])
+        self.assertFalse(result.fetch_metadata["morechildren_expansion_succeeded"])
+        self.assertEqual(result.fetch_metadata["expandable_comment_ids_requested"], ["more_1"])
+        self.assertIn("Rate limit snapshot", result.fetch_metadata["morechildren_expansion_error"])
+        self.assertEqual(result.fetch_metadata["morechildren_ratelimit_snapshot"]["remaining"], 0)
+        self.assertEqual(sleep_mock.call_count, 1)
 
     def test_rate_limit_snapshot_is_reported_after_retries(self) -> None:
         canonical_url = "https://reddit.com/r/python/comments/oauth001/oauth_thread"

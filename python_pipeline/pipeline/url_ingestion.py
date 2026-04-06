@@ -290,37 +290,67 @@ def normalize_top_comments(top_comments: list[dict[str, object]]) -> list[dict[s
 
 
 def build_additive_fetch_metadata(fetch_result: UrlFetchResult) -> dict[str, object]:
-    metadata = fetch_result.fetch_metadata or {}
+    metadata = fetch_result.fetch_metadata if isinstance(fetch_result.fetch_metadata, dict) else {}
 
-    fetch_mode = clean_string(metadata.get("fetch_mode")) if isinstance(metadata, dict) else ""
-    if not fetch_mode:
-        fetch_mode = "public"
-
-    comment_fetch_count = coerce_int(metadata.get("comment_fetch_count")) if isinstance(metadata, dict) else 0
+    fetch_mode = clean_string(metadata.get("fetch_mode")) or "public"
+    comment_fetch_mode = clean_string(metadata.get("comment_fetch_mode")) or "initial_only"
+    comment_fetch_count = coerce_int(metadata.get("comment_fetch_count"))
     if comment_fetch_count <= 0:
         comment_fetch_count = len(fetch_result.top_comments)
 
-    comment_fetch_depth = coerce_int(metadata.get("comment_fetch_depth")) if isinstance(metadata, dict) else 0
-    ratelimit_snapshot = metadata.get("ratelimit_snapshot") if isinstance(metadata, dict) else {}
+    comment_fetch_depth = coerce_int(metadata.get("comment_fetch_depth"))
+    ratelimit_snapshot = metadata.get("ratelimit_snapshot")
     if not isinstance(ratelimit_snapshot, dict):
         ratelimit_snapshot = {}
 
+    morechildren_ratelimit_snapshot = metadata.get("morechildren_ratelimit_snapshot")
+    if not isinstance(morechildren_ratelimit_snapshot, dict):
+        morechildren_ratelimit_snapshot = {}
+
+    expandable_found = normalize_string_list(metadata.get("expandable_comment_ids_found"))
+    if not expandable_found:
+        expandable_found = normalize_string_list(metadata.get("expandable_comment_ids"))
+
+    expandable_requested = normalize_string_list(metadata.get("expandable_comment_ids_requested"))
+    morechildren_expansion_attempted = bool(metadata.get("morechildren_expansion_attempted", False))
+    morechildren_expansion_succeeded = bool(metadata.get("morechildren_expansion_succeeded", False))
+
     extra_metadata: dict[str, object] = {
         "fetch_mode": fetch_mode,
+        "comment_fetch_mode": comment_fetch_mode,
         "comment_fetch_count": comment_fetch_count,
         "comment_fetch_depth": comment_fetch_depth,
         "ratelimit_snapshot": ratelimit_snapshot,
+        "morechildren_ratelimit_snapshot": morechildren_ratelimit_snapshot,
+        "expandable_comment_ids": expandable_found,
+        "expandable_comment_ids_found": expandable_found,
+        "expandable_comment_ids_requested": expandable_requested,
+        "morechildren_expansion_attempted": morechildren_expansion_attempted,
+        "morechildren_expansion_succeeded": morechildren_expansion_succeeded,
     }
 
-    expandable_comment_ids = metadata.get("expandable_comment_ids") if isinstance(metadata, dict) else []
-    if isinstance(expandable_comment_ids, list):
-        extra_metadata["expandable_comment_ids"] = [clean_string(value) for value in expandable_comment_ids if clean_string(value)]
+    deleted_checked_at = clean_string(metadata.get("deleted_checked_at"))
+    if deleted_checked_at:
+        extra_metadata["deleted_checked_at"] = deleted_checked_at
 
-    deleted_checked_at = metadata.get("deleted_checked_at") if isinstance(metadata, dict) else ""
-    if isinstance(deleted_checked_at, str) and deleted_checked_at.strip():
-        extra_metadata["deleted_checked_at"] = deleted_checked_at.strip()
+    if "morechildren_expansion_error" in metadata:
+        error_value = clean_string(metadata.get("morechildren_expansion_error"))
+        if error_value:
+            extra_metadata["morechildren_expansion_error"] = error_value
 
     return extra_metadata
+
+
+def normalize_string_list(value: object) -> list[str]:
+    if not isinstance(value, list):
+        return []
+
+    normalized_values: list[str] = []
+    for item in value:
+        cleaned = clean_string(item)
+        if cleaned and cleaned not in normalized_values:
+            normalized_values.append(cleaned)
+    return normalized_values
 
 
 def build_body_excerpt(post_body: str, max_len: int = 280) -> str:
