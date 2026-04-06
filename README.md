@@ -49,3 +49,5 @@ then turns that input into raw JSON, normalized records, cards, and optional dow
 
 - `python_pipeline/README.md`
 - `docs/architecture.md`
+- `docs/reddit_oauth_runbook.md`
+- `docs/reddit_api_approval_prep.md`
