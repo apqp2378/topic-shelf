@@ -4,3 +4,11 @@ dist
 .env
 __pycache__/
 *.pyc
+python_pipeline/data/url_lists/GPT_code_tips.txt
+python_pipeline/data/url_lists/ai_news.txt
+python_pipeline/data/url_lists/ai_topic
+python_pipeline/data/url_lists/ai_topic.txt
+python_pipeline/data/url_lists/claude_code_tips.txt
+python_pipeline/data/url_lists/datascience_job.txt
+python_pipeline/data/url_lists/ds_career_jobs.txt
+python_pipeline/data/url_lists/gemini_code_tips.txt

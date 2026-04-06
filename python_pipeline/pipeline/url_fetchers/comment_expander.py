@@ -27,13 +27,15 @@ class CommentThreadSnapshot:
 class NoOpCommentExpander:
     """Current placeholder expander that only normalizes and caps comments."""
 
+    limit: int = TOP_COMMENT_LIMIT
+
     def expand(self, comments: list[dict[str, object]]) -> list[dict[str, object]]:
         normalized = [
             normalized_comment
             for normalized_comment in (normalize_comment_node(comment) for comment in comments)
             if normalized_comment is not None
         ]
-        return cap_comments(normalized)
+        return cap_comments(normalized, limit=self.limit)
 
 
 def extract_comment_thread_snapshot(

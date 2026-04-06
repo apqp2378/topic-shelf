@@ -298,7 +298,7 @@ class UrlIngestionTests(unittest.TestCase):
 
             fetcher = RedditPublicJsonFetcher()
             fixture_payload = load_json_fixture("reddit_public_edge_short.json")
-            with mock.patch.object(fetcher, "_load_json", return_value=fixture_payload):
+            with mock.patch.object(RedditPublicJsonFetcher, "_load_json", return_value=fixture_payload):
                 result = ingest_url_list(input_path, fetcher, output_path=output_path)
 
             record = result.records[0]
@@ -320,7 +320,7 @@ class UrlIngestionTests(unittest.TestCase):
 
             fetcher = RedditPublicJsonFetcher()
             fixture_payload = load_json_fixture("reddit_public_edge_long.json")
-            with mock.patch.object(fetcher, "_load_json", return_value=fixture_payload):
+            with mock.patch.object(RedditPublicJsonFetcher, "_load_json", return_value=fixture_payload):
                 result = ingest_url_list(input_path, fetcher, output_path=output_path)
 
             record = result.records[0]

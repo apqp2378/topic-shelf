@@ -8,6 +8,11 @@ from urllib.parse import urlsplit, urlunsplit
 
 from pipeline.io_utils import build_raw_from_urls_output_path, read_text_file, write_json_file
 from pipeline.url_fetchers.comment_expander import clean_string, coerce_int, normalize_comment_nodes
+from pipeline.url_fetchers.config import (
+    DEFAULT_MAX_RETRY_ATTEMPTS,
+    DEFAULT_REQUEST_TIMEOUT_SECONDS,
+    DEFAULT_RETRY_BACKOFF_SECONDS,
+)
 from pipeline.url_fetchers.base import TOP_COMMENT_LIMIT, UrlFetchResult, UrlFetcher
 from pipeline.validators import validate_raw_record
 
@@ -307,6 +312,28 @@ def build_additive_fetch_metadata(fetch_result: UrlFetchResult) -> dict[str, obj
     if not isinstance(morechildren_ratelimit_snapshot, dict):
         morechildren_ratelimit_snapshot = {}
 
+    comment_cap = coerce_int(metadata.get("comment_cap"))
+    if comment_cap <= 0:
+        comment_cap = TOP_COMMENT_LIMIT
+
+    morechildren_enabled = metadata.get("morechildren_enabled")
+    if not isinstance(morechildren_enabled, bool):
+        morechildren_enabled = False
+
+    morechildren_request_limit = coerce_int(metadata.get("morechildren_request_limit"))
+    if morechildren_request_limit < 0:
+        morechildren_request_limit = 0
+
+    morechildren_max_batches = coerce_int(metadata.get("morechildren_max_batches"))
+    if morechildren_max_batches < 0:
+        morechildren_max_batches = 0
+
+    request_timeout_seconds = coerce_float(metadata.get("request_timeout_seconds"))
+    if request_timeout_seconds <= 0:
+        request_timeout_seconds = DEFAULT_REQUEST_TIMEOUT_SECONDS
+
+    retry_policy = normalize_retry_policy(metadata.get("retry_policy"))
+
     expandable_found = normalize_string_list(metadata.get("expandable_comment_ids_found"))
     if not expandable_found:
         expandable_found = normalize_string_list(metadata.get("expandable_comment_ids"))
@@ -320,6 +347,12 @@ def build_additive_fetch_metadata(fetch_result: UrlFetchResult) -> dict[str, obj
         "comment_fetch_mode": comment_fetch_mode,
         "comment_fetch_count": comment_fetch_count,
         "comment_fetch_depth": comment_fetch_depth,
+        "comment_cap": comment_cap,
+        "morechildren_enabled": morechildren_enabled,
+        "morechildren_request_limit": morechildren_request_limit,
+        "morechildren_max_batches": morechildren_max_batches,
+        "request_timeout_seconds": request_timeout_seconds,
+        "retry_policy": retry_policy,
         "ratelimit_snapshot": ratelimit_snapshot,
         "morechildren_ratelimit_snapshot": morechildren_ratelimit_snapshot,
         "expandable_comment_ids": expandable_found,
@@ -351,6 +384,45 @@ def normalize_string_list(value: object) -> list[str]:
         if cleaned and cleaned not in normalized_values:
             normalized_values.append(cleaned)
     return normalized_values
+
+
+def normalize_retry_policy(value: object) -> dict[str, object]:
+    if not isinstance(value, dict):
+        return {
+            "max_attempts": DEFAULT_MAX_RETRY_ATTEMPTS,
+            "backoff_seconds": DEFAULT_RETRY_BACKOFF_SECONDS,
+        }
+
+    max_attempts = coerce_int(value.get("max_attempts"))
+    if max_attempts <= 0:
+        max_attempts = DEFAULT_MAX_RETRY_ATTEMPTS
+
+    backoff_seconds = coerce_float(value.get("backoff_seconds"))
+    if backoff_seconds < 0:
+        backoff_seconds = DEFAULT_RETRY_BACKOFF_SECONDS
+
+    return {
+        "max_attempts": max_attempts,
+        "backoff_seconds": backoff_seconds,
+    }
+
+
+def coerce_float(value: object) -> float:
+    if isinstance(value, bool):
+        return 0.0
+    if isinstance(value, int):
+        return float(value)
+    if isinstance(value, float):
+        return value
+    if isinstance(value, str):
+        stripped = value.strip()
+        if not stripped:
+            return 0.0
+        try:
+            return float(stripped)
+        except ValueError:
+            return 0.0
+    return 0.0
 
 
 def build_body_excerpt(post_body: str, max_len: int = 280) -> str:

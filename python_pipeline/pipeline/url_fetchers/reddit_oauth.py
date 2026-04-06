@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode, urlsplit, urlunsplit
@@ -19,15 +19,13 @@ from pipeline.url_fetchers.comment_expander import (
     extract_morechildren_comment_nodes,
     merge_comment_nodes,
 )
+from pipeline.url_fetchers.config import RedditFetcherConfig, load_reddit_fetcher_config
 from pipeline.url_fetchers.reddit_public import (
     build_canonical_reddit_url,
     extract_post_data,
     extract_post_fullname,
 )
 from pipeline.url_fetchers.token_provider import EnvTokenProvider, TokenProvider
-
-MORECHILDREN_MAX_CHILD_IDS = 5
-MORECHILDREN_MAX_BATCHES = 1
 
 
 class RedditOAuthRequestError(RuntimeError):
@@ -52,20 +50,25 @@ class MoreChildrenExpansionResult:
 
 @dataclass(frozen=True)
 class RedditOAuthFetcher:
-    """MVP OAuth fetcher for already-approved bearer tokens.
+    """MVP OAuth fetcher for already-approved bearer tokens."""
 
-    The token provider and comment-expander scaffolding are wired in so future
-    OAuth work can stay local, but token refresh, approval flow, and deeper
-    comment expansion remain intentionally deferred.
-    """
+    token_provider: TokenProvider = field(default_factory=EnvTokenProvider)
+    comment_expander: CommentExpander = field(default_factory=NoOpCommentExpander)
+    config: RedditFetcherConfig = field(default_factory=load_reddit_fetcher_config)
+    timeout_seconds: float | None = None
+    max_attempts: int | None = None
+    backoff_seconds: float | None = None
+    max_morechildren_child_ids: int | None = None
+    max_morechildren_batches: int | None = None
+    morechildren_enabled: bool | None = None
 
-    token_provider: TokenProvider = EnvTokenProvider()
-    comment_expander: CommentExpander = NoOpCommentExpander()
-    timeout_seconds: float = 20.0
-    max_attempts: int = 3
-    backoff_seconds: float = 0.25
-    max_morechildren_child_ids: int = MORECHILDREN_MAX_CHILD_IDS
-    max_morechildren_batches: int = MORECHILDREN_MAX_BATCHES
+    def __post_init__(self) -> None:
+        if (
+            isinstance(self.comment_expander, NoOpCommentExpander)
+            and self.comment_expander.limit == TOP_COMMENT_LIMIT
+            and self.config.top_comment_limit != TOP_COMMENT_LIMIT
+        ):
+            object.__setattr__(self, "comment_expander", NoOpCommentExpander(limit=self.config.top_comment_limit))
 
     def fetch_thread(self, canonical_url: str) -> UrlFetchResult:
         token = self.token_provider.get_token()
@@ -97,7 +100,7 @@ class RedditOAuthFetcher:
         merged_comments = merge_comment_nodes(
             comment_snapshot.initial_comment_nodes,
             expansion_result.expanded_comment_nodes,
-            limit=TOP_COMMENT_LIMIT,
+            limit=self._effective_top_comment_limit(),
         )
         top_comments = self.comment_expander.expand(merged_comments)
 
@@ -122,6 +125,15 @@ class RedditOAuthFetcher:
             "comment_fetch_count": comment_snapshot.comment_fetch_count + len(expansion_result.expanded_comment_nodes),
             "comment_fetch_initial_count": comment_snapshot.comment_fetch_count,
             "comment_fetch_depth": 1 if expansion_result.attempted else 0,
+            "comment_cap": self._effective_top_comment_limit(),
+            "morechildren_enabled": self._morechildren_enabled(),
+            "morechildren_request_limit": self._effective_morechildren_child_limit(),
+            "morechildren_max_batches": self._effective_morechildren_batches(),
+            "request_timeout_seconds": self._effective_timeout_seconds(),
+            "retry_policy": {
+                "max_attempts": self._effective_max_attempts(),
+                "backoff_seconds": self._effective_backoff_seconds(),
+            },
             "expandable_comment_ids": comment_snapshot.expandable_comment_ids,
             "expandable_comment_ids_found": comment_snapshot.expandable_comment_ids,
             "expandable_comment_ids_requested": expansion_result.requested_comment_ids,
@@ -155,7 +167,11 @@ class RedditOAuthFetcher:
         comment_snapshot: CommentThreadSnapshot,
     ) -> MoreChildrenExpansionResult:
         expandable_comment_ids = comment_snapshot.expandable_comment_ids
-        if not expandable_comment_ids or self.max_morechildren_batches < 1:
+        if (
+            not expandable_comment_ids
+            or not self._morechildren_enabled()
+            or self._effective_morechildren_batches() < 1
+        ):
             return MoreChildrenExpansionResult(
                 expanded_comment_nodes=[],
                 requested_comment_ids=[],
@@ -164,7 +180,7 @@ class RedditOAuthFetcher:
             )
 
         requested_comment_ids = self._normalize_requested_comment_ids(expandable_comment_ids)
-        requested_comment_ids = requested_comment_ids[: self.max_morechildren_child_ids]
+        requested_comment_ids = requested_comment_ids[: self._effective_morechildren_child_limit()]
         if not requested_comment_ids:
             return MoreChildrenExpansionResult(
                 expanded_comment_nodes=[],
@@ -215,9 +231,9 @@ class RedditOAuthFetcher:
             },
         )
 
-        for attempt in range(1, self.max_attempts + 1):
+        for attempt in range(1, self._effective_max_attempts() + 1):
             try:
-                with urlopen(request, timeout=self.timeout_seconds) as response:
+                with urlopen(request, timeout=self._effective_timeout_seconds()) as response:
                     raw_body = response.read().decode("utf-8")
                     ratelimit_snapshot = extract_rate_limit_snapshot(getattr(response, "headers", None))
                 return json.loads(raw_body), ratelimit_snapshot
@@ -226,12 +242,12 @@ class RedditOAuthFetcher:
                     getattr(exc, "headers", None) or getattr(exc, "hdrs", None)
                 )
                 retryable = exc.code == 429 or 500 <= exc.code < 600
-                if retryable and attempt < self.max_attempts:
+                if retryable and attempt < self._effective_max_attempts():
                     self._sleep_before_retry(attempt)
                     continue
                 raise self._format_http_error(exc, url, request_name, ratelimit_snapshot) from exc
             except URLError as exc:
-                if attempt < self.max_attempts:
+                if attempt < self._effective_max_attempts():
                     self._sleep_before_retry(attempt)
                     continue
                 raise RedditOAuthRequestError(
@@ -245,7 +261,7 @@ class RedditOAuthFetcher:
         raise RedditOAuthRequestError(f"{self._request_label(request_name)}request failed.")
 
     def _sleep_before_retry(self, attempt: int) -> None:
-        time.sleep(self.backoff_seconds * attempt)
+        time.sleep(self._effective_backoff_seconds() * attempt)
 
     def _format_http_error(
         self,
@@ -306,6 +322,41 @@ class RedditOAuthFetcher:
         if request_name == "thread":
             return "Reddit OAuth "
         return f"Reddit OAuth {request_name} "
+
+    def _effective_timeout_seconds(self) -> float:
+        return self.timeout_seconds if self.timeout_seconds is not None else self.config.request_timeout_seconds
+
+    def _effective_max_attempts(self) -> int:
+        return self.max_attempts if self.max_attempts is not None else self.config.max_retry_attempts
+
+    def _effective_backoff_seconds(self) -> float:
+        return self.backoff_seconds if self.backoff_seconds is not None else self.config.retry_backoff_seconds
+
+    def _effective_top_comment_limit(self) -> int:
+        if isinstance(self.comment_expander, NoOpCommentExpander):
+            if self.comment_expander.limit != TOP_COMMENT_LIMIT:
+                return self.comment_expander.limit
+            return self.config.top_comment_limit
+        return self.config.top_comment_limit
+
+    def _effective_morechildren_child_limit(self) -> int:
+        return (
+            self.max_morechildren_child_ids
+            if self.max_morechildren_child_ids is not None
+            else self.config.morechildren_max_child_ids
+        )
+
+    def _effective_morechildren_batches(self) -> int:
+        return (
+            self.max_morechildren_batches
+            if self.max_morechildren_batches is not None
+            else self.config.morechildren_max_batches
+        )
+
+    def _morechildren_enabled(self) -> bool:
+        if self.morechildren_enabled is not None:
+            return self.morechildren_enabled
+        return self.config.morechildren_enabled
 
 
 def build_oauth_reddit_json_url(canonical_url: str) -> str:

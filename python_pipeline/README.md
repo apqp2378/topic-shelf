@@ -141,6 +141,36 @@ Example:
 TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/my_threads.txt
 ~~~
 
+### Runtime config
+
+The Reddit fetchers also read a small set of optional environment variables:
+
+- `TOPIC_SHELF_REDDIT_REQUEST_TIMEOUT_SECONDS` default `20.0`
+- `TOPIC_SHELF_REDDIT_MAX_RETRY_ATTEMPTS` default `3`
+- `TOPIC_SHELF_REDDIT_RETRY_BACKOFF_SECONDS` default `0.25`
+- `TOPIC_SHELF_REDDIT_TOP_COMMENT_LIMIT` default `5`
+- `TOPIC_SHELF_REDDIT_MORECOMMENTS_ENABLED` default `true`
+- `TOPIC_SHELF_REDDIT_MORECOMMENTS_MAX_CHILD_IDS` default `5`
+- `TOPIC_SHELF_REDDIT_MORECOMMENTS_MAX_BATCHES` default `1`
+
+These settings are intentionally small and local. They keep the default public path working while making the OAuth MVP easier to operate.
+
+Example commands:
+
+~~~bash
+# Default public prototype
+python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/my_threads.txt
+
+# MVP OAuth path with a bearer token
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/my_threads.txt
+
+# Disable bounded MoreComments expansion for OAuth
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... TOPIC_SHELF_REDDIT_MORECOMMENTS_ENABLED=false python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/my_threads.txt
+
+# Raise the shared top-comment cap
+TOPIC_SHELF_REDDIT_TOP_COMMENT_LIMIT=8 python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/my_threads.txt
+~~~
+
 This MVP path:
 
 - uses an already-supplied bearer token
@@ -150,6 +180,7 @@ This MVP path:
 - keeps the current `top_comments` raw field and shared comment cap
 - attaches additive metadata such as `fetch_mode`, `comment_fetch_mode`, `comment_fetch_count`, `comment_fetch_depth`, `ratelimit_snapshot`, and `expandable_comment_ids`
 - detects initial `MoreComments` placeholders, requests a small bounded follow-up batch, and preserves the requested ids in metadata
+- records additive runtime metadata such as `comment_cap`, `morechildren_enabled`, `morechildren_request_limit`, `request_timeout_seconds`, and `retry_policy`
 
 Not implemented yet:
 
@@ -181,4 +212,5 @@ It does not delete arbitrary raw files, fixtures, or sample inputs.
 - The stable center of the pipeline is the same in both cases: `raw JSON -> normalized -> cards`.
 - The public URL fetcher is intentionally still the local prototype path until the OAuth flow is implemented.
 - `reddit_public` remains the default current path unless `--fetcher reddit_oauth` or `TOPIC_SHELF_FETCHER=reddit_oauth` is selected.
+- The local URL-list files under `python_pipeline/data/url_lists/` that are meant only for personal churn are ignored intentionally.
 - During stabilization, prefer fixture-backed tests and stubbed fetchers over live network fetches.

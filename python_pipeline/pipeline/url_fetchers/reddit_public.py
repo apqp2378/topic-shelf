@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass, field
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit, urlunsplit
@@ -12,10 +13,14 @@ from pipeline.url_fetchers.comment_expander import (
     coerce_int,
     normalize_comment_node,
 )
+from pipeline.url_fetchers.config import RedditFetcherConfig, load_reddit_fetcher_config
 from pipeline.url_fetchers.base import TOP_COMMENT_LIMIT, UrlFetchResult
 
 
+@dataclass(frozen=True)
 class RedditPublicJsonFetcher:
+    config: RedditFetcherConfig = field(default_factory=load_reddit_fetcher_config)
+
     user_agent = "topic-shelf-url-ingest/1.0"
 
     def fetch_thread(self, canonical_url: str) -> UrlFetchResult:
@@ -27,7 +32,7 @@ class RedditPublicJsonFetcher:
 
         post_data = extract_post_data(payload)
         top_comment_nodes = extract_top_comment_nodes(payload)
-        top_comments = normalize_top_comment_nodes(top_comment_nodes)
+        top_comments = normalize_top_comment_nodes(top_comment_nodes, limit=self.config.top_comment_limit)
         post_permalink = clean_string(post_data.get("permalink"))
         post_url = canonical_url
         if post_permalink:
@@ -63,6 +68,12 @@ class RedditPublicJsonFetcher:
                 "comment_fetch_mode": "initial_only",
                 "comment_fetch_count": len(top_comment_nodes),
                 "comment_fetch_depth": 0,
+                "comment_cap": self.config.top_comment_limit,
+                "morechildren_enabled": False,
+                "morechildren_request_limit": 0,
+                "morechildren_max_batches": 0,
+                "request_timeout_seconds": self.config.request_timeout_seconds,
+                "retry_policy": self.config.retry_policy,
                 "expandable_comment_ids_found": [],
                 "expandable_comment_ids_requested": [],
                 "morechildren_expansion_attempted": False,
@@ -82,7 +93,7 @@ class RedditPublicJsonFetcher:
         )
 
         try:
-            with urlopen(request, timeout=20) as response:
+            with urlopen(request, timeout=self.config.request_timeout_seconds) as response:
                 raw_body = response.read().decode("utf-8")
         except HTTPError as exc:
             raise RuntimeError(f"Reddit request failed with HTTP {exc.code}.") from exc
@@ -167,13 +178,16 @@ def extract_top_comment_nodes(payload: list[Any]) -> list[dict[str, object]]:
     return top_comment_nodes
 
 
-def normalize_top_comment_nodes(top_comment_nodes: list[dict[str, object]]) -> list[dict[str, object]]:
+def normalize_top_comment_nodes(
+    top_comment_nodes: list[dict[str, object]],
+    limit: int = TOP_COMMENT_LIMIT,
+) -> list[dict[str, object]]:
     normalized_comments: list[dict[str, object]] = []
     for comment_data in top_comment_nodes:
         comment = normalize_comment_node(comment_data)
         if comment is not None:
             normalized_comments.append(comment)
-    return normalized_comments
+    return cap_comments(normalized_comments, limit=limit)
 
 
 def extract_post_fullname(post_data: dict[str, Any]) -> str:
