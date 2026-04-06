@@ -194,6 +194,27 @@ Ownership stays split on purpose:
 
 The runtime config behavior and additive metadata behavior are unchanged by this refactor.
 
+### Preflight doctor
+
+Use the doctor script to validate setup before running ingestion. It checks fetcher selection, runtime config, token presence for OAuth, URL list readiness, and output directory readiness. It does not fetch data.
+
+Examples:
+
+~~~bash
+# Public path
+python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_public --url-list python_pipeline/data/url_lists/my_threads.txt
+
+# OAuth path
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/check_reddit_ingestion_setup.py --fetcher reddit_oauth --url-list python_pipeline/data/url_lists/my_threads.txt
+
+# Check a specific URL list file
+python python_pipeline/scripts/check_reddit_ingestion_setup.py --url-list python_pipeline/data/url_lists/my_threads.txt
+~~~
+
+Blocking errors are things that would prevent a successful ingestion run, such as an invalid fetcher, missing OAuth token, invalid config, or a missing URL list file. Warnings are non-blocking setup notes, such as not providing a URL list for inspection.
+
+The doctor script uses the same fetcher resolution and config loading as ingestion, but it never performs any network fetches.
+
 Not implemented yet:
 
 - token refresh
