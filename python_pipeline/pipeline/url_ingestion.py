@@ -7,7 +7,7 @@ from typing import Iterable
 from urllib.parse import urlsplit, urlunsplit
 
 from pipeline.io_utils import build_raw_from_urls_output_path, read_text_file, write_json_file
-from pipeline.url_fetchers.comment_expander import normalize_comment_nodes
+from pipeline.url_fetchers.comment_expander import clean_string, coerce_int, normalize_comment_nodes
 from pipeline.url_fetchers.base import TOP_COMMENT_LIMIT, UrlFetchResult, UrlFetcher
 from pipeline.validators import validate_raw_record
 
@@ -281,11 +281,46 @@ def build_raw_record(
         "candidate_id": canonical_post_id,
         "body_excerpt": build_body_excerpt(post_body),
         "devvit_version": "url-ingest-v1",
+        **build_additive_fetch_metadata(fetch_result),
     }
 
 
 def normalize_top_comments(top_comments: list[dict[str, object]]) -> list[dict[str, object]]:
     return normalize_comment_nodes(top_comments, limit=TOP_COMMENT_LIMIT)
+
+
+def build_additive_fetch_metadata(fetch_result: UrlFetchResult) -> dict[str, object]:
+    metadata = fetch_result.fetch_metadata or {}
+
+    fetch_mode = clean_string(metadata.get("fetch_mode")) if isinstance(metadata, dict) else ""
+    if not fetch_mode:
+        fetch_mode = "public"
+
+    comment_fetch_count = coerce_int(metadata.get("comment_fetch_count")) if isinstance(metadata, dict) else 0
+    if comment_fetch_count <= 0:
+        comment_fetch_count = len(fetch_result.top_comments)
+
+    comment_fetch_depth = coerce_int(metadata.get("comment_fetch_depth")) if isinstance(metadata, dict) else 0
+    ratelimit_snapshot = metadata.get("ratelimit_snapshot") if isinstance(metadata, dict) else {}
+    if not isinstance(ratelimit_snapshot, dict):
+        ratelimit_snapshot = {}
+
+    extra_metadata: dict[str, object] = {
+        "fetch_mode": fetch_mode,
+        "comment_fetch_count": comment_fetch_count,
+        "comment_fetch_depth": comment_fetch_depth,
+        "ratelimit_snapshot": ratelimit_snapshot,
+    }
+
+    expandable_comment_ids = metadata.get("expandable_comment_ids") if isinstance(metadata, dict) else []
+    if isinstance(expandable_comment_ids, list):
+        extra_metadata["expandable_comment_ids"] = [clean_string(value) for value in expandable_comment_ids if clean_string(value)]
+
+    deleted_checked_at = metadata.get("deleted_checked_at") if isinstance(metadata, dict) else ""
+    if isinstance(deleted_checked_at, str) and deleted_checked_at.strip():
+        extra_metadata["deleted_checked_at"] = deleted_checked_at.strip()
+
+    return extra_metadata
 
 
 def build_body_excerpt(post_body: str, max_len: int = 280) -> str:

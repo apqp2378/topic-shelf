@@ -112,6 +112,10 @@ class UrlIngestionTests(unittest.TestCase):
             self.assertEqual(payload[0]["candidate_id"], "t3_abc123")
             self.assertEqual(payload[0]["post_url"], input_url)
             self.assertEqual(payload[0]["devvit_reason_tags"], ["url_seeded_ingestion"])
+            self.assertEqual(payload[0]["fetch_mode"], "public")
+            self.assertEqual(payload[0]["comment_fetch_count"], 1)
+            self.assertEqual(payload[0]["comment_fetch_depth"], 0)
+            self.assertEqual(payload[0]["ratelimit_snapshot"], {})
 
     def test_partial_failure_continues(self) -> None:
         with make_test_root() as root:

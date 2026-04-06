@@ -25,8 +25,9 @@ from pipeline.url_ingestion import ingest_url_list
 
 
 class FakeHTTPResponse:
-    def __init__(self, payload: object):
+    def __init__(self, payload: object, headers: dict[str, str] | None = None):
         self._payload = payload
+        self.headers = headers or {}
 
     def __enter__(self) -> "FakeHTTPResponse":
         return self
@@ -56,9 +57,72 @@ class RedditOAuthFetcherTests(unittest.TestCase):
         self.assertEqual(result.num_comments, 6)
         self.assertEqual(len(result.top_comments), TOP_COMMENT_LIMIT)
         self.assertEqual(result.top_comments[0]["comment_id"], "t1_comment_1")
+        self.assertEqual(result.fetch_metadata["fetch_mode"], "oauth")
+        self.assertEqual(result.fetch_metadata["comment_fetch_count"], 6)
+        self.assertEqual(result.fetch_metadata["comment_fetch_depth"], 0)
+        self.assertEqual(result.fetch_metadata["expandable_comment_ids"], [])
+        self.assertEqual(result.fetch_metadata["ratelimit_snapshot"], {})
         request = urlopen_mock.call_args.args[0]
         self.assertEqual(request.full_url, build_oauth_reddit_json_url(canonical_url))
         self.assertEqual(request.get_header("Authorization"), "bearer token")
+
+    def test_expanded_comment_placeholders_are_preserved_in_metadata(self) -> None:
+        payload = [
+            {
+                "data": {
+                    "children": [
+                        {
+                            "data": {
+                                "name": "t3_more001",
+                                "id": "more001",
+                                "subreddit": "python",
+                                "title": "More comments thread",
+                                "permalink": "/r/python/comments/more001/more_comments_thread/",
+                                "author": "tester",
+                                "created_utc": 1712222222,
+                                "selftext": "Body text.",
+                                "num_comments": 2,
+                                "ups": 9,
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "children": [
+                        {
+                            "kind": "t1",
+                            "data": {
+                                "id": "comment_1",
+                                "name": "t1_comment_1",
+                                "author": "helper_1",
+                                "body": "Comment 1",
+                                "score": 3,
+                                "created_utc": 1712222223,
+                            },
+                        },
+                        {
+                            "kind": "more",
+                            "data": {
+                                "children": ["t1_more_1", "t1_more_2"],
+                            },
+                        },
+                    ]
+                }
+            },
+        ]
+        fetcher = RedditOAuthFetcher(token_provider=StaticTokenProvider("token"))
+
+        with mock.patch(
+            "pipeline.url_fetchers.reddit_oauth.urlopen",
+            return_value=FakeHTTPResponse(payload),
+        ):
+            result = fetcher.fetch_thread("https://reddit.com/r/python/comments/more001/more_comments_thread")
+
+        self.assertEqual(len(result.top_comments), 1)
+        self.assertEqual(result.fetch_metadata["expandable_comment_ids"], ["t1_more_1", "t1_more_2"])
+        self.assertEqual(result.fetch_metadata["comment_fetch_count"], 1)
 
     def test_missing_token_raises_clear_error(self) -> None:
         fetcher = RedditOAuthFetcher()
@@ -117,6 +181,36 @@ class RedditOAuthFetcherTests(unittest.TestCase):
                 self.assertEqual(len(result.top_comments), TOP_COMMENT_LIMIT)
                 self.assertEqual(urlopen_mock.call_count, 2)
                 sleep_mock.assert_called_once()
+
+    def test_rate_limit_snapshot_is_reported_after_retries(self) -> None:
+        canonical_url = "https://reddit.com/r/python/comments/oauth001/oauth_thread"
+        fetcher = RedditOAuthFetcher(
+            token_provider=StaticTokenProvider("token"),
+            backoff_seconds=0.0,
+            max_attempts=2,
+        )
+
+        rate_headers = {
+            "x-ratelimit-remaining": "0",
+            "x-ratelimit-reset": "2.5",
+            "x-ratelimit-used": "60",
+        }
+
+        with mock.patch(
+            "pipeline.url_fetchers.reddit_oauth.urlopen",
+            side_effect=[
+                HTTPError(canonical_url, 429, "retry", hdrs=rate_headers, fp=None),
+                HTTPError(canonical_url, 429, "retry", hdrs=rate_headers, fp=None),
+            ],
+        ):
+            with mock.patch("pipeline.url_fetchers.reddit_oauth.time.sleep") as sleep_mock:
+                with self.assertRaisesRegex(
+                    RuntimeError,
+                    r"Rate limit snapshot: \{remaining=0, reset=2.5, used=60\}",
+                ):
+                    fetcher.fetch_thread(canonical_url)
+
+        self.assertEqual(sleep_mock.call_count, 1)
 
     def test_ingest_works_with_oauth_fetcher_and_mocked_http(self) -> None:
         payload = load_fixture("reddit_oauth_thread.json")

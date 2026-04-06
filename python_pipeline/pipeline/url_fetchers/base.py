@@ -20,6 +20,7 @@ class UrlFetchResult:
     upvotes: int
     top_comments: list[dict[str, object]]
     post_id: str
+    fetch_metadata: dict[str, object] | None = None
 
 
 class UrlFetcher(Protocol):

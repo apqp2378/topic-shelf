@@ -147,6 +147,8 @@ This MVP path:
 - fetches the initial thread payload with the standard library only
 - parses the post and initial top-level comments
 - keeps the current `top_comments` raw field and shared comment cap
+- attaches additive metadata such as `fetch_mode`, `comment_fetch_count`, `comment_fetch_depth`, `ratelimit_snapshot`, and `expandable_comment_ids`
+- detects initial `MoreComments` placeholders and preserves their ids in metadata, but does not recurse into deep pagination yet
 
 Not implemented yet:
 

@@ -14,6 +14,16 @@ class CommentExpander(Protocol):
 
 
 @dataclass(frozen=True)
+class CommentThreadSnapshot:
+    """Parsed initial thread comments plus any expandable placeholder ids."""
+
+    initial_comment_nodes: list[dict[str, object]]
+    expandable_comment_ids: list[str]
+    comment_fetch_count: int
+    comment_fetch_depth: int = 0
+
+
+@dataclass(frozen=True)
 class NoOpCommentExpander:
     """Current placeholder expander that only normalizes and caps comments."""
 
@@ -24,6 +34,39 @@ class NoOpCommentExpander:
             if normalized_comment is not None
         ]
         return cap_comments(normalized)
+
+
+def extract_comment_thread_snapshot(
+    children: Iterable[Any],
+    limit: int = TOP_COMMENT_LIMIT,
+) -> CommentThreadSnapshot:
+    """Parse initial comments and expandable placeholders from a thread listing."""
+
+    initial_comment_nodes: list[dict[str, object]] = []
+    expandable_comment_ids: list[str] = []
+
+    for child in children:
+        if not isinstance(child, dict):
+            continue
+
+        kind = clean_string(child.get("kind"))
+        data = child.get("data")
+        if not isinstance(data, dict):
+            continue
+
+        if kind == "t1":
+            initial_comment_nodes.append(data)
+            continue
+
+        if kind == "more":
+            expandable_comment_ids.extend(extract_more_comment_ids(data))
+
+    return CommentThreadSnapshot(
+        initial_comment_nodes=cap_comment_nodes(initial_comment_nodes, limit=limit),
+        expandable_comment_ids=dedupe_preserving_order(expandable_comment_ids),
+        comment_fetch_count=len(initial_comment_nodes),
+        comment_fetch_depth=0,
+    )
 
 
 def normalize_comment_node(node: Any) -> dict[str, object] | None:
@@ -72,6 +115,15 @@ def normalize_comment_nodes(
     return cap_comments(normalized_comments, limit=limit)
 
 
+def cap_comment_nodes(
+    comments: list[dict[str, object]],
+    limit: int = TOP_COMMENT_LIMIT,
+) -> list[dict[str, object]]:
+    """Cap raw comment nodes before later normalization."""
+
+    return comments[:limit]
+
+
 def cap_comments(
     comments: list[dict[str, object]],
     limit: int = TOP_COMMENT_LIMIT,
@@ -79,6 +131,37 @@ def cap_comments(
     """Apply the shared top-comment cap in one place."""
 
     return comments[:limit]
+
+
+def extract_more_comment_ids(node: dict[str, object]) -> list[str]:
+    """Collect expandable comment ids from a ``more`` node."""
+
+    candidate_fields = ("children", "ids", "child_ids")
+    more_ids: list[str] = []
+
+    for field_name in candidate_fields:
+        field_value = node.get(field_name)
+        if isinstance(field_value, list):
+            for item in field_value:
+                comment_id = clean_string(item)
+                if comment_id and comment_id not in more_ids:
+                    more_ids.append(comment_id)
+
+    return more_ids
+
+
+def dedupe_preserving_order(values: Iterable[str]) -> list[str]:
+    seen: set[str] = set()
+    deduped: list[str] = []
+
+    for value in values:
+        cleaned = clean_string(value)
+        if not cleaned or cleaned in seen:
+            continue
+        seen.add(cleaned)
+        deduped.append(cleaned)
+
+    return deduped
 
 
 def clean_string(value: object) -> str:

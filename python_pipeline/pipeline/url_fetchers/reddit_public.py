@@ -57,6 +57,12 @@ class RedditPublicJsonFetcher:
             upvotes=coerce_int(post_data.get("ups")),
             top_comments=top_comments,
             post_id=post_id,
+            fetch_metadata={
+                "fetch_mode": "public",
+                "comment_fetch_count": len(top_comments),
+                "comment_fetch_depth": 0,
+                "ratelimit_snapshot": {},
+            },
         )
 
     def _load_json(self, url: str) -> Any:
