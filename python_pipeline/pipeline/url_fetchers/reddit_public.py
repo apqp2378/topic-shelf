@@ -6,7 +6,13 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
-from pipeline.url_fetchers.base import UrlFetchResult
+from pipeline.url_fetchers.comment_expander import (
+    cap_comments,
+    clean_string,
+    coerce_int,
+    normalize_comment_node,
+)
+from pipeline.url_fetchers.base import TOP_COMMENT_LIMIT, UrlFetchResult
 
 
 class RedditPublicJsonFetcher:
@@ -140,25 +146,13 @@ def extract_top_comments(payload: list[Any]) -> list[dict[str, object]]:
         if not isinstance(comment_data, dict):
             continue
 
-        comment_short_id = clean_string(comment_data.get("id"))
-        comment_fullname = clean_string(comment_data.get("name"))
-        comment_id = comment_fullname
-        if not comment_id and comment_short_id:
-            comment_id = f"t1_{comment_short_id}"
-        if not comment_id:
+        comment = normalize_comment_node(comment_data)
+        if comment is None:
             continue
 
-        top_comments.append(
-            {
-                "comment_id": comment_id,
-                "author": clean_string(comment_data.get("author")) or "[deleted]",
-                "body": clean_string(comment_data.get("body")),
-                "score": coerce_int(comment_data.get("score")),
-                "created_utc": coerce_int(comment_data.get("created_utc")),
-            }
-        )
+        top_comments.append(comment)
 
-    return top_comments[:5]
+    return cap_comments(top_comments, limit=TOP_COMMENT_LIMIT)
 
 
 def extract_post_fullname(post_data: dict[str, Any]) -> str:
@@ -171,29 +165,3 @@ def extract_post_fullname(post_data: dict[str, Any]) -> str:
         return f"t3_{post_short_id}"
 
     return ""
-
-
-def clean_string(value: object) -> str:
-    if isinstance(value, str):
-        cleaned = value.strip()
-        if cleaned:
-            return cleaned
-    return ""
-
-
-def coerce_int(value: object) -> int:
-    if isinstance(value, bool):
-        return 0
-    if isinstance(value, int):
-        return value
-    if isinstance(value, float):
-        return int(value)
-    if isinstance(value, str):
-        stripped = value.strip()
-        if not stripped:
-            return 0
-        try:
-            return int(float(stripped))
-        except ValueError:
-            return 0
-    return 0

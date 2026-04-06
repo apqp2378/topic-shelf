@@ -1,0 +1,94 @@
+[
+  {
+    "data": {
+      "children": [
+        {
+          "data": {
+            "name": "t3_oauth001",
+            "id": "oauth001",
+            "subreddit": "python",
+            "title": "OAuth thread",
+            "permalink": "/r/python/comments/oauth001/oauth_thread/",
+            "author": "tester",
+            "created_utc": 1711111111,
+            "selftext": "OAuth body text.",
+            "num_comments": 6,
+            "ups": 42
+          }
+        }
+      ]
+    }
+  },
+  {
+    "data": {
+      "children": [
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment_1",
+            "name": "t1_comment_1",
+            "author": "helper_1",
+            "body": "Comment 1",
+            "score": 10,
+            "created_utc": 1711111112
+          }
+        },
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment_2",
+            "name": "t1_comment_2",
+            "author": "helper_2",
+            "body": "Comment 2",
+            "score": 9,
+            "created_utc": 1711111113
+          }
+        },
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment_3",
+            "name": "t1_comment_3",
+            "author": "helper_3",
+            "body": "Comment 3",
+            "score": 8,
+            "created_utc": 1711111114
+          }
+        },
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment_4",
+            "name": "t1_comment_4",
+            "author": "helper_4",
+            "body": "Comment 4",
+            "score": 7,
+            "created_utc": 1711111115
+          }
+        },
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment_5",
+            "name": "t1_comment_5",
+            "author": "helper_5",
+            "body": "Comment 5",
+            "score": 6,
+            "created_utc": 1711111116
+          }
+        },
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment_6",
+            "name": "t1_comment_6",
+            "author": "helper_6",
+            "body": "Comment 6",
+            "score": 5,
+            "created_utc": 1711111117
+          }
+        }
+      ]
+    }
+  }
+]

@@ -219,15 +219,6 @@ class UrlIngestionTests(unittest.TestCase):
         ):
             build_url_fetcher("not_a_fetcher")
 
-    def test_reddit_oauth_placeholder_raises_not_implemented(self) -> None:
-        fetcher = build_url_fetcher("reddit_oauth")
-
-        with self.assertRaisesRegex(
-            NotImplementedError,
-            r"RedditOAuthFetcher is a placeholder\. OAuth token / approval flow is not implemented yet\.",
-        ):
-            fetcher.fetch_thread("https://reddit.com/comments/abc123")
-
     def test_ingest_resolve_fetcher_name_prefers_cli_then_env_then_default(self) -> None:
         ingest_script = load_script_module(
             PROJECT_ROOT / "python_pipeline" / "scripts" / "ingest_reddit_urls.py",

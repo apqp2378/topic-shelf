@@ -7,7 +7,8 @@ from typing import Iterable
 from urllib.parse import urlsplit, urlunsplit
 
 from pipeline.io_utils import build_raw_from_urls_output_path, read_text_file, write_json_file
-from pipeline.url_fetchers.base import UrlFetchResult, UrlFetcher
+from pipeline.url_fetchers.comment_expander import normalize_comment_nodes
+from pipeline.url_fetchers.base import TOP_COMMENT_LIMIT, UrlFetchResult, UrlFetcher
 from pipeline.validators import validate_raw_record
 
 
@@ -284,32 +285,7 @@ def build_raw_record(
 
 
 def normalize_top_comments(top_comments: list[dict[str, object]]) -> list[dict[str, object]]:
-    normalized_comments: list[dict[str, object]] = []
-
-    for item in top_comments:
-        comment_id_value = item.get("comment_id")
-        author_value = item.get("author")
-        body_value = item.get("body")
-        score_value = item.get("score")
-        created_utc_value = item.get("created_utc")
-
-        comment_id = comment_id_value.strip() if isinstance(comment_id_value, str) else ""
-        author = author_value.strip() if isinstance(author_value, str) else ""
-        body = body_value.strip() if isinstance(body_value, str) else ""
-        if not comment_id:
-            continue
-
-        normalized_comments.append(
-            {
-                "comment_id": comment_id,
-                "author": author or "[deleted]",
-                "body": body,
-                "score": coerce_int(score_value),
-                "created_utc": coerce_int(created_utc_value),
-            }
-        )
-
-    return normalized_comments[:5]
+    return normalize_comment_nodes(top_comments, limit=TOP_COMMENT_LIMIT)
 
 
 def build_body_excerpt(post_body: str, max_len: int = 280) -> str:
@@ -319,24 +295,6 @@ def build_body_excerpt(post_body: str, max_len: int = 280) -> str:
     if len(flattened) <= max_len:
         return flattened
     return flattened[:max_len].rstrip()
-
-
-def coerce_int(value: object) -> int:
-    if isinstance(value, bool):
-        return 0
-    if isinstance(value, int):
-        return value
-    if isinstance(value, float):
-        return int(value)
-    if isinstance(value, str):
-        stripped = value.strip()
-        if not stripped:
-            return 0
-        try:
-            return int(float(stripped))
-        except ValueError:
-            return 0
-    return 0
 
 
 def ensure_utc_datetime(value: datetime | None) -> datetime:

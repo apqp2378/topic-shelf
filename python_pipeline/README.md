@@ -120,7 +120,41 @@ TOPIC_SHELF_FETCHER=reddit_oauth python python_pipeline/scripts/ingest_reddit_ur
 Current fetchers:
 
 - `reddit_public`: local prototype / smoke-test oriented fetcher that reads Reddit public JSON
-- `reddit_oauth`: placeholder for the future approval/token-based fetcher and currently raises a clear not-implemented error
+- `reddit_oauth`: MVP OAuth fetcher for a pre-supplied bearer token
+
+### OAuth prep layer
+
+The repository now includes two small scaffolding modules for the future OAuth path:
+
+- `pipeline/url_fetchers/token_provider.py` for loading and later caching bearer tokens
+- `pipeline/url_fetchers/comment_expander.py` for shaping comment normalization and future `MoreComments` expansion
+
+These modules are intentionally lightweight. They prepare the structure for a real OAuth fetcher, but they do not perform live token exchange or API approval flows yet.
+
+To run the MVP OAuth path, provide a bearer token in:
+
+- `TOPIC_SHELF_REDDIT_OAUTH_TOKEN`
+
+Example:
+
+~~~bash
+TOPIC_SHELF_REDDIT_OAUTH_TOKEN=... python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_oauth python_pipeline/data/url_lists/my_threads.txt
+~~~
+
+This MVP path:
+
+- uses an already-supplied bearer token
+- fetches the initial thread payload with the standard library only
+- parses the post and initial top-level comments
+- keeps the current `top_comments` raw field and shared comment cap
+
+Not implemented yet:
+
+- token refresh
+- approval workflow
+- secret exchange
+- deep comment pagination
+- `MoreComments` expansion
 
 ### Raw retention and purge
 
@@ -142,4 +176,5 @@ It does not delete arbitrary raw files, fixtures, or sample inputs.
 - Devvit remains an optional input path for manually reviewed keep exports.
 - The stable center of the pipeline is the same in both cases: `raw JSON -> normalized -> cards`.
 - The public URL fetcher is intentionally still the local prototype path until the OAuth flow is implemented.
+- `reddit_public` remains the default current path unless `--fetcher reddit_oauth` or `TOPIC_SHELF_FETCHER=reddit_oauth` is selected.
 - During stabilization, prefer fixture-backed tests and stubbed fetchers over live network fetches.
