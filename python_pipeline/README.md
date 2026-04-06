@@ -101,8 +101,45 @@ python python_pipeline/scripts/ingest_reddit_urls.py python_pipeline/data/url_li
 python python_pipeline/scripts/run_pipeline.py python_pipeline/data/raw/raw_from_urls_my_threads.json
 ~~~
 
+### Choosing a fetcher
+
+The URL ingestion entrypoint supports a fetcher selector so the current public prototype and the future OAuth path can share the same command shape.
+
+Default behavior stays the same:
+
+- CLI default: `reddit_public`
+- Env var fallback: `TOPIC_SHELF_FETCHER`
+
+Examples:
+
+~~~bash
+python python_pipeline/scripts/ingest_reddit_urls.py --fetcher reddit_public python_pipeline/data/url_lists/my_threads.txt
+TOPIC_SHELF_FETCHER=reddit_oauth python python_pipeline/scripts/ingest_reddit_urls.py python_pipeline/data/url_lists/my_threads.txt
+~~~
+
+Current fetchers:
+
+- `reddit_public`: local prototype / smoke-test oriented fetcher that reads Reddit public JSON
+- `reddit_oauth`: placeholder for the future approval/token-based fetcher and currently raises a clear not-implemented error
+
+### Raw retention and purge
+
+Generated raw ingestion files can be cleaned up with the purge helper:
+
+~~~bash
+python python_pipeline/scripts/purge_old_raw.py --older-than-days 7 --dry-run
+python python_pipeline/scripts/purge_old_raw.py --older-than-days 7 --apply
+python python_pipeline/scripts/purge_old_raw.py --older-than-hours 24 --apply
+~~~
+
+The purge helper only targets generated URL-ingestion outputs that match `raw_from_urls_*.json` under `python_pipeline/data/raw/`.
+
+It does not delete arbitrary raw files, fixtures, or sample inputs.
+
 ## Notes
 
 - The current practical input path is the V3 URL bridge flow.
 - Devvit remains an optional input path for manually reviewed keep exports.
 - The stable center of the pipeline is the same in both cases: `raw JSON -> normalized -> cards`.
+- The public URL fetcher is intentionally still the local prototype path until the OAuth flow is implemented.
+- During stabilization, prefer fixture-backed tests and stubbed fetchers over live network fetches.

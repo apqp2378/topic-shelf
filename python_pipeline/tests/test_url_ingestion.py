@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sys
 import shutil
 import unittest
@@ -14,16 +15,20 @@ from unittest import mock
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 PIPELINE_ROOT = PROJECT_ROOT / "python_pipeline"
+FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures"
 if str(PIPELINE_ROOT) not in sys.path:
     sys.path.insert(0, str(PIPELINE_ROOT))
 
 from pipeline.io_utils import read_json_file
-from pipeline.url_fetchers.base import UrlFetchResult
+from pipeline.url_fetchers import build_url_fetcher, list_url_fetchers
+from pipeline.url_fetchers.base import TOP_COMMENT_LIMIT, UrlFetchResult
+from pipeline.url_fetchers.reddit_public import RedditPublicJsonFetcher, extract_top_comments
 from pipeline.url_ingestion import (
     build_body_excerpt,
     canonicalize_and_dedupe_urls,
     canonicalize_reddit_thread_url,
     ingest_url_list,
+    normalize_top_comments,
 )
 from pipeline.validators import validate_raw_payload
 
@@ -202,6 +207,40 @@ class UrlIngestionTests(unittest.TestCase):
 
         self.assertEqual(exit_code, 0)
 
+    def test_fetcher_builder_resolves_supported_fetchers(self) -> None:
+        self.assertEqual(list_url_fetchers(), ("reddit_public", "reddit_oauth"))
+        self.assertEqual(type(build_url_fetcher("reddit_public")).__name__, "RedditPublicJsonFetcher")
+        self.assertEqual(type(build_url_fetcher("reddit_oauth")).__name__, "RedditOAuthFetcher")
+
+    def test_fetcher_builder_rejects_unknown_fetcher(self) -> None:
+        with self.assertRaisesRegex(
+            ValueError,
+            r"Unknown URL fetcher: not_a_fetcher\. Available fetchers: reddit_public, reddit_oauth\.",
+        ):
+            build_url_fetcher("not_a_fetcher")
+
+    def test_reddit_oauth_placeholder_raises_not_implemented(self) -> None:
+        fetcher = build_url_fetcher("reddit_oauth")
+
+        with self.assertRaisesRegex(
+            NotImplementedError,
+            r"RedditOAuthFetcher is a placeholder\. OAuth token / approval flow is not implemented yet\.",
+        ):
+            fetcher.fetch_thread("https://reddit.com/comments/abc123")
+
+    def test_ingest_resolve_fetcher_name_prefers_cli_then_env_then_default(self) -> None:
+        ingest_script = load_script_module(
+            PROJECT_ROOT / "python_pipeline" / "scripts" / "ingest_reddit_urls.py",
+            "ingest_reddit_urls_test_resolve_fetcher",
+        )
+
+        with mock.patch.dict("os.environ", {"TOPIC_SHELF_FETCHER": "reddit_oauth"}, clear=False):
+            self.assertEqual(ingest_script.resolve_fetcher_name("reddit_public"), "reddit_public")
+            self.assertEqual(ingest_script.resolve_fetcher_name(None), "reddit_oauth")
+
+        with mock.patch.dict("os.environ", {}, clear=True):
+            self.assertEqual(ingest_script.resolve_fetcher_name(None), "reddit_public")
+
     def test_top_comments_missing_maps_to_empty_list(self) -> None:
         with make_test_root() as root:
             input_path = root / "data" / "url_lists" / "comments.txt"
@@ -250,7 +289,98 @@ class UrlIngestionTests(unittest.TestCase):
             )
 
             result = ingest_url_list(input_path, fetcher, output_path=output_path)
-            self.assertEqual(len(result.records[0]["top_comments"]), 5)
+            self.assertEqual(len(result.records[0]["top_comments"]), TOP_COMMENT_LIMIT)
+
+    def test_reddit_public_fixture_keeps_short_comment_lists_short(self) -> None:
+        with make_test_root() as root:
+            input_path = root / "data" / "url_lists" / "fixture_short.txt"
+            output_path = root / "data" / "raw" / "raw_from_urls_fixture_short.json"
+            input_path.parent.mkdir(parents=True, exist_ok=True)
+            input_path.write_text(
+                "https://reddit.com/comments/edge001/edge_case_thread\n",
+                encoding="utf-8",
+            )
+
+            fetcher = RedditPublicJsonFetcher()
+            fixture_payload = load_json_fixture("reddit_public_edge_short.json")
+            with mock.patch.object(fetcher, "_load_json", return_value=fixture_payload):
+                result = ingest_url_list(input_path, fetcher, output_path=output_path)
+
+            record = result.records[0]
+            self.assertEqual(record["post_author"], "[deleted]")
+            self.assertEqual(record["post_body"], "")
+            self.assertEqual(record["body_excerpt"], "")
+            self.assertEqual(len(record["top_comments"]), 2)
+            self.assertEqual(record["top_comments"][0]["author"], "[deleted]")
+
+    def test_reddit_public_fixture_caps_long_comment_lists(self) -> None:
+        with make_test_root() as root:
+            input_path = root / "data" / "url_lists" / "fixture_long.txt"
+            output_path = root / "data" / "raw" / "raw_from_urls_fixture_long.json"
+            input_path.parent.mkdir(parents=True, exist_ok=True)
+            input_path.write_text(
+                "https://reddit.com/comments/edge002/long_comment_thread\n",
+                encoding="utf-8",
+            )
+
+            fetcher = RedditPublicJsonFetcher()
+            fixture_payload = load_json_fixture("reddit_public_edge_long.json")
+            with mock.patch.object(fetcher, "_load_json", return_value=fixture_payload):
+                result = ingest_url_list(input_path, fetcher, output_path=output_path)
+
+            record = result.records[0]
+            self.assertEqual(len(record["top_comments"]), TOP_COMMENT_LIMIT)
+            self.assertEqual(record["post_author"], "tester")
+            self.assertEqual(record["post_body"], "Body text for the longer fixture.")
+
+    def test_public_fetcher_top_comment_limit_matches_shared_cap(self) -> None:
+        payload = [
+            {
+                "data": {
+                    "children": [
+                        {
+                            "data": {
+                                "name": "t3_abc123",
+                                "id": "abc123",
+                                "subreddit": "python",
+                                "title": "Example thread",
+                                "permalink": "/r/python/comments/abc123/example-thread",
+                                "author": "spez",
+                                "created_utc": 1710000000,
+                                "selftext": "",
+                                "num_comments": 10,
+                                "ups": 5,
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "children": [
+                        {
+                            "kind": "t1",
+                            "data": {
+                                "id": f"comment_{index + 1}",
+                                "name": f"t1_comment_{index + 1}",
+                                "author": "commenter",
+                                "body": "Comment body",
+                                "score": index,
+                                "created_utc": 1710000000 + index,
+                            },
+                        }
+                        for index in range(TOP_COMMENT_LIMIT + 1)
+                    ]
+                }
+            },
+        ]
+
+        self.assertEqual(len(extract_top_comments(payload)), TOP_COMMENT_LIMIT)
+
+    def test_normalize_top_comments_uses_shared_cap(self) -> None:
+        comments = build_comment_list(TOP_COMMENT_LIMIT + 2)
+
+        self.assertEqual(len(normalize_top_comments(comments)), TOP_COMMENT_LIMIT)
 
     def test_shortlink_and_permalink_dedupe_to_one_record(self) -> None:
         with make_test_root() as root:
@@ -414,6 +544,11 @@ def build_comment_list(count: int) -> list[dict[str, object]]:
             }
         )
     return comments
+
+
+def load_json_fixture(filename: str) -> object:
+    fixture_path = FIXTURES_DIR / filename
+    return json.loads(fixture_path.read_text(encoding="utf-8"))
 
 
 def load_script_module(path: Path, module_name: str):

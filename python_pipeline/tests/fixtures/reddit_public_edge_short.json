@@ -1,0 +1,50 @@
+[
+  {
+    "data": {
+      "children": [
+        {
+          "data": {
+            "name": "t3_edge001",
+            "id": "edge001",
+            "subreddit": "python",
+            "title": "Edge case thread",
+            "permalink": "/r/python/comments/edge001/edge_case_thread/",
+            "author": "",
+            "created_utc": 1710000000,
+            "selftext": "",
+            "num_comments": 2,
+            "ups": 11
+          }
+        }
+      ]
+    }
+  },
+  {
+    "data": {
+      "children": [
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment_1",
+            "name": "t1_comment_1",
+            "author": "",
+            "body": "First comment",
+            "score": 4,
+            "created_utc": 1710000001
+          }
+        },
+        {
+          "kind": "t1",
+          "data": {
+            "id": "comment_2",
+            "name": "t1_comment_2",
+            "author": "helper",
+            "body": "Second comment",
+            "score": 3,
+            "created_utc": 1710000002
+          }
+        }
+      ]
+    }
+  }
+]

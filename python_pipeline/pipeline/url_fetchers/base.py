@@ -4,6 +4,9 @@ from dataclasses import dataclass
 from typing import Protocol
 
 
+TOP_COMMENT_LIMIT = 5
+
+
 @dataclass(frozen=True)
 class UrlFetchResult:
     canonical_url: str
