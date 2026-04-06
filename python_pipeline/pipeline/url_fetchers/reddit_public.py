@@ -7,14 +7,16 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
-from pipeline.url_fetchers.comment_expander import (
-    cap_comments,
-    clean_string,
-    coerce_int,
-    normalize_comment_node,
-)
 from pipeline.url_fetchers.config import RedditFetcherConfig, load_reddit_fetcher_config
 from pipeline.url_fetchers.base import TOP_COMMENT_LIMIT, UrlFetchResult
+from pipeline.url_fetchers.comment_expander import normalize_comment_nodes
+from pipeline.url_fetchers.reddit_parser import (
+    extract_post_data,
+    extract_post_fullname,
+    extract_thread_top_comment_nodes,
+    extract_thread_top_comments,
+    parse_post_fields,
+)
 
 
 @dataclass(frozen=True)
@@ -31,16 +33,17 @@ class RedditPublicJsonFetcher:
             raise ValueError("Reddit public JSON response must be a non-empty list.")
 
         post_data = extract_post_data(payload)
-        top_comment_nodes = extract_top_comment_nodes(payload)
-        top_comments = normalize_top_comment_nodes(top_comment_nodes, limit=self.config.top_comment_limit)
-        post_permalink = clean_string(post_data.get("permalink"))
+        post_fields = parse_post_fields(post_data)
+        top_comment_nodes = extract_thread_top_comment_nodes(payload)
+        top_comments = extract_thread_top_comments(payload, limit=self.config.top_comment_limit)
+        post_permalink = post_fields.permalink
         post_url = canonical_url
         if post_permalink:
             post_url = build_canonical_reddit_url(post_permalink)
 
-        post_id = extract_post_fullname(post_data)
-        subreddit = clean_string(post_data.get("subreddit"))
-        post_title = clean_string(post_data.get("title"))
+        post_id = post_fields.post_id
+        subreddit = post_fields.subreddit
+        post_title = post_fields.title
 
         if not subreddit:
             raise ValueError("Missing subreddit in Reddit public JSON response.")
@@ -56,11 +59,11 @@ class RedditPublicJsonFetcher:
             subreddit=subreddit,
             post_title=post_title,
             post_url=post_url,
-            post_author=clean_string(post_data.get("author")) or "[deleted]",
-            post_created_utc=coerce_int(post_data.get("created_utc")),
-            post_body=clean_string(post_data.get("selftext")),
-            num_comments=coerce_int(post_data.get("num_comments")),
-            upvotes=coerce_int(post_data.get("ups")),
+            post_author=post_fields.author,
+            post_created_utc=post_fields.created_utc,
+            post_body=post_fields.body,
+            num_comments=post_fields.num_comments,
+            upvotes=post_fields.upvotes,
             top_comments=top_comments,
             post_id=post_id,
             fetch_metadata={
@@ -118,85 +121,15 @@ def build_canonical_reddit_url(path: str) -> str:
     return f"https://reddit.com{clean_path.rstrip('/')}"
 
 
-def extract_post_data(payload: list[Any]) -> dict[str, Any]:
-    listing = payload[0]
-    if not isinstance(listing, dict):
-        raise ValueError("Reddit post listing is not an object.")
-
-    listing_data = listing.get("data")
-    if not isinstance(listing_data, dict):
-        raise ValueError("Reddit post listing is missing data.")
-
-    children = listing_data.get("children")
-    if not isinstance(children, list) or not children:
-        raise ValueError("Reddit post listing has no children.")
-
-    first_child = children[0]
-    if not isinstance(first_child, dict):
-        raise ValueError("Reddit post child is not an object.")
-
-    post_data = first_child.get("data")
-    if not isinstance(post_data, dict):
-        raise ValueError("Reddit post child is missing data.")
-
-    return post_data
-
-
 def extract_top_comments(payload: list[Any]) -> list[dict[str, object]]:
-    return cap_comments(normalize_top_comment_nodes(extract_top_comment_nodes(payload)), limit=TOP_COMMENT_LIMIT)
+    return extract_thread_top_comments(payload, limit=TOP_COMMENT_LIMIT)
 
 
-def extract_top_comment_nodes(payload: list[Any]) -> list[dict[str, object]]:
-    if len(payload) < 2:
-        return []
-
-    listing = payload[1]
-    if not isinstance(listing, dict):
-        return []
-
-    listing_data = listing.get("data")
-    if not isinstance(listing_data, dict):
-        return []
-
-    children = listing_data.get("children")
-    if not isinstance(children, list):
-        return []
-
-    top_comment_nodes: list[dict[str, object]] = []
-    for child in children:
-        if not isinstance(child, dict):
-            continue
-        if clean_string(child.get("kind")) != "t1":
-            continue
-
-        comment_data = child.get("data")
-        if not isinstance(comment_data, dict):
-            continue
-
-        top_comment_nodes.append(comment_data)
-
-    return top_comment_nodes
+extract_top_comment_nodes = extract_thread_top_comment_nodes
 
 
 def normalize_top_comment_nodes(
     top_comment_nodes: list[dict[str, object]],
     limit: int = TOP_COMMENT_LIMIT,
 ) -> list[dict[str, object]]:
-    normalized_comments: list[dict[str, object]] = []
-    for comment_data in top_comment_nodes:
-        comment = normalize_comment_node(comment_data)
-        if comment is not None:
-            normalized_comments.append(comment)
-    return cap_comments(normalized_comments, limit=limit)
-
-
-def extract_post_fullname(post_data: dict[str, Any]) -> str:
-    post_name = clean_string(post_data.get("name"))
-    if post_name.startswith("t3_"):
-        return post_name
-
-    post_short_id = clean_string(post_data.get("id"))
-    if post_short_id:
-        return f"t3_{post_short_id}"
-
-    return ""
+    return normalize_comment_nodes(top_comment_nodes, limit=limit)

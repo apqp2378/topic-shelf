@@ -182,6 +182,18 @@ This MVP path:
 - detects initial `MoreComments` placeholders, requests a small bounded follow-up batch, and preserves the requested ids in metadata
 - records additive runtime metadata such as `comment_cap`, `morechildren_enabled`, `morechildren_request_limit`, `request_timeout_seconds`, and `retry_policy`
 
+### Shared parser layout
+
+`reddit_public` and `reddit_oauth` now share a small internal parser module for common Reddit payload parsing.
+
+Ownership stays split on purpose:
+
+- `pipeline/url_fetchers/reddit_parser.py`: raw Reddit post and thread parsing helpers
+- `pipeline/url_fetchers/comment_expander.py`: shared comment normalization and cap helpers
+- `reddit_public.py` and `reddit_oauth.py`: fetcher-specific network transport, retry, and rate-limit handling
+
+The runtime config behavior and additive metadata behavior are unchanged by this refactor.
+
 Not implemented yet:
 
 - token refresh

@@ -14,16 +14,17 @@ from pipeline.url_fetchers.comment_expander import (
     CommentThreadSnapshot,
     NoOpCommentExpander,
     clean_string,
-    coerce_int,
-    extract_comment_thread_snapshot,
     extract_morechildren_comment_nodes,
     merge_comment_nodes,
 )
 from pipeline.url_fetchers.config import RedditFetcherConfig, load_reddit_fetcher_config
 from pipeline.url_fetchers.reddit_public import (
     build_canonical_reddit_url,
+)
+from pipeline.url_fetchers.reddit_parser import (
     extract_post_data,
-    extract_post_fullname,
+    extract_thread_comment_snapshot,
+    parse_post_fields,
 )
 from pipeline.url_fetchers.token_provider import EnvTokenProvider, TokenProvider
 
@@ -83,14 +84,15 @@ class RedditOAuthFetcher:
             raise ValueError("Reddit OAuth JSON response must be a non-empty list.")
 
         post_data = extract_post_data(payload)
-        post_permalink = clean_string(post_data.get("permalink"))
+        post_fields = parse_post_fields(post_data)
+        post_permalink = post_fields.permalink
         post_url = canonical_url
         if post_permalink:
             post_url = build_canonical_reddit_url(post_permalink)
 
-        post_id = extract_post_fullname(post_data)
-        subreddit = clean_string(post_data.get("subreddit"))
-        post_title = clean_string(post_data.get("title"))
+        post_id = post_fields.post_id
+        subreddit = post_fields.subreddit
+        post_title = post_fields.title
         comment_snapshot = extract_comment_snapshot(payload)
         expansion_result = self._expand_morechildren_comments(
             token=token,
@@ -150,11 +152,11 @@ class RedditOAuthFetcher:
             subreddit=subreddit,
             post_title=post_title,
             post_url=post_url,
-            post_author=clean_string(post_data.get("author")) or "[deleted]",
-            post_created_utc=coerce_int(post_data.get("created_utc")),
-            post_body=clean_string(post_data.get("selftext")),
-            num_comments=coerce_int(post_data.get("num_comments")),
-            upvotes=coerce_int(post_data.get("ups")) or coerce_int(post_data.get("score")),
+            post_author=post_fields.author,
+            post_created_utc=post_fields.created_utc,
+            post_body=post_fields.body,
+            num_comments=post_fields.num_comments,
+            upvotes=post_fields.upvotes,
             top_comments=top_comments,
             post_id=post_id,
             fetch_metadata=fetch_metadata,
@@ -387,22 +389,7 @@ def build_oauth_morechildren_json_url(post_id: str, child_ids: list[str]) -> str
 
 
 def extract_comment_snapshot(payload: list[Any]) -> CommentThreadSnapshot:
-    if len(payload) < 2:
-        return CommentThreadSnapshot([], [], 0, 0)
-
-    listing = payload[1]
-    if not isinstance(listing, dict):
-        return CommentThreadSnapshot([], [], 0, 0)
-
-    listing_data = listing.get("data")
-    if not isinstance(listing_data, dict):
-        return CommentThreadSnapshot([], [], 0, 0)
-
-    children = listing_data.get("children")
-    if not isinstance(children, list):
-        return CommentThreadSnapshot([], [], 0, 0)
-
-    return extract_comment_thread_snapshot(children)
+    return extract_thread_comment_snapshot(payload)
 
 
 def extract_rate_limit_snapshot(headers: Any) -> dict[str, object]:
