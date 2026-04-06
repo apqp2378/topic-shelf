@@ -1,16 +1,26 @@
+## 한국어 요약
+Topic Shelf는 Reddit 글을 선별해
+`raw JSON -> normalized -> cards` 구조로 변환하는 개인 큐레이션 시스템입니다.
+현재는 Python pipeline 중심으로 운영하고 있으며,
+사람이 고른 Reddit URL 목록을 V3 URL bridge로 처리하는 흐름을 주력으로 사용합니다.
+Devvit은 선택적으로 후보 글을 keep/skip으로 검토하고,
+keep로 표시한 결과를 raw JSON으로 export하는 입력 경로입니다.
+
 # Topic Shelf
 
-Topic Shelf is a small Reddit curation system. It combines a Devvit candidate picker for collecting keep-worthy threads with a Python post-processing pipeline that turns those kept items into normalized records, cards, and optional downstream publishing assets.
+Topic Shelf is a small Reddit curation system centered on a Python processing pipeline.
+It takes either a human-curated Reddit URL list or an optional Devvit keep export,
+then turns that input into raw JSON, normalized records, cards, and optional downstream publishing assets.
 
 ## What This Repo Contains
 
-- `Devvit candidate picker`: the in-Reddit review dashboard used to collect and export keep-style raw JSON
-- `V3 URL bridge`: a small alternate input path that turns a human-curated Reddit URL list into raw JSON
 - `Python pipeline`: the core processing layer that takes raw input through normalization, card building, and optional later stages
+- `V3 URL bridge`: the current practical input path that turns a human-curated Reddit URL list into raw JSON
+- `Devvit candidate picker`: an optional in-Reddit review dashboard where I mark candidate threads as keep/skip and export the kept set as raw JSON
 
 ## Core Flow
 
-`Devvit keep export OR URL list -> raw JSON -> normalized -> cards -> optional stages`
+`URL list OR Devvit keep export -> raw JSON -> normalized -> cards -> optional stages`
 
 ## Repository Structure
 
@@ -22,18 +32,18 @@ Topic Shelf is a small Reddit curation system. It combines a Devvit candidate pi
 
 ## Fastest Ways To Use This Repo
 
-### Path A: Devvit keep export flow
+### Path A: V3 URL list flow
+
+1. Put a small human-curated Reddit URL list into `python_pipeline/data/url_lists/`.
+2. Run the URL ingestion step to create raw JSON.
+3. Run the Python pipeline on that raw JSON.
+
+### Path B: Devvit keep export flow
 
 1. Start the Devvit app locally.
 2. Review candidates in the dashboard and mark keep/skip.
 3. Export the keep set as raw JSON.
 4. Run the Python pipeline on that raw JSON.
-
-### Path B: V3 URL list flow
-
-1. Put a small human-curated Reddit URL list into `python_pipeline/data/url_lists/`.
-2. Run the URL ingestion step to create raw JSON.
-3. Run the Python pipeline on that raw JSON.
 
 ## Where To Read Next
 
