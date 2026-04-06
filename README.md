@@ -38,6 +38,7 @@ then turns that input into raw JSON, normalized records, cards, and optional dow
 2. Use `python_pipeline/data/url_lists/claude_code_tips.txt` as the canonical example file when you need a concrete path in docs or tests.
 3. Run the URL ingestion step to create raw JSON.
 4. Run the Python pipeline on that raw JSON.
+5. Generate a batch review scaffold and export publish candidates from the completed review sidecar.
 
 ### Path B: Devvit keep export flow
 
@@ -53,3 +54,4 @@ then turns that input into raw JSON, normalized records, cards, and optional dow
 - `docs/reddit_oauth_runbook.md`
 - `docs/reddit_api_approval_prep.md`
 - `python_pipeline/scripts/init_batch_review.py`
+- `python_pipeline/scripts/export_publish_candidates.py`

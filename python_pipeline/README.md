@@ -157,6 +157,22 @@ The review scaffold writes two human-editable files under `python_pipeline/data/
 
 It does not modify raw, normalized, or cards outputs.
 
+### Publish-candidate export
+
+After filling in the review sidecars, export just the publish candidates for the next human review step:
+
+~~~bash
+python python_pipeline/scripts/export_publish_candidates.py claude_code_tips
+python python_pipeline/scripts/export_publish_candidates.py python_pipeline/data/reviews/claude_code_tips_decisions.json
+~~~
+
+The export helper writes two read-only handoff files under `python_pipeline/data/publish_candidates/`:
+
+- `publish_candidates_<stem>.md`
+- `publish_candidates_<stem>.json`
+
+It reads the review decisions sidecar and the matching cards file, then exports only items marked as publish candidates. It does not modify the original review input or the cards output.
+
 ### Runtime config
 
 The Reddit fetchers also read a small set of optional environment variables:
@@ -262,5 +278,6 @@ It does not delete arbitrary raw files, fixtures, or sample inputs.
 - The public URL fetcher is intentionally still the local prototype path until the OAuth flow is implemented.
 - `reddit_public` remains the default current path unless `--fetcher reddit_oauth` or `TOPIC_SHELF_FETCHER=reddit_oauth` is selected.
 - Use `python_pipeline/data/url_lists/claude_code_tips.txt` as the canonical example URL-list file in docs and tests.
+- The review workflow is now: ingest URLs -> run pipeline -> generate review scaffold -> fill review decisions -> export publish candidates.
 - The local URL-list files under `python_pipeline/data/url_lists/` that are meant only for personal churn are ignored intentionally.
 - During stabilization, prefer fixture-backed tests and stubbed fetchers over live network fetches.
