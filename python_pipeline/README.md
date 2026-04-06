@@ -20,6 +20,7 @@ builds minimal card JSON for later expansion.
 - `validate_raw.py`: Checks JSON shape, required fields, keep status, and `top_comments`
 - `normalize_devvit_raw.py`: Converts Devvit raw JSON into the internal normalized structure
 - `make_cards.py`: Converts normalized records into small card objects
+- `ingest_reddit_urls.py`: Fetches a human-curated Reddit thread URL txt list and writes raw JSON that `run_pipeline.py` can read directly
 - `run_pipeline.py`: Runs validation, normalization, and card generation in one command and prints stage counts
 - `run_pipeline.py --enable-summary`: Adds the optional heuristic summary stage and writes a second card export
 - `run_pipeline.py --enable-summary --summary-provider openai`: Uses the optional summary provider adapter with safe fallback
@@ -37,6 +38,7 @@ builds minimal card JSON for later expansion.
 python python_pipeline/scripts/validate_raw.py python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/normalize_devvit_raw.py python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/make_cards.py python_pipeline/data/normalized/normalized_devvit_keep_2026-04-05.json
+python python_pipeline/scripts/ingest_reddit_urls.py python_pipeline/data/url_lists/my_threads.txt
 python python_pipeline/scripts/run_pipeline.py python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-summary python_pipeline/data/raw/devvit_keep_2026-04-05.json
 python python_pipeline/scripts/run_pipeline.py --enable-summary --summary-provider openai python_pipeline/data/raw/devvit_keep_2026-04-05.json
@@ -68,6 +70,26 @@ python python_pipeline/scripts/run_pipeline.py --enable-summary --enable-transla
 3. Build cards from the normalized JSON
 
 Or run everything at once with `run_pipeline.py`.
+
+For the V3 URL-list-based ingestion bridge, the flow is:
+
+1. Put a human-curated txt file of Reddit thread URLs in `python_pipeline/data/url_lists/`
+2. Run `ingest_reddit_urls.py`
+3. Feed the generated raw JSON into `run_pipeline.py`
+
+Example:
+
+```bash
+python python_pipeline/scripts/ingest_reddit_urls.py python_pipeline/data/url_lists/my_threads.txt
+python python_pipeline/scripts/run_pipeline.py python_pipeline/data/raw/raw_from_urls_my_threads.json
+```
+
+This bridge is not a replacement for Devvit collection or a future Reddit Data API collector.
+It is a URL-seeded bridge that produces raw JSON in the same keep-export shape expected by the
+existing pipeline. If Data API access is approved later, the fetcher layer can be swapped without
+changing the downstream raw schema, validator contract, or `run_pipeline.py` usage.
+The raw `post_url` field preserves the original input URL, while canonical URLs are used internally
+for fetch and dedupe logic.
 
 `run_pipeline.py` prints a compact handoff summary:
 
@@ -127,6 +149,8 @@ When `--enable-quality-review` is set, the pipeline writes `quality_reviews_*.js
   `python_pipeline/data/normalized/normalized_devvit_keep_2026-04-05.json`
 - Cards example:
   `python_pipeline/data/cards/cards_devvit_keep_2026-04-05.json`
+- URL-seeded raw example:
+  `python_pipeline/data/raw/raw_from_urls_my_threads.json`
 - Summary cards example:
   `python_pipeline/data/cards/cards_with_summary_devvit_keep_2026-04-05.json`
 - Translation cards example:
@@ -239,3 +263,4 @@ The V2-9 publish export stage is a scaffold for human-readable Markdown handoff 
 
 - Pipeline 0.1 uses only the Python standard library.
 - `requirements.txt` exists only to make that explicit.
+- The URL-seeded bridge also uses only the Python standard library and prefers Reddit public JSON responses for small, manual thread lists.

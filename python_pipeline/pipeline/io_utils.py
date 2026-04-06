@@ -27,6 +27,15 @@ def write_text_file(path: Path, text: str) -> None:
         file.write(text)
 
 
+def read_text_file(path: Path) -> str:
+    with path.open("r", encoding="utf-8") as file:
+        return file.read()
+
+
+def build_raw_from_urls_output_path(url_list_path: Path) -> Path:
+    return url_list_path.parent.parent / "raw" / f"raw_from_urls_{url_list_path.stem}.json"
+
+
 def build_normalized_output_path(raw_path: Path) -> Path:
     return raw_path.parent.parent / "normalized" / f"normalized_{raw_path.name}"
 
