@@ -68,6 +68,7 @@ class CardRecord(TypedDict):
     card_id: str
     source_id: str
     title: str
+    excerpt: str
     source_url: str
     subreddit: str
     status: CandidateStatus

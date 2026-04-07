@@ -21,7 +21,7 @@ from pipeline.io_utils import (
     build_cards_with_summary_output_path,
     build_normalized_output_path,
 )
-from pipeline.summary_providers.openai import OpenAISummaryProvider
+from pipeline.summary_providers.openai import OpenAISummaryProvider, parse_summary_output
 from pipeline.summarizers import (
     build_heuristic_summary,
     build_summary_provider,
@@ -114,6 +114,18 @@ class SummaryStageTests(unittest.TestCase):
         self.assertEqual(stats.provider_failure_count, 0)
         self.assertEqual(stats.fallback_count, 0)
         self.assertEqual(stats.success_count, 1)
+
+    def test_parse_summary_output_accepts_json_response(self) -> None:
+        parsed = parse_summary_output('{"summary_text":"  Compact JSON summary.  "}', max_len=90)
+        self.assertEqual(parsed, "Compact JSON summary.")
+
+    def test_parse_summary_output_accepts_plain_text_fallback(self) -> None:
+        parsed = parse_summary_output("  Plain text summary.  ", max_len=90)
+        self.assertEqual(parsed, "Plain text summary.")
+
+    def test_parse_summary_output_returns_empty_for_placeholder_text(self) -> None:
+        parsed = parse_summary_output('{"summary_text":"null"}', max_len=90)
+        self.assertEqual(parsed, "")
 
     def test_openai_provider_missing_key_falls_back_safely(self) -> None:
         cards = [

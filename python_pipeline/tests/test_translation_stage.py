@@ -206,6 +206,7 @@ class TranslationStageTests(unittest.TestCase):
                 "moderator_status": "keep",
                 "review_note": "",
                 "collected_at": "2026-04-05T10:00:00Z",
+                "body_excerpt": "I use AI tools for work, writing, and coding.",
             },
             {
                 "raw_id": "reddit_devvit_test_002",
@@ -224,6 +225,7 @@ class TranslationStageTests(unittest.TestCase):
                 "moderator_status": "keep",
                 "review_note": "",
                 "collected_at": "2026-04-05T11:00:00Z",
+                "body_excerpt": "Body text for the second keep record.",
             },
         ]
 
@@ -268,7 +270,10 @@ class TranslationStageTests(unittest.TestCase):
                 translation_without_summary[0]["title_ko"],
                 "Claude vs ChatGPT for daily work",
             )
-            self.assertEqual(translation_without_summary[0]["excerpt_ko"], "")
+            self.assertEqual(
+                translation_without_summary[0]["excerpt_ko"],
+                "I use AI tools for work, writing, and coding.",
+            )
             self.assertEqual(translation_without_summary[0]["summary_ko"], "")
             cards_after_translation = read_json(cards_path)
             self.assertEqual(cards_without_summary, cards_after_translation)
@@ -308,7 +313,10 @@ class TranslationStageTests(unittest.TestCase):
                 summary_cards[1]["summary"],
             )
             self.assertEqual(translation_with_summary[0]["title_ko"], summary_cards[0]["title"])
-            self.assertEqual(translation_with_summary[0]["excerpt_ko"], "")
+            self.assertEqual(
+                translation_with_summary[0]["excerpt_ko"],
+                "I use AI tools for work, writing, and coding.",
+            )
         finally:
             shutil.rmtree(tmp_root, ignore_errors=True)
 

@@ -17,6 +17,7 @@ def build_card(record: NormalizedRecord, index: int) -> CardRecord:
         "card_id": f"reddit_card_{card_date}_{index:03d}",
         "source_id": clean_string_value(record["source_id"]),
         "title": clean_string_value(record["title"]),
+        "excerpt": clean_string_value(record["body_excerpt"]),
         "source_url": clean_string_value(record["source_url"]),
         "subreddit": clean_string_value(record["subreddit"]),
         "status": clean_string_value(record["moderator_status"]),

@@ -7,6 +7,7 @@ import urllib.request
 from typing import Any
 
 from pipeline.summary_providers.base import SummaryProvider, clean_text
+from pipeline.summary_output_model import SummaryOutput
 
 
 DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
@@ -38,7 +39,7 @@ class OpenAISummaryProvider(SummaryProvider):
             return ""
 
         response_text = self.request_summary(prompt)
-        return clean_summary_output(response_text, max_len=max_len)
+        return parse_summary_output(response_text, max_len=max_len)
 
     def request_summary(self, prompt: str) -> str:
         payload = {
@@ -48,7 +49,11 @@ class OpenAISummaryProvider(SummaryProvider):
             "messages": [
                 {
                     "role": "system",
-                    "content": "Write a short, stable card-style summary in plain English.",
+                    "content": (
+                        "Write a short, stable card-style summary in plain English. "
+                        'Prefer compact JSON like {"summary_text":"..."} when convenient, '
+                        "but plain text is also acceptable."
+                    ),
                 },
                 {
                     "role": "user",
@@ -180,6 +185,51 @@ def extract_response_text(response_payload: dict[str, Any]) -> str:
         return output_text
 
     return ""
+
+
+def parse_summary_output(text: str, max_len: int = 180) -> str:
+    raw_text = clean_text(text)
+    if not raw_text:
+        return ""
+
+    json_candidate = parse_summary_output_json(raw_text)
+    if json_candidate:
+        return clean_summary_output(json_candidate, max_len=max_len)
+
+    if looks_like_json_payload(raw_text):
+        return ""
+
+    plain_text_candidate = parse_summary_output_plain_text(raw_text)
+    if plain_text_candidate:
+        return clean_summary_output(plain_text_candidate, max_len=max_len)
+
+    return ""
+
+
+def parse_summary_output_json(text: str) -> str:
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
+        return ""
+
+    if not isinstance(payload, dict):
+        return ""
+
+    try:
+        return SummaryOutput.model_validate(payload).summary_text
+    except Exception:
+        return ""
+
+
+def parse_summary_output_plain_text(text: str) -> str:
+    try:
+        return SummaryOutput.model_validate({"summary_text": text}).summary_text
+    except Exception:
+        return ""
+
+
+def looks_like_json_payload(text: str) -> bool:
+    return (text.startswith("{") and text.endswith("}")) or (text.startswith("[") and text.endswith("]"))
 
 
 def clean_summary_output(text: str, max_len: int = 180) -> str:
