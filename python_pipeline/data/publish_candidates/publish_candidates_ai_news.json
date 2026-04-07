@@ -1,0 +1,8 @@
+{
+  "batch_name": "ai_news",
+  "generated_at": "2026-04-07T00:58:17.725911Z",
+  "source_decisions_file": "C:/Users/최상원/개인프로젝트/topic-shelf/python_pipeline/data/reviews/ai_news_decisions.json",
+  "source_cards_file": "C:/Users/최상원/개인프로젝트/topic-shelf/python_pipeline/data/cards/cards_raw_from_urls_ai_news.json",
+  "publish_candidate_count": 0,
+  "publish_candidates": []
+}

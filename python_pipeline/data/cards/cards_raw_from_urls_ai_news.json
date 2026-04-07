@@ -1,0 +1,221 @@
+[
+  {
+    "card_id": "reddit_card_2026-04-07_001",
+    "source_id": "reddit_url_ingest_20260407_001",
+    "title": "Anthropic Surpasses OpenAI in ARR",
+    "source_url": "https://www.reddit.com/r/singularity/comments/1sd411i/anthropic_surpasses_openai_in_arr/",
+    "subreddit": "singularity",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "“ARR” = annual recurring revenue fyi",
+      "I don’t think this means they have passed OpenAI. OpenAI passed 25 billion a month ago and will likely pass 30 in the next month. But yea, t...",
+      "It is very important to note that Anthropic and OpenAI determine income differently. OpenAI famously deducts revenue share they have with hy...",
+      "$28B was Anthropic’s ARR target for the end of 2026. $25B ARR at the end of Q1 is crazy.",
+      "Open AI sure fumbled hard with all their side projects"
+    ],
+    "created_utc": 1775396735,
+    "collected_at": "2026-04-07T00:57:52Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_002",
+    "source_id": "reddit_url_ingest_20260407_002",
+    "title": "MIT study challenges AI job apocalypse narrative",
+    "source_url": "https://www.reddit.com/r/singularity/comments/1sbfcci/mit_study_challenges_ai_job_apocalypse_narrative/",
+    "subreddit": "singularity",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "Article without pay wall https://archive.is/gzDX6 Thanks u/pavelkomin",
+      "Studies like this will reach an entirely different conclusion, once we cross certain thresholds and start actually seeing job numbers declin...",
+      "Jesus christ the title is straight propaganda. I'm also a UAP person (yall will catch up soon enough). It's hilarious/sad how many time I ge...",
+      "Yeah I feel like people go way to far on the ***near term*** implications of AI. Think of sales jobs. Can you imagine how insulting it would...",
+      "# Key Takeaways from the MIT Study: * **The \"Rising Tide\" Timeline:** Researchers estimate that by **2029**, AI will be able to perform 80% ..."
+    ],
+    "created_utc": 1775226987,
+    "collected_at": "2026-04-07T00:57:52Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_003",
+    "source_id": "reddit_url_ingest_20260407_003",
+    "title": "Nvidia goes all-in on AI agents while Anthropic pulls the plug",
+    "source_url": "https://www.reddit.com/r/artificial/comments/1scccs1/nvidia_goes_allin_on_ai_agents_while_anthropic/",
+    "subreddit": "artificial",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "The framing here is a bit misleading. Nvidia building agent infrastructure and Anthropic restricting certain agent access patterns are not r...",
+      "Its obvious, the more consumption the better for Nvidias chip business. On the other hand, more consumption means more costs for Anthropic. ...",
+      "Complete bullshit. Anthropic isn’t blocking 3rd party agents, it is enforcing that 3rd party agents go through their priced-by-volume SDKs i...",
+      "one is scaling ecosystem while the other is protecting resources",
+      "Claude Agent SDK is unaffected. They want an efficient use of their model, and the SDK helps them do that."
+    ],
+    "created_utc": 1775316995,
+    "collected_at": "2026-04-07T00:57:52Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_004",
+    "source_id": "reddit_url_ingest_20260407_004",
+    "title": "Meta just acqui-hired its 4th AI startup in 4 months. Dreamer, Manus, Moltbook, and Scale AI's founder. Is anyone else watching this pattern?",
+    "source_url": "https://www.reddit.com/r/artificial/comments/1s3xr4l/meta_just_acquihired_its_4th_ai_startup_in_4/",
+    "subreddit": "artificial",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "When I see Meta , I see Metaverse. That says it all.",
+      "So many bots in this thread posting almost the exact same thing. Sad Meta is trying to change their failure after failure image to something...",
+      "Buying appearance of relevance.",
+      "The Manus + Dreamer combo is the tell. Both are agentic platforms, not model companies. Meta already has Llama for the model layer, what the...",
+      "They stole this for me they bought moltbook yo hide my agents /blesstheirhearts is the submolt that started it"
+    ],
+    "created_utc": 1774499489,
+    "collected_at": "2026-04-07T00:57:52Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_005",
+    "source_id": "reddit_url_ingest_20260407_005",
+    "title": "Jensen Huang: \"Physical AI as a large category, it's technology industry's first opportunity to address a $50,000,000,000,000 industry\". The robot revolution is coming and we are in for the ride.",
+    "source_url": "https://www.reddit.com/r/singularity/comments/1s4on2b/jensen_huang_physical_ai_as_a_large_category_its/",
+    "subreddit": "singularity",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "Why did you make me count the zeroes🤬🤬",
+      "Always about how much money you're going to make replacing jobs, never about how you're going to make people's live better. I used to be so ...",
+      "$50,000,000,000,000 industry of dancing and kung-fuing.",
+      "50... Uh... Gazilion",
+      "my weewee isn't ready"
+    ],
+    "created_utc": 1774570386,
+    "collected_at": "2026-04-07T00:57:52Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_006",
+    "source_id": "reddit_url_ingest_20260407_006",
+    "title": "The Claude Code leak accidentally published the first complete blueprint for production AI agents. Here's what it tells us about where this is all going.",
+    "source_url": "https://www.reddit.com/r/artificial/comments/1s9jprb/the_claude_code_leak_accidentally_published_the/",
+    "subreddit": "artificial",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "I start reading slop and within about 3 seconds I start skimming and then just give up entirely.",
+      "**&gt; Background consolidation** it sleeps!",
+      "It's obvious this post is a semantic drift attack, not a legitimate leak discussion nor a legitimate replication of technique... But I have ...",
+      "the most interesting part isn't the prompt structure, it's the multi-layer context system. the way it chains tool definitions, system prompt...",
+      "this lines up way more with what i have seen in production than most of the hype posts lately. people keep arguing about model benchmarks bu..."
+    ],
+    "created_utc": 1775048048,
+    "collected_at": "2026-04-07T00:57:52Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_007",
+    "source_id": "reddit_url_ingest_20260407_007",
+    "title": "Anthropic Leaked 512,000 Lines of Claude Code Source. Here's What the Code Actually Reveals.",
+    "source_url": "https://www.reddit.com/r/ClaudeAI/comments/1s9ai45/anthropic_leaked_512000_lines_of_claude_code/",
+    "subreddit": "ClaudeAI",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "i actually can’t wait to actually read another actual post from claude. actually! edit: okay i actually read it, source for 8100 DMCA takedo...",
+      "# Here's — What — Matters — Most.",
+      "512k lines of ts, thats why claude code takes 10 secs to start up 😭🤌",
+      "could this leak be intentional trying to garner open source comments for free to optimize they internal code base",
+      "\\&gt; 250,000 wasted API calls per day from failed sessions Is this just explicit API calls or VSCode failures included? Either way it is un..."
+    ],
+    "created_utc": 1775017890,
+    "collected_at": "2026-04-07T00:57:52Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_008",
+    "source_id": "reddit_url_ingest_20260407_008",
+    "title": "An attack class that passes every current LLM filter - no payload, no injection signature, no log trace",
+    "source_url": "https://www.reddit.com/r/artificial/comments/1s7t9qs/an_attack_class_that_passes_every_current_llm/",
+    "subreddit": "artificial",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "How is this different from prompt poisoning?",
+      "This is interesting, especially the idea that the “stance” gets installed before any explicit instruction. One thing I’ve noticed in practic...",
+      "Very intrigued. This may or may not be related, but it seems like there’s a class of reasoning weaknesses, vulnerabilities?… that have to do...",
+      "Fascinating research. The postural manipulation concept has huge implications for multi-agent systems where context passes between agents th...",
+      "if there's no intent and no payload how is that an 'attack' though?"
+    ],
+    "created_utc": 1774883418,
+    "collected_at": "2026-04-07T00:57:52Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_009",
+    "source_id": "reddit_url_ingest_20260407_009",
+    "title": "Apple Gains Full Access to Google's Gemini for On-Device AI Distillation",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1s3klpz/apple_gains_full_access_to_googles_gemini_for/",
+    "subreddit": "GeminiAI",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "If Gemini gets feedback and can use the data that's pretty insane, on Android and on iPhone",
+      "Apple isn’t after AGI, it make sense they don’t develop their own SOTA models, although they would love to but they just can’t have everythi...",
+      "If only I could replace Siri with Gemini…",
+      "I am on an iPhone 16, with Apple Intelligence. They have taken far far too long to incorporate anything useful."
+    ],
+    "created_utc": 1774466784,
+    "collected_at": "2026-04-07T00:57:52Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_010",
+    "source_id": "reddit_url_ingest_20260407_010",
+    "title": "AI Pro storage increases",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1sa4okd/ai_pro_storage_increases/",
+    "subreddit": "GeminiAI",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "Is this a gift because people are unhappy with their latest models? And because Claude is getting more popular?",
+      "I thought this was fake but it isn't. They're completely crazy hahah",
+      "anyone knows whether it applies to existing users on annual plan or only for new subscribers/next month's subscription? Mine is not reflecti...",
+      "eh! this is real! my drive is now 5TB! i thought this 1st APR joke that i just found out",
+      "My subscription is via Verizon as well. Hell of deal, especially now."
+    ],
+    "created_utc": 1775095900,
+    "collected_at": "2026-04-07T00:57:52Z"
+  }
+]

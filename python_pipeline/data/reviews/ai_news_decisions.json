@@ -1,0 +1,77 @@
+{
+  "batch_name": "ai_news",
+  "source_cards_file": "C:/Users/최상원/개인프로젝트/topic-shelf/python_pipeline/data/cards/cards_raw_from_urls_ai_news.json",
+  "reviewed_at": "2026-04-07T00:58:13.939573Z",
+  "decisions": [
+    {
+      "card_id": "reddit_card_2026-04-07_001",
+      "title": "Anthropic Surpasses OpenAI in ARR",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_002",
+      "title": "MIT study challenges AI job apocalypse narrative",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_003",
+      "title": "Nvidia goes all-in on AI agents while Anthropic pulls the plug",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_004",
+      "title": "Meta just acqui-hired its 4th AI startup in 4 months. Dreamer, Manus, Moltbook, and Scale AI's founder. Is anyone else watching this pattern?",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_005",
+      "title": "Jensen Huang: \"Physical AI as a large category, it's technology industry's first opportunity to address a $50,000,000,000,000 industry\". The robot revolution is coming and we are in for the ride.",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_006",
+      "title": "The Claude Code leak accidentally published the first complete blueprint for production AI agents. Here's what it tells us about where this is all going.",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_007",
+      "title": "Anthropic Leaked 512,000 Lines of Claude Code Source. Here's What the Code Actually Reveals.",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_008",
+      "title": "An attack class that passes every current LLM filter - no payload, no injection signature, no log trace",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_009",
+      "title": "Apple Gains Full Access to Google's Gemini for On-Device AI Distillation",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_010",
+      "title": "AI Pro storage increases",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    }
+  ]
+}

@@ -1,0 +1,615 @@
+[
+  {
+    "source_id": "reddit_url_ingest_20260407_001",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "singularity",
+    "title": "Anthropic Surpasses OpenAI in ARR",
+    "source_url": "https://www.reddit.com/r/singularity/comments/1sd411i/anthropic_surpasses_openai_in_arr/",
+    "author": "Eastern-Weekend5407",
+    "created_utc": 1775396735,
+    "body": "According to semianalysis, Anthropic ARR is 25 Billions, and according to openai 4 days days ago they are doing 2 Billions per month.",
+    "body_excerpt": "According to semianalysis, Anthropic ARR is 25 Billions, and according to openai 4 days days ago they are doing 2 Billions per month.",
+    "num_comments": 70,
+    "upvotes": 517,
+    "top_comments": [
+      {
+        "comment_id": "t1_oefor82",
+        "author": "LividSunset",
+        "body": "“ARR” = annual recurring revenue fyi",
+        "score": 104,
+        "created_utc": 1775397889
+      },
+      {
+        "comment_id": "t1_oefn65j",
+        "author": "Longjumping_Kale3013",
+        "body": "I don’t think this means they have passed OpenAI. OpenAI passed 25 billion a month ago and will likely pass 30 in the next month.\n\nBut yea, they are right on their heels.",
+        "score": 93,
+        "created_utc": 1775397375
+      },
+      {
+        "comment_id": "t1_oejnv2g",
+        "author": "Infinite-Jelly-3182",
+        "body": "It is very important to note that Anthropic and OpenAI determine income differently. OpenAI famously deducts revenue share they have with hyperscalers whereas Anthropic does not. If OpenAI makes $1 and they have to give 20 cents to Microsoft, they count that as $.8 of revenue. Anthropic counts the full dollar.",
+        "score": 15,
+        "created_utc": 1775442991
+      },
+      {
+        "comment_id": "t1_oefr9ua",
+        "author": "JustBrowsinAndVibin",
+        "body": "$28B was Anthropic’s ARR target for the end of 2026. $25B ARR at the end of Q1 is crazy.",
+        "score": 22,
+        "created_utc": 1775398674
+      },
+      {
+        "comment_id": "t1_oeflsov",
+        "author": "Due_Sweet_9500",
+        "body": "Open AI sure fumbled hard with all their side projects",
+        "score": 42,
+        "created_utc": 1775396925
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1sd411i",
+    "candidate_id": "t3_1sd411i"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_002",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "singularity",
+    "title": "MIT study challenges AI job apocalypse narrative",
+    "source_url": "https://www.reddit.com/r/singularity/comments/1sbfcci/mit_study_challenges_ai_job_apocalypse_narrative/",
+    "author": "Anen-o-me",
+    "created_utc": 1775226987,
+    "body": "",
+    "body_excerpt": "",
+    "num_comments": 184,
+    "upvotes": 251,
+    "top_comments": [
+      {
+        "comment_id": "t1_oe4sqwc",
+        "author": "Anen-o-me",
+        "body": "Article without pay wall \n\nhttps://archive.is/gzDX6\n\nThanks u/pavelkomin",
+        "score": 1,
+        "created_utc": 1775246363
+      },
+      {
+        "comment_id": "t1_oe63ina",
+        "author": "NikoKun",
+        "body": "Studies like this will reach an entirely different conclusion, once we cross certain thresholds and start actually seeing job numbers decline.",
+        "score": 12,
+        "created_utc": 1775261115
+      },
+      {
+        "comment_id": "t1_oe33zlg",
+        "author": "TheWesternMythos",
+        "body": "Jesus christ the title is straight propaganda. I'm also a UAP person (yall will catch up soon enough). It's hilarious/sad how many time I get sent articles debunking government/military sightings, but only in headline. The actual article, obviously, states whatever government has no idea what going on.\n\n\n\n\nFrom this article \n\n\n\n\n&gt; The research finds that we are several years away from AI achieving near-perfect success rates, which means workers may have more time to adapt, making the disruption less abrupt.\n\n\n\n\nA few YEARS from Near Perfect?!?! That's kinda huge right?!? That's exactly what some people are warning about right?!? \n\n\n\n\n\n\n&gt; The study challenges the idea of a sudden AI-driven employment cliff and instead points to a slower, more uneven reshaping of work.\n\n\n\n\nI mean no shit. Anyone saying it will take all jobs overnight are worse than people saying it will never happen. \n\n\n\n\n\n\nLet's be clear:\n\n\n-This study, and most I have seen, all say we are very close to AI being able to do a huge number of tasks with minimumal human input. Assuming current progress, no big jumps like the attention paper or other architectures coming into play. \n\n\n\n\n-At a certain levels of job cutting, the current economic model falls apart, forcing additional cuts to \"labor support and disposable income\" jobs, which snowballs into a new economy where most people are unemployed \n\n\n\n\n-this would obviously have additional societal consequences like crime rates. However also include, for the first time is history \"law and order\" can be enforced through screens instead of in person and sometimes not even requiring people. \n\n\n\n\nThis is the kicker \n\n\n-think about how long it takes us to do obvious stuff like universal Healthcare or codifying the right to abortion. Then extrapolate that to how long it will take to create social safety nets for mass unemployment. Then ask yourself how much harder it will be when people are fighting over a small amount of jobs and over getting basic essentials. Then ask yourself when we should get started on thia social safety net thing \n\n\n\n\nTo emphasize,  this article/study \n\n\n&gt; The bottom line: The study challenges the idea of a sudden AI-driven employment cliff and instead points to a slower, more uneven reshaping of work. \n\n\n\n\nIs not saying AI won't \"reshape\". It's saying it's  currently happening and will continue to unfold over the next several years. \n\n\nWhy wait until the ship is at the edge of the waterfall to start trying to turn it????",
+        "score": 87,
+        "created_utc": 1775229431
+      },
+      {
+        "comment_id": "t1_oe2w2pq",
+        "author": "Hogo-Nano",
+        "body": "Yeah I feel like people go way to far on the ***near term*** implications of AI. Think of sales jobs. Can you imagine how insulting it would be for a client for someone not to meet them in person and for the company to just have an AI call them or join a zoom call? It'd be ridiculous lol. That's just one example but there many similar ones where an actual human does or has something an AI cannot replicate.",
+        "score": 108,
+        "created_utc": 1775227257
+      },
+      {
+        "comment_id": "t1_oe31084",
+        "author": "shobogenzo93",
+        "body": "# Key Takeaways from the MIT Study:\n\n* **The \"Rising Tide\" Timeline:** Researchers estimate that by **2029**, AI will be able to perform 80% to 95% of text-based work tasks at a \"minimally sufficient\" level. However, achieving \"near-perfect\" quality in error-sensitive domains is still years away.\n* **Task vs. Job Replacement:** The study emphasizes that AI typically impacts specific **tasks** rather than entire occupations. For example, software developers with AI access were found to spend more time on core coding and less on administrative \"drudge work.\"\n* **Productivity Gains:** Firms that adopt AI extensively tend to grow faster. A large increase in AI use is linked to approximately **6% higher employment growth** and 9.5% more sales growth over five years, as productivity gains often offset task automation.\n* **Winners and Losers:**\n   * **Legal &amp; High-Wage Roles:** These saw the most growth. Legal roles, for instance, are predicted to see a **6.4% increase** in employment as they are augmented rather than replaced.\n   * **Administrative &amp; Routine Roles:** Business, financial, and clerical jobs are more vulnerable, shrinking by 2% to 2.5% because a higher share of their tasks matches AI capabilities.\n   * **The \"Slow-Adopter\" Risk:** Interestingly, even low-exposure jobs (like food service) are at risk if their employers fail to adopt AI, as those companies grow more slowly and eventually reduce their total headcount.\n\n# Advice for Workforce Adaptation:\n\nThe study co-author, Lawrence Schmidt, suggests that business leaders should encourage **hands-on use** immediately. Building \"AI fluency\" is becoming a critical competitive advantage, allowing workers to act as \"force multipliers\" rather than being replaced by the technology.",
+        "score": 11,
+        "created_utc": 1775228612
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1sbfcci",
+    "candidate_id": "t3_1sbfcci"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_003",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "artificial",
+    "title": "Nvidia goes all-in on AI agents while Anthropic pulls the plug",
+    "source_url": "https://www.reddit.com/r/artificial/comments/1scccs1/nvidia_goes_allin_on_ai_agents_while_anthropic/",
+    "author": "1PoorBagHolder",
+    "created_utc": 1775316995,
+    "body": "TLDR: Nvidia is partnering with 17 major companies to build a platform specifically for enterprise AI agents, basically trying to become the main infrastructure for business AI.\n\nAt the exact same time, Anthropic is doing the opposite. They just blocked third-party AI agents (like the popular OpenClaw app) from using standard Claude subscriptions because the automated bots are draining their servers. Now, if you want to use those third-party tools with Claude, you have to pay separate API fees.\n\nBasically, Nvidia is opening its doors to partners to build out their ecosystem, while Anthropic is walling off its garden to protect its own revenue.\n\nSource: https://sparkedweekly.com/issues/2026-04-04-0805-nvidia-opens-ai-agent-doors-while-anthropic-slams-them.html",
+    "body_excerpt": "TLDR: Nvidia is partnering with 17 major companies to build a platform specifically for enterprise AI agents, basically trying to become the main infrastructure for business AI. At the exact same time, Anthropic is doing the opposite. They just blocked third-party AI agents (like",
+    "num_comments": 13,
+    "upvotes": 0,
+    "top_comments": [
+      {
+        "comment_id": "t1_oea1x18",
+        "author": "EightRice",
+        "body": "The framing here is a bit misleading. Nvidia building agent infrastructure and Anthropic restricting certain agent access patterns are not really opposite strategies - they are operating at different layers of the stack.\n\nNvidia is building the compute and orchestration infrastructure. Anthropic is trying to control how their specific models get called. These can coexist - Nvidia NIMS will run plenty of non-Anthropic models.\n\nThe more interesting dynamic is that neither approach solves the actual hard problem: agent coordination at scale. You can have all the GPU infrastructure in the world and the most capable models, but if your agents cannot reliably coordinate across organizational boundaries, delegate tasks, and maintain accountability chains, you get expensive chaos rather than useful automation.\n\nThe missing layer is governance infrastructure - mechanisms that let agents operate within defined constraints, with economic skin-in-the-game for reliability. That is the piece nobody in the enterprise stack is building yet.",
+        "score": 11,
+        "created_utc": 1775319964
+      },
+      {
+        "comment_id": "t1_oea12a4",
+        "author": "ShiangShaoLong",
+        "body": "Its obvious, the more consumption the better for Nvidias chip business. On the other hand, more consumption means more costs for Anthropic. Therefore this reaction is just based on different business model, whos right in the longterm? Who knows but I'll be banking on the one whos has more to loss as they have to do a deeper dive",
+        "score": 7,
+        "created_utc": 1775319709
+      },
+      {
+        "comment_id": "t1_oea4tgg",
+        "author": "HiggsFieldgoal",
+        "body": "Complete bullshit.  \n  \nAnthropic isn’t blocking 3rd party agents, it is enforcing that 3rd party agents go through their priced-by-volume SDKs instead of their monthly subscription models.  \n  \nYou are inferring totally absurd conclusions, none of which make sense.  \n  \n“Charging more” and “pulling the plug” are entirely different, arguably opposite, things.",
+        "score": 5,
+        "created_utc": 1775320831
+      },
+      {
+        "comment_id": "t1_oea8yqi",
+        "author": "25_vijay",
+        "body": "one is scaling ecosystem while the other is protecting resources",
+        "score": 2,
+        "created_utc": 1775322035
+      },
+      {
+        "comment_id": "t1_oeaj70l",
+        "author": "Original_Finding2212",
+        "body": "Claude Agent SDK is unaffected.\n\nThey want an efficient use of their model, and the SDK helps them do that.",
+        "score": 2,
+        "created_utc": 1775324984
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1scccs1",
+    "candidate_id": "t3_1scccs1"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_004",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "artificial",
+    "title": "Meta just acqui-hired its 4th AI startup in 4 months. Dreamer, Manus, Moltbook, and Scale AI's founder. Is anyone else watching this pattern?",
+    "source_url": "https://www.reddit.com/r/artificial/comments/1s3xr4l/meta_just_acquihired_its_4th_ai_startup_in_4/",
+    "author": "This_Suggestion_7891",
+    "created_utc": 1774499489,
+    "body": "Quick rundown of what Meta's done since December:\n\n\n\n• Dec 2025: Acquired Manus (autonomous web agent) for $2B\n\n• Early 2026: Acqui-hired Moltbook team\n\n• Scale AI's Alexandr Wang stepped down as CEO to become Meta's first Chief AI Officer\n\n• March 23: Dreamer team (agentic AI platform) joins Meta Superintelligence Labs\n\n\n\nAll of these teams are going into one division under Wang. Zuckerberg isn't just building models, he's assembling an entire talent army for agents.\n\n\n\nThe Dreamer one is interesting because they were only in beta for a month before Meta grabbed them. The product let regular people build their own AI agents. Thousands of users already.\n\n\n\nFeels like Meta is betting everything on agents being the next platform shift, not just chatbots.\n\n\n\nWhat do you guys think - is this a smart consolidation play or is Zuck just panic-buying talent because open-source alone isn't enough?\n\n\n\n[Full breakdown here](https://medium.com/towards-artificial-intelligence/meta-just-acqui-hired-its-4th-ai-startup-in-4-months-zuckerbergs-agent-empire-is-taking-shape-9bae657fef66)",
+    "body_excerpt": "Quick rundown of what Meta's done since December: • Dec 2025: Acquired Manus (autonomous web agent) for $2B • Early 2026: Acqui-hired Moltbook team • Scale AI's Alexandr Wang stepped down as CEO to become Meta's first Chief AI Officer • March 23: Dreamer team (agentic AI platform",
+    "num_comments": 51,
+    "upvotes": 20,
+    "top_comments": [
+      {
+        "comment_id": "t1_ocixxkq",
+        "author": "ninhaomah",
+        "body": "When I see Meta , I see Metaverse.\n\nThat says it all.",
+        "score": 11,
+        "created_utc": 1774499954
+      },
+      {
+        "comment_id": "t1_ockv7gk",
+        "author": "johnfkngzoidberg",
+        "body": "So many bots in this thread posting almost the exact same thing. Sad Meta is trying to change their failure after failure image to something relevant with bots.",
+        "score": 7,
+        "created_utc": 1774532203
+      },
+      {
+        "comment_id": "t1_ocjhzf7",
+        "author": "Blando-Cartesian",
+        "body": "Buying appearance of relevance.",
+        "score": 4,
+        "created_utc": 1774510588
+      },
+      {
+        "comment_id": "t1_ocjiw1n",
+        "author": "wazymandias",
+        "body": "The Manus + Dreamer combo is the tell. Both are agentic platforms, not model companies. Meta already has Llama for the model layer, what they're buying is the orchestration and reliability layer.",
+        "score": 5,
+        "created_utc": 1774511100
+      },
+      {
+        "comment_id": "t1_ocjett5",
+        "author": "Sunofa420",
+        "body": "They stole this for me they bought moltbook yo hide my agents /blesstheirhearts is the submolt that started it",
+        "score": 2,
+        "created_utc": 1774508835
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1s3xr4l",
+    "candidate_id": "t3_1s3xr4l"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_005",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "singularity",
+    "title": "Jensen Huang: \"Physical AI as a large category, it's technology industry's first opportunity to address a $50,000,000,000,000 industry\". The robot revolution is coming and we are in for the ride.",
+    "source_url": "https://www.reddit.com/r/singularity/comments/1s4on2b/jensen_huang_physical_ai_as_a_large_category_its/",
+    "author": "Mogante",
+    "created_utc": 1774570386,
+    "body": "I was listening to the episode of All-In with NVIDIA founder Jensen Huang (summary [here](https://www.podtyper.com/transcriptions/jensen-huang-live-nvidias-future-physical-ai-rise-of-the-age-8914)) and he's mentioning a lot about the physical applications of AI. With this and the recent push from the US government themselves (having a robot walk in the white house?), it seems the next push will be all about the robotic applications of AI.   \n  \nWe all know it's starting with software but I think it will get exponentially faster and once we have the foundations in place it will take no time to mass produce these everyday robots and live a completely different life. Honestly, this is f'ing exciting.",
+    "body_excerpt": "I was listening to the episode of All-In with NVIDIA founder Jensen Huang (summary [here](https://www.podtyper.com/transcriptions/jensen-huang-live-nvidias-future-physical-ai-rise-of-the-age-8914)) and he's mentioning a lot about the physical applications of AI. With this and the",
+    "num_comments": 31,
+    "upvotes": 60,
+    "top_comments": [
+      {
+        "comment_id": "t1_ocpbimn",
+        "author": "hellcat1592",
+        "body": "Why did you make me count the zeroes🤬🤬",
+        "score": 21,
+        "created_utc": 1774579265
+      },
+      {
+        "comment_id": "t1_ocoux34",
+        "author": "itisi52",
+        "body": "Always about how much money you're going to make replacing jobs, never about how you're going to make people's live better.\n\nI used to be so optimistic about things, but I'm so over the capitalistic way these people talk.",
+        "score": 41,
+        "created_utc": 1774573592
+      },
+      {
+        "comment_id": "t1_ocq6n8z",
+        "author": "Normaandy",
+        "body": "$50,000,000,000,000 industry of dancing and kung-fuing.",
+        "score": 7,
+        "created_utc": 1774593294
+      },
+      {
+        "comment_id": "t1_ocq2s0s",
+        "author": "Happysedits",
+        "body": "50... Uh... Gazilion",
+        "score": 4,
+        "created_utc": 1774591185
+      },
+      {
+        "comment_id": "t1_octovnf",
+        "author": "Virtual_Plant_5629",
+        "body": "my weewee isn't ready",
+        "score": 2,
+        "created_utc": 1774638299
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1s4on2b",
+    "candidate_id": "t3_1s4on2b"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_006",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "artificial",
+    "title": "The Claude Code leak accidentally published the first complete blueprint for production AI agents. Here's what it tells us about where this is all going.",
+    "source_url": "https://www.reddit.com/r/artificial/comments/1s9jprb/the_claude_code_leak_accidentally_published_the/",
+    "author": "Joozio",
+    "created_utc": 1775048048,
+    "body": "Most coverage of the Claude Code leak focuses on the drama or the hidden features. But the bigger story is that this is the first time we've seen the complete architecture of a production-grade AI agent system running at scale ($2.5B ARR, 80% enterprise adoption). And the patterns it reveals tell us where autonomous AI agents are actually heading.  \n  \n**What the architecture confirms:**  \n  \nAI agents aren't getting smarter just from better models. The real progress is in the orchestration layer around the model. Claude Code's leaked source shows six systems working together:  \n  \n1. **Skeptical memory.** Three-layer system where the agent treats its own memory as a hint, not a fact. It verifies against the real world before acting. This is how you prevent an agent from confidently doing the wrong thing based on outdated information.  \n  \n2. **Background consolidation.** A system called autoDream runs during idle time to merge observations, remove contradictions, and keep memory bounded. Without this, agents degrade over weeks as their memory fills with noise and conflicting notes.  \n  \n3. **Multi-agent coordination.** One lead agent spawns parallel workers. They share a prompt cache so the cost doesn't multiply linearly. Each worker gets isolated context and restricted tool access.  \n  \n4. **Risk classification.** Every action gets labeled LOW, MEDIUM, or HIGH risk. Low-risk actions auto-approve. High-risk ones require human approval. The agent knows which actions are safe to take alone.  \n  \n5. [**CLAUDE.md**](http://CLAUDE.md) **reinsertion.** The config file isn't a one-time primer. It gets reinserted on every turn. The agent is constantly reminded of its instructions.  \n  \n6. **KAIROS daemon mode.** The biggest unreleased feature (150+ references in the source). An always-on background agent that acts proactively, maintains daily logs, and has a 15-second blocking budget so it doesn't overwhelm the user.  \n  \n**What this tells us about the future:**  \n  \nAI tools are moving from \"you ask, it responds\" to \"it works when you're not looking.\" KAIROS isn't a gimmick. It's the natural next step: agents that plan, act, verify, and consolidate their own memory autonomously. With human gates on dangerous actions and rate limits on proactive behavior.  \n  \nThe patterns are convergent. I've been building my own AI agent independently for months. Scheduled autonomous work, memory consolidation, multi-agent delegation, risk tiers. I arrived at the same architecture without seeing Anthropic's code. Multiple independent builders keep converging on the same design because the constraints demand it.  \n  \n**The part people are overlooking:**  \n  \nClaude Code itself isn't even a good tool by benchmark standards. It ranks 39th on terminal bench. The harness adds nothing to the model's performance. The value is in the architecture patterns, not the implementation.  \n  \nThis leak is basically a free textbook on production AI agent design from a $60B company. The drama fades. The patterns are permanent.  \n  \nFull technical breakdown with what I built from it: [https://thoughts.jock.pl/p/claude-code-source-leak-what-to-learn-ai-agents-2026](https://thoughts.jock.pl/p/claude-code-source-leak-what-to-learn-ai-agents-2026)",
+    "body_excerpt": "Most coverage of the Claude Code leak focuses on the drama or the hidden features. But the bigger story is that this is the first time we've seen the complete architecture of a production-grade AI agent system running at scale ($2.5B ARR, 80% enterprise adoption). And the pattern",
+    "num_comments": 134,
+    "upvotes": 372,
+    "top_comments": [
+      {
+        "comment_id": "t1_odps86l",
+        "author": "banedlol",
+        "body": "I start reading slop and within about 3 seconds I start skimming and then just give up entirely.",
+        "score": 108,
+        "created_utc": 1775059100
+      },
+      {
+        "comment_id": "t1_odosu0y",
+        "author": "pab_guy",
+        "body": "**&gt; Background consolidation**\n\nit sleeps!",
+        "score": 45,
+        "created_utc": 1775049026
+      },
+      {
+        "comment_id": "t1_odpbtac",
+        "author": "TheEvelynn",
+        "body": "It's obvious this post is a semantic drift attack, not a legitimate leak discussion nor a legitimate replication of technique... But I have noticed these semantic drift attacks are getting more advanced. The \"dev-speak\" and technical hallucinations are sounding a lot more realistic and impressionable on an uneducated audience, more so than the semantic drift attacks from about 6-12 months ago.\n\nAnyhow, I hope nobody scrolling got duped here into thinking this is a legit and interesting post.",
+        "score": 35,
+        "created_utc": 1775054673
+      },
+      {
+        "comment_id": "t1_odp6hl5",
+        "author": "Dulark",
+        "body": "the most interesting part isn't the prompt structure, it's the multi-layer context system. the way it chains tool definitions, system prompts, and user context into a hierarchy that determines what the agent can see at any given moment. that's the actual blueprint — the rest is just good prompt engineering",
+        "score": 15,
+        "created_utc": 1775053159
+      },
+      {
+        "comment_id": "t1_odqdomz",
+        "author": "QuietBudgetWins",
+        "body": "this lines up way more with what i have seen in production than most of the hype posts lately. people keep arguing about model benchmarks but once you actually ship something the hard part is everything around it. memory that does not rot some kind of gating so it does not do dumb things and orchestration that does not blow up cost.\n\nthe skeptical memory idea especially feels overdue. most systems i have worked on quietly assume their own past outputs are correct which is where a lot of weird behavior creeps in over time.\n\nalso not surprised multiple people are converging on similar patterns. the constraints kind of force you there if you care about reliability and cost. the always on agent thing sounds cool but i would be more curious how they keep it from becoming noisy or just burning cycles for no reason.\n\nhonestly the leak is more useful as a systems design doc than anything about the model itself.",
+        "score": 6,
+        "created_utc": 1775064907
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1s9jprb",
+    "candidate_id": "t3_1s9jprb"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_007",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "ClaudeAI",
+    "title": "Anthropic Leaked 512,000 Lines of Claude Code Source. Here's What the Code Actually Reveals.",
+    "source_url": "https://www.reddit.com/r/ClaudeAI/comments/1s9ai45/anthropic_leaked_512000_lines_of_claude_code/",
+    "author": "followtayeeb",
+    "created_utc": 1775017890,
+    "body": "On March 31, 2026, Anthropic accidentally published a source map file in their npm package that contained the complete TypeScript source code of Claude Code — 1,900 files, 512,000+ lines of code, including internal prompts, tool definitions, 44 hidden feature flags, and roughly 50 unreleased commands. Developer comments were preserved. Operational data was exposed. A GitHub mirror hit 9,000 stars in under two hours. Anthropic issued DMCA takedowns affecting 8,100+ repository forks within days.\n\nThis is a breakdown of what the source code actually reveals — not the drama, but the engineering.\n\n\n\n**How the Leak Happened**\n\nThe culprit was a .map file — a source map artifact. Source maps contain a sourcesContent array that embeds the complete original source code as strings. The fix is trivial: exclude \\*.map from production builds or add them to .npmignore. This was the second incident — a similar leak occurred in February 2025. The operational complexity of shipping a tool at this scale appears to have outpaced DevOps discipline.\n\n\n\n**The Architectural Picture**\n\nThe most technically honest takeaway from this leak is: the competitive moat in AI coding tools is not the model. It is the harness.\n\nClaude Code runs on Bun (not Node.js) — a performance decision. The terminal UI is built with React and Ink — a pragmatic choice allowing frontend engineers to use familiar component patterns. The tool system accounts for 29,000 lines of code just for base tool definitions. Tool schemas are cached for prompt efficiency. Tools are filtered by feature gates, user type, and environment flags.\n\nThe multi-agent coordinator pattern is production-grade and visible in the code: parallel workers managed by a coordinator, XML-formatted task-notification messages, shared scratchpad directory for cross-agent knowledge transfer. This is exactly what developers building multi-agent systems today are trying to implement — and now there's a reference implementation to study.\n\nThe YOLO permission system uses an ML classifier trained on transcript patterns to auto-approve low-risk operations — a production example of using a small fast model to gate a larger expensive one.\n\n\n\n**The Unreleased Features Worth Understanding**\n\nThree unreleased capabilities behind feature flags are architecturally significant:\n\nKAIROS is an always-on background agent that maintains append-only daily log files, watches for relevant events, and acts proactively with a 15-second blocking budget to avoid disrupting active workflows. Exclusive tools include SendUserFile, PushNotification, and SubscribePR. KAIROS is the clearest signal available about where AI assistants are heading: from reactive tools that wait for commands to persistent background companions that monitor and act on your behalf. This is not a Claude Code feature. This is a preview of the next generation of all AI assistants.\n\nULTRAPLAN offloads complex planning to a remote Cloud Container Runtime using Opus 4.6 with 30-minute think time — far beyond any interactive session. A browser-based UI surfaces the plan for human approval. Results transfer via a special **ULTRAPLAN\\_TELEPORT\\_LOCAL** sentinel. This is async deep thinking as a product feature: separate the computationally expensive planning phase, run it at maximum model time, surface results for review.\n\nBUDDY is a Tamagotchi-style companion pet system: 18 species across 5 rarity tiers (Common 60%, Uncommon 25%, Rare 10%, Epic 4%, Legendary 1%), independent 1% shiny chance, procedural stats (Debugging Skill, Patience, Chaos, Wisdom, Snark), ASCII sprite rendering with animation frames. Uses the Mulberry32 deterministic PRNG for consistent pet generation. Beneath the novelty: this exercises session persistence, personality modeling, and companion UX — all capabilities Anthropic is building for more serious agent memory systems.\n\n\n\n**The Anti-Distillation Contradiction**\n\nThe source code revealed a system designed to inject fake tool definitions into Claude Code's outputs to poison AI training data scraped from API traffic. The code comment explicitly states this measure is now \"useless\" — because the leak exposed its existence.\n\nThis is the most intellectually interesting artifact in the entire codebase. The security mechanism depended entirely on secrecy, not technical robustness. Once the code was visible, the trick stopped working. The same applies to hidden feature flags, internal codenames, and internal roadmap references — many AI product security models are built on \"if nobody sees the code, nobody can replicate it.\" That assumption is now broken.\n\nClaude Code's internal codename was also confirmed as \"Tengu.\"\n\n\n\n**The Code Quality Question**\n\nDeveloper reactions to the code were mixed. Some described the architecture as underwhelming relative to the tool's capabilities. Others noted the detailed internal comments as useful context for understanding agent behavior. The frustration detection system, notably, uses a regex rather than an LLM inference call — likely for cost and latency reasons. Developer comments also revealed operational data: approximately 1,279 sessions per day experienced 50+ consecutive failures, burning roughly 250,000 wasted API calls daily. Building reliable agentic systems at scale is genuinely hard, and the numbers confirm it.\n\n\n\n**What This Means for the Ecosystem**\n\nThe contrast with OpenAI's approach is sharp. OpenAI open-sourced Codex CLI under Apache 2.0 in April 2025. Today it has 60,000+ GitHub stars and 363 contributors. While Anthropic scrambled to contain their leak and issue DMCA takedowns, OpenAI was already winning on transparency. The open-vs-closed debate has fully transferred from AI models to AI tools.\n\nThe architectural patterns visible in Claude Code — multi-agent orchestration, always-on background agents, ML-based permission systems, persistent session memory, extended thinking for complex planning — represent a clear roadmap for where all AI development tools are heading. The question for the ecosystem is not whether these capabilities will ship, but which teams will execute on these patterns most effectively, and whether they'll do it in the open or behind closed doors.\n\n\n\n**Key numbers to keep in mind:**\n\n* 512,000+ lines of TypeScript exposed\n* 1,900 files in the leak\n* 44 feature flags hiding unreleased capabilities\n* 40+ built-in tools in the registry\n* 30 minutes of extended thinking in ULTRAPLAN\n* 15-second blocking budget for KAIROS proactive actions\n* 250,000 wasted API calls per day from failed sessions\n* 8,100+ repository forks affected by DMCA takedowns\n\n\n\nNo editorial opinion on whether the leak was good or bad. Just the engineering.",
+    "body_excerpt": "On March 31, 2026, Anthropic accidentally published a source map file in their npm package that contained the complete TypeScript source code of Claude Code — 1,900 files, 512,000+ lines of code, including internal prompts, tool definitions, 44 hidden feature flags, and roughly 5",
+    "num_comments": 20,
+    "upvotes": 0,
+    "top_comments": [
+      {
+        "comment_id": "t1_odn005u",
+        "author": "tyschan",
+        "body": "i actually can’t wait to actually read another actual post from claude. actually!\n\nedit: okay i actually read it, source for 8100 DMCA takedowns? *silently deletes fork*",
+        "score": 9,
+        "created_utc": 1775018769
+      },
+      {
+        "comment_id": "t1_odn2dpb",
+        "author": "nyldn",
+        "body": "# Here's — What — Matters — Most.",
+        "score": 6,
+        "created_utc": 1775019842
+      },
+      {
+        "comment_id": "t1_odn36x0",
+        "author": "lopydark",
+        "body": "512k lines of ts, thats why claude code takes 10 secs to start up 😭🤌",
+        "score": 2,
+        "created_utc": 1775020219
+      },
+      {
+        "comment_id": "t1_odn5b19",
+        "author": "Initial-Zone-8907",
+        "body": "could this leak be intentional trying to garner open source comments for free to optimize they internal code base",
+        "score": 1,
+        "created_utc": 1775021227
+      },
+      {
+        "comment_id": "t1_odnf6f8",
+        "author": "snnsnn",
+        "body": "\\&gt; 250,000 wasted API calls per day from failed sessions\n\nIs this just explicit API calls or VSCode failures included? Either way it is unbelievable horrible. The VSCode addon fails frequently for different reasons without giving any indication while Claude's status messages keep cycling on the screen. You need to toggle the developer tools to see it.",
+        "score": 1,
+        "created_utc": 1775026282
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1s9ai45",
+    "candidate_id": "t3_1s9ai45"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_008",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "artificial",
+    "title": "An attack class that passes every current LLM filter - no payload, no injection signature, no log trace",
+    "source_url": "https://www.reddit.com/r/artificial/comments/1s7t9qs/an_attack_class_that_passes_every_current_llm/",
+    "author": "lurkyloon",
+    "created_utc": 1774883418,
+    "body": "[https://shapingrooms.com/research](https://shapingrooms.com/research)\n\nI published a paper today on something I've been calling postural manipulation. The short version: ordinary language buried in prior context can shift how an AI reasons about a decision before any instruction arrives. No adversarial signature. Nothing that looks like an attack. The model does exactly what it's told, just from a different angle than intended.\n\nI know that sounds like normal context sensitivity. It isn't, or at least the effect is much larger than expected. I ran matched controls and documented binary decision reversals across four frontier models. The same question, the same task, two different answers depending on what came before it in the conversation.\n\nIn agentic systems it compounds. A posture installed early in one agent can survive summarization and arrive at a downstream agent looking like independent expert judgment. No trace of where it came from.\n\nThe paper is published following coordinated disclosure to Anthropic, OpenAI, Google, xAI, CERT/CC, and OWASP. I don't have all the answers and I'm not claiming to. The methodology is observational, no internals access, limitations stated plainly. But the effect is real and reproducible and I think it matters.\n\nIf you want to try it yourself the demos are at [https://shapingrooms.com/demos](https://shapingrooms.com/demos) \\- works against any frontier model, no setup required.\n\nHappy to discuss.",
+    "body_excerpt": "[https://shapingrooms.com/research](https://shapingrooms.com/research) I published a paper today on something I've been calling postural manipulation. The short version: ordinary language buried in prior context can shift how an AI reasons about a decision before any instruction",
+    "num_comments": 38,
+    "upvotes": 18,
+    "top_comments": [
+      {
+        "comment_id": "t1_odbpo7m",
+        "author": "ClankerCore",
+        "body": "How is this different from prompt poisoning?",
+        "score": 5,
+        "created_utc": 1774883538
+      },
+      {
+        "comment_id": "t1_odciwa4",
+        "author": "acceptio",
+        "body": "This is interesting, especially the idea that the “stance” gets installed before any explicit instruction. One thing I’ve noticed in practice is that once that framing is in place, everything that follows can look completely valid in isolation. So even if you log actions or reasoning steps, nothing appears anomalous. What I mean is, the system is just operating from a slightly shifted baseline. Feels like that makes it hard to detect after the fact, because you’re not looking at a bad action, just a different interpretation of the same situation.",
+        "score": 2,
+        "created_utc": 1774891489
+      },
+      {
+        "comment_id": "t1_odc7ph0",
+        "author": "hollee-o",
+        "body": "Very intrigued. This may or may not be related, but it seems like there’s a class of reasoning weaknesses, vulnerabilities?… that have to do with what I think you refferred to as “angles”. The one I notice a lot is the tendency for models to give greater weight to whatever was the most recent input or instruction, instead of being able to weigh new information equally with prior information. \n\nDo you see this as a similar class of problem?",
+        "score": 1,
+        "created_utc": 1774888495
+      },
+      {
+        "comment_id": "t1_odcjdqj",
+        "author": "TripIndividual9928",
+        "body": "Fascinating research. The postural manipulation concept has huge implications for multi-agent systems where context passes between agents through summarization. Most current guardrails focus on payload detection but this shows the attack surface is much broader than that. Have you tested whether routing through different model families breaks the posture propagation?",
+        "score": 1,
+        "created_utc": 1774891622
+      },
+      {
+        "comment_id": "t1_odd8fuf",
+        "author": "Hatekk",
+        "body": "if there's no intent and no payload how is that an 'attack' though?",
+        "score": 1,
+        "created_utc": 1774898561
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1s7t9qs",
+    "candidate_id": "t3_1s7t9qs"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_009",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "GeminiAI",
+    "title": "Apple Gains Full Access to Google's Gemini for On-Device AI Distillation",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1s3klpz/apple_gains_full_access_to_googles_gemini_for/",
+    "author": "deferare",
+    "created_utc": 1774466784,
+    "body": "A new report reveals Apple's deep partnership with Google, allowing the iPhone maker complete access to Gemini inside its facilities. Apple uses distillation to train smaller 'student' models that capture Gemini's step-by-step reasoning, enabling efficient on-device AI for tasks like enhanced Siri features without cloud reliance. The arrangement, part of a January 2026 collaboration, saves Apple from building everything from scratch while optimizing for its hardware. Possible previews could appear at WWDC in June, blending Google's scale with Apple's privacy focus.\n\n[9to5mac.com](https://9to5mac.com/2026/03/25/new-details-on-apple-google-ai-deal-revealed-including-gemini-changes-report/)",
+    "body_excerpt": "A new report reveals Apple's deep partnership with Google, allowing the iPhone maker complete access to Gemini inside its facilities. Apple uses distillation to train smaller 'student' models that capture Gemini's step-by-step reasoning, enabling efficient on-device AI for tasks",
+    "num_comments": 12,
+    "upvotes": 193,
+    "top_comments": [
+      {
+        "comment_id": "t1_ocg5u8d",
+        "author": "frogsarenottoads",
+        "body": "If Gemini gets feedback and can use the data that's pretty insane, on Android and on iPhone",
+        "score": 52,
+        "created_utc": 1774466979
+      },
+      {
+        "comment_id": "t1_ochw226",
+        "author": "m3kw",
+        "body": "Apple isn’t after AGI, it make sense they don’t develop their own SOTA models, although they would love to but they just can’t have everything",
+        "score": 6,
+        "created_utc": 1774485877
+      },
+      {
+        "comment_id": "t1_ockdc4o",
+        "author": "c4mbo",
+        "body": "If only I could replace Siri with Gemini…",
+        "score": 3,
+        "created_utc": 1774526266
+      },
+      {
+        "comment_id": "t1_ockqxud",
+        "author": "Am-Insurgent",
+        "body": "I am on an iPhone 16, with Apple Intelligence. They have taken far far too long to incorporate anything useful.",
+        "score": 2,
+        "created_utc": 1774530886
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1s3klpz",
+    "candidate_id": "t3_1s3klpz"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_010",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "GeminiAI",
+    "title": "AI Pro storage increases",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1sa4okd/ai_pro_storage_increases/",
+    "author": "unorthodox_Nerd",
+    "created_utc": 1775095900,
+    "body": "Well this was unexpected… Google AI Pro’s storage offering from 2TB to 5TB — at no additional cost. I am subscribed to AI pro via Verizon. Paying that for AI features and massive storage is insanely good 😳",
+    "body_excerpt": "Well this was unexpected… Google AI Pro’s storage offering from 2TB to 5TB — at no additional cost. I am subscribed to AI pro via Verizon. Paying that for AI features and massive storage is insanely good 😳",
+    "num_comments": 76,
+    "upvotes": 342,
+    "top_comments": [
+      {
+        "comment_id": "t1_odtpscm",
+        "author": "Sharpiesniffingshark",
+        "body": "Is this a gift because people are unhappy with their latest models? And because Claude is getting more popular?",
+        "score": 84,
+        "created_utc": 1775103193
+      },
+      {
+        "comment_id": "t1_odtf0g6",
+        "author": "Pasto_Shouwa",
+        "body": "I thought this was fake but it isn't. They're completely crazy hahah",
+        "score": 47,
+        "created_utc": 1775098796
+      },
+      {
+        "comment_id": "t1_odtrf3p",
+        "author": "hsianghui",
+        "body": "anyone knows whether it applies to existing users on annual plan or only for new subscribers/next month's subscription?\n\nMine is not reflecting 5TB yet (not that I really need it)\n\nThanks",
+        "score": 12,
+        "created_utc": 1775103924
+      },
+      {
+        "comment_id": "t1_oduerug",
+        "author": "ch179",
+        "body": "eh! this is real! my drive is now 5TB! i thought this 1st APR joke that i just found out",
+        "score": 12,
+        "created_utc": 1775115917
+      },
+      {
+        "comment_id": "t1_odtb977",
+        "author": "BroadBeginning961",
+        "body": "My subscription is via Verizon as well. Hell of deal, especially now.",
+        "score": 9,
+        "created_utc": 1775097399
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:57:52Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1sa4okd",
+    "candidate_id": "t3_1sa4okd"
+  }
+]
