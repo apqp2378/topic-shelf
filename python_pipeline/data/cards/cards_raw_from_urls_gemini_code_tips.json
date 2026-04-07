@@ -1,0 +1,56 @@
+[
+  {
+    "card_id": "reddit_card_2026-04-07_001",
+    "source_id": "reddit_url_ingest_20260407_001",
+    "title": "The 'Modular Prompting' Hack: Context management for 2026.",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1sc1tn5/the_modular_prompting_hack_context_management_for/",
+    "subreddit": "GeminiAI",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [],
+    "created_utc": 1775284063,
+    "collected_at": "2026-04-07T01:05:38Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_002",
+    "source_id": "reddit_url_ingest_20260407_002",
+    "title": "Projects is HERE (in Beta at Least)!",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1scdsmc/projects_is_here_in_beta_at_least/",
+    "subreddit": "GeminiAI",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "https://preview.redd.it/m5guzt6r08tg1.png?width=236&amp;format=png&amp;auto=webp&amp;s=9c71a15d8a2e9c83699c37a700e7b2515799d3a3 My drive loo...",
+      "For me, a writer, who has all his writings saved in Drive, this is pretty amazing. I can create outlines and such from with my own writings ...",
+      "I think this is for AI studio projects (which are just chat threads) not gemini app",
+      "Why is it on Drive and not Gemini I hope they don't make us call the project every time we want to use it instead of having just an icon lik...",
+      "Ugh, google drive is the worst."
+    ],
+    "created_utc": 1775320425,
+    "collected_at": "2026-04-07T01:05:38Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_003",
+    "source_id": "reddit_url_ingest_20260407_003",
+    "title": "5 Gemini for Workspace hacks I wish I knew sooner (2026 Edition)",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1r8a4pj/5_gemini_for_workspace_hacks_i_wish_i_knew_sooner/",
+    "subreddit": "GeminiAI",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [],
+    "created_utc": 1771437367,
+    "collected_at": "2026-04-07T01:05:38Z"
+  }
+]

@@ -49,3 +49,9 @@ Use this checklist after a URL-list batch moves through the V3 flow:
 ## Canonical Example
 - Use `python_pipeline/data/url_lists/claude_code_tips.txt` as the canonical example URL-list file.
 - Do not reintroduce `my_threads.txt`.
+
+## Operating Rules
+- Production batches should usually be narrow, practical, and tips-oriented so they can plausibly produce publish candidates.
+- Baseline batches can be broader or news-oriented when the goal is coverage, monitoring, or negative signal collection.
+- A small batch size, roughly 3 to 10 URLs, is preferred for validation runs.
+- Review decisions should stay in sidecar files, and holds are acceptable when the batch is genuinely low-yield.

@@ -1,0 +1,28 @@
+{
+  "batch_name": "gemini_code_tips",
+  "source_cards_file": "C:/Users/최상원/개인프로젝트/topic-shelf/python_pipeline/data/cards/cards_raw_from_urls_gemini_code_tips.json",
+  "reviewed_at": "2026-04-07T01:05:51.702194Z",
+  "decisions": [
+    {
+      "card_id": "reddit_card_2026-04-07_001",
+      "title": "The 'Modular Prompting' Hack: Context management for 2026.",
+      "decision": "publish_candidate",
+      "publish_candidate": true,
+      "review_note": "Practical prompting workflow with a clear utility angle."
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_002",
+      "title": "Projects is HERE (in Beta at Least)!",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_003",
+      "title": "5 Gemini for Workspace hacks I wish I knew sooner (2026 Edition)",
+      "decision": "publish_candidate",
+      "publish_candidate": true,
+      "review_note": "Concrete tips-style framing that should translate well into a draft seed."
+    }
+  ]
+}

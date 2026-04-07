@@ -1,0 +1,116 @@
+[
+  {
+    "source_id": "reddit_url_ingest_20260407_001",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "GeminiAI",
+    "title": "The 'Modular Prompting' Hack: Context management for 2026.",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1sc1tn5/the_modular_prompting_hack_context_management_for/",
+    "author": "Significant-Strike40",
+    "created_utc": 1775284063,
+    "body": "Large context windows are a trap—models get \"lost in the middle.\" Break your tasks into modules. \n\n The Strategy: \n\n \"Phase 1: Outline only. Phase 2: Expand Section A. Phase 3: Critique Section A. [Wait for my 'Proceed' after each phase].\" \n\n This keeps the attention mechanism laser-focused on one block at a time. I use the Prompt Helper Gemini Chrome extension to inject these phase-gates into my workflow.",
+    "body_excerpt": "Large context windows are a trap—models get \"lost in the middle.\" Break your tasks into modules. The Strategy: \"Phase 1: Outline only. Phase 2: Expand Section A. Phase 3: Critique Section A. [Wait for my 'Proceed' after each phase].\" This keeps the attention mechanism laser-focus",
+    "num_comments": 0,
+    "upvotes": 2,
+    "top_comments": [],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:05:38Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1sc1tn5",
+    "candidate_id": "t3_1sc1tn5"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_002",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "GeminiAI",
+    "title": "Projects is HERE (in Beta at Least)!",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1scdsmc/projects_is_here_in_beta_at_least/",
+    "author": "meshtron",
+    "created_utc": 1775320425,
+    "body": "Got up early to work on stuff, opened Drive and thought the \"Projects\" link at top/left was my folder called Projects.  Clicked it and got this!  It's about time!!  I haven't gotten a chance to try it out yet (need to figure out how it relates to all my files in other project folders) but I'm so happy to finally see this happening.\n\nEDIT TO ADD: This was on a Google for Business account.  But, I have the same Projects button on my personal Drive.\n\nEDIT2: So, this is more of a \"Drive\" feature, but see comment below - you can \"Connect\" to your Drive project from Gemini.  Maybe not optimal workflow for now, but it's not nothing.\n\nhttps://preview.redd.it/yvmn27k0b7tg1.png?width=1357&amp;format=png&amp;auto=webp&amp;s=1e87c8c902cbacc569fc5cfc97e95369437d89fb",
+    "body_excerpt": "Got up early to work on stuff, opened Drive and thought the \"Projects\" link at top/left was my folder called Projects. Clicked it and got this! It's about time!! I haven't gotten a chance to try it out yet (need to figure out how it relates to all my files in other project folder",
+    "num_comments": 16,
+    "upvotes": 10,
+    "top_comments": [
+      {
+        "comment_id": "t1_oeawvof",
+        "author": "war4peace79",
+        "body": "https://preview.redd.it/m5guzt6r08tg1.png?width=236&amp;format=png&amp;auto=webp&amp;s=9c71a15d8a2e9c83699c37a700e7b2515799d3a3\n\nMy drive looks nothing like that.",
+        "score": 3,
+        "created_utc": 1775329060
+      },
+      {
+        "comment_id": "t1_oeba74l",
+        "author": "cybersaint2k",
+        "body": "For me, a writer, who has all his writings saved in Drive, this is pretty amazing. I can create outlines and such from with my own writings as the context in a way that I was only able to do fractionally before.",
+        "score": 3,
+        "created_utc": 1775333080
+      },
+      {
+        "comment_id": "t1_oeab9ns",
+        "author": "SurpriseAdept3453",
+        "body": "I think this is for AI studio projects (which are just chat threads) not gemini app",
+        "score": 2,
+        "created_utc": 1775322697
+      },
+      {
+        "comment_id": "t1_oeb084c",
+        "author": "Pasto_Shouwa",
+        "body": "Why is it on Drive and not Gemini\n\nI hope they don't make us call the project every time we want to use it instead of having just an icon like ChatGPT and Claude.",
+        "score": 2,
+        "created_utc": 1775330069
+      },
+      {
+        "comment_id": "t1_oeewom3",
+        "author": "GlitteringRoof7307",
+        "body": "Ugh, google drive is the worst.",
+        "score": 1,
+        "created_utc": 1775386922
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:05:38Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1scdsmc",
+    "candidate_id": "t3_1scdsmc"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260407_003",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "GeminiAI",
+    "title": "5 Gemini for Workspace hacks I wish I knew sooner (2026 Edition)",
+    "source_url": "https://www.reddit.com/r/GeminiAI/comments/1r8a4pj/5_gemini_for_workspace_hacks_i_wish_i_knew_sooner/",
+    "author": "netcommah",
+    "created_utc": 1771437367,
+    "body": "Gemini 3 just turned Google Workspace into an actual agent. Here are the 5 workflows saving me hours this week:\n\n* The \"Audit\" Hack: Prompt in Drive: \"Extract all vendor names and totals from the 'Q1 Invoices' folder into a table.\" One-click export to Sheets.\n* The \"Silent Partner\": Use \"Take notes for me\" in Meet, then prompt: \"Based on the transcript, draft a follow-up email with 3 calendar slots for a sync.\"\n* Deep Research: In Docs, use the side panel to ground Gemini in NotebookLM sources for zero-hallucination technical drafts.\n* Privacy Truth: On Business/Enterprise plans, your data is NOT used for training. Look for the \"Data Protection\" badge in the UI.\n* Sheet Master: Use the new \"Auto\" formula prediction; Gemini now suggests entire Pivot Table structures based on your column headers.\n\nWhich one are you actually using? I'm trying to build a 'Gem' for automated slide decks; anyone got a solid prompt?",
+    "body_excerpt": "Gemini 3 just turned Google Workspace into an actual agent. Here are the 5 workflows saving me hours this week: * The \"Audit\" Hack: Prompt in Drive: \"Extract all vendor names and totals from the 'Q1 Invoices' folder into a table.\" One-click export to Sheets. * The \"Silent Partner",
+    "num_comments": 0,
+    "upvotes": 3,
+    "top_comments": [],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:05:38Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1r8a4pj",
+    "candidate_id": "t3_1r8a4pj"
+  }
+]
