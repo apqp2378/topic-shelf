@@ -39,6 +39,7 @@ then turns that input into raw JSON, normalized records, cards, and optional dow
 3. Run the URL ingestion step to create raw JSON.
 4. Run the Python pipeline on that raw JSON.
 5. Generate a batch review scaffold and export publish candidates from the completed review sidecar.
+6. Export blog draft seeds from the publish-candidate handoff and edit those drafts manually.
 
 ### Path B: Devvit keep export flow
 
@@ -55,3 +56,4 @@ then turns that input into raw JSON, normalized records, cards, and optional dow
 - `docs/reddit_api_approval_prep.md`
 - `python_pipeline/scripts/init_batch_review.py`
 - `python_pipeline/scripts/export_publish_candidates.py`
+- `python_pipeline/scripts/export_blog_draft_seeds.py`

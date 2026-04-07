@@ -173,6 +173,19 @@ The export helper writes two read-only handoff files under `python_pipeline/data
 
 It reads the review decisions sidecar and the matching cards file, then exports only items marked as publish candidates. It does not modify the original review input or the cards output.
 
+### Blog draft seeds
+
+After exporting publish candidates, generate one human-editable draft seed markdown file per selected candidate:
+
+~~~bash
+python python_pipeline/scripts/export_blog_draft_seeds.py claude_code_tips
+python python_pipeline/scripts/export_blog_draft_seeds.py python_pipeline/data/publish_candidates/publish_candidates_claude_code_tips.json
+~~~
+
+The draft seed helper writes read-only scaffold files under `python_pipeline/data/blog_draft_seeds/`.
+
+Each file is a writing input, not a finished article. It pre-fills the title, source URL, subreddit, card ID, review note, working headline, core takeaway, evidence, framing notes, outline, and rewrite notes, then leaves placeholders where human judgment is still needed.
+
 ### Runtime config
 
 The Reddit fetchers also read a small set of optional environment variables:
@@ -279,5 +292,6 @@ It does not delete arbitrary raw files, fixtures, or sample inputs.
 - `reddit_public` remains the default current path unless `--fetcher reddit_oauth` or `TOPIC_SHELF_FETCHER=reddit_oauth` is selected.
 - Use `python_pipeline/data/url_lists/claude_code_tips.txt` as the canonical example URL-list file in docs and tests.
 - The review workflow is now: ingest URLs -> run pipeline -> generate review scaffold -> fill review decisions -> export publish candidates.
+- The blog drafting workflow is now: export publish candidates -> export blog draft seeds -> edit the draft seeds manually.
 - The local URL-list files under `python_pipeline/data/url_lists/` that are meant only for personal churn are ignored intentionally.
 - During stabilization, prefer fixture-backed tests and stubbed fetchers over live network fetches.

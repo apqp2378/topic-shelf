@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -10,7 +11,7 @@ if str(PIPELINE_ROOT) not in sys.path:
     sys.path.insert(0, str(PIPELINE_ROOT))
 
 from pipeline.io_utils import build_raw_from_urls_output_path
-from pipeline.url_fetchers import build_url_fetcher
+from pipeline.url_fetchers import build_url_fetcher, list_url_fetchers
 from pipeline.url_ingestion import ingest_url_list
 
 
@@ -29,6 +30,11 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         help="Optional explicit raw JSON output path.",
     )
+    parser.add_argument(
+        "--fetcher",
+        type=str,
+        help=f"URL fetcher to use. Supported values: {', '.join(list_url_fetchers())}.",
+    )
     return parser.parse_args()
 
 
@@ -40,6 +46,19 @@ def resolve_input_path(url_list_path: Path | None) -> Path:
     raise FileNotFoundError(
         f"Provide a txt URL list path. Expected input folder: {default_dir}"
     )
+
+
+def resolve_fetcher_name(fetcher_name: str | None) -> str:
+    if fetcher_name is not None:
+        normalized = fetcher_name.strip()
+        if normalized:
+            return normalized
+
+    env_fetcher = os.environ.get("TOPIC_SHELF_FETCHER", "").strip()
+    if env_fetcher:
+        return env_fetcher
+
+    return "reddit_public"
 
 
 def main() -> int:
@@ -56,7 +75,8 @@ def main() -> int:
         output_path = build_raw_from_urls_output_path(input_path)
 
     try:
-        fetcher = build_url_fetcher("reddit_public")
+        selected_fetcher_name = resolve_fetcher_name(getattr(args, "fetcher", None))
+        fetcher = build_url_fetcher(selected_fetcher_name)
         result = ingest_url_list(
             input_path,
             fetcher,
@@ -71,6 +91,7 @@ def main() -> int:
 
     print(f"Input URL list: {input_path}")
     print(f"Output raw JSON: {result.output_path}")
+    print(f"Selected fetcher: {selected_fetcher_name}")
     print(f"Input URL count: {result.input_count}")
     print(f"Canonical unique URL count: {result.unique_count}")
     print(f"Success count: {result.success_count}")

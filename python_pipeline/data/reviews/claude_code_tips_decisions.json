@@ -1,0 +1,28 @@
+{
+  "batch_name": "claude_code_tips",
+  "source_cards_file": "python_pipeline/data/cards/cards_raw_from_urls_claude_code_tips.json",
+  "reviewed_at": "2026-04-06T14:30:00Z",
+  "decisions": [
+    {
+      "card_id": "reddit_card_2026-04-06_001",
+      "title": "I benchmarked \"Plan with Opus, Execute with Codex\" — here's the actual cost data",
+      "decision": "publish_candidate",
+      "publish_candidate": true,
+      "review_note": "실측 비용 비교, crossover 기준, cache reads 인사이트가 남는다. 외부 공개 글로 재구성 가치 높음."
+    },
+    {
+      "card_id": "reddit_card_2026-04-06_002",
+      "title": "I'm new to Claude Code and would like to make the best out of my subscription, where can I learn alot about how to use Claude Code in more efficient ways?",
+      "decision": "keep",
+      "publish_candidate": false,
+      "review_note": "본문은 질문형이라 약하지만 댓글에서 학습 경로와 실전 팁이 살아난다. 내부 참고용 카드로 유지."
+    },
+    {
+      "card_id": "reddit_card_2026-04-06_003",
+      "title": "I built an AI job search system with Claude Code that scored 740+ offers and landed me a job. Just open sourced it.",
+      "decision": "publish_candidate",
+      "publish_candidate": true,
+      "review_note": "오픈소스 사례와 구체 기능이 좋아 카드 가치가 높다. 다만 제목 오해가 있어 publish 전 프레이밍 보정 필요."
+    }
+  ]
+}

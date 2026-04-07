@@ -1,0 +1,188 @@
+[
+  {
+    "source_id": "reddit_url_ingest_20260406_001",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "ClaudeAI",
+    "title": "I benchmarked \"Plan with Opus, Execute with Codex\" — here's the actual cost data",
+    "source_url": "https://www.reddit.com/r/ClaudeAI/comments/1sdk2sj/i_benchmarked_plan_with_opus_execute_with_codex/",
+    "author": "Least-Sink-7222",
+    "created_utc": 1775435969,
+    "body": "There's been discussion about using Opus to plan and Codex to execute ([example](https://www.reddit.com/r/VibeCodeDevs/comments/1ronaqp/plan_with_opus_execute_with_sonnet_and_codex/)). Everyone agrees it \"feels\" more efficient, but nobody had numbers. So I ran a controlled benchmark.\n\n**Setup:** Claude Opus 4.6 + OpenAI Codex CLI, using the [opus-codex](https://github.com/brian93512/opus-codex) skill. 3 real tasks at increasing scale, each in isolated git worktrees.\n\n**Results:**\n\n|Task|Pure Opus|Opus+Codex|\n|:-|:-|:-|\n|80 LOC (CLI flag + 3 tests)|**$0.33**|$0.53|\n|400 LOC (HTML report + 10 tests)|**$0.68**|$0.74|\n|1060 LOC (REST API + 46 tests)|$0.86|**$0.78**|\n\n**Crossover is \\~600 LOC.** Below that, the planning/handoff overhead costs more than just letting Opus write the code. Above that, Opus+Codex wins because it cuts output tokens by \\~50%.\n\n**The hidden cost driver: cache reads.** Everyone optimizes output tokens, but every API turn re-sends your full conversation as cached context. Extra turns from planning + review add up. We found 600 lines of Codex stdout landing in the conversation was the single biggest cost inflator — piping it to a file saved \\~$0.15/run.\n\n**Practical advice:**\n\n* **&lt; 500 LOC:** Pure Opus. Don't overthink it.\n* **500-800 LOC:** Either approach, roughly equal.\n* **&gt; 800 LOC:** Opus+Codex saves money and the gap grows with scale. Codex free trial makes it even more attractive for large tasks.\n* **Burning Opus tokens fast?** Check cache reads in `/cost`. If they're 5-10x your output tokens, your context is bloated.",
+    "body_excerpt": "There's been discussion about using Opus to plan and Codex to execute ([example](https://www.reddit.com/r/VibeCodeDevs/comments/1ronaqp/plan_with_opus_execute_with_sonnet_and_codex/)). Everyone agrees it \"feels\" more efficient, but nobody had numbers. So I ran a controlled benchm",
+    "num_comments": 25,
+    "upvotes": 33,
+    "top_comments": [
+      {
+        "comment_id": "t1_oej4v1w",
+        "author": "ClaudeAI-mod-bot",
+        "body": "We are allowing this through to the feed for those who are not yet familiar with the Megathread. To see the latest discussions about this topic, please visit the relevant Megathread here: https://www.reddit.com/r/ClaudeAI/comments/1s7fepn/rclaudeai_list_of_ongoing_megathreads/",
+        "score": 1,
+        "created_utc": 1775436029
+      },
+      {
+        "comment_id": "t1_oej995k",
+        "author": "delimitdev",
+        "body": "The cost data is useful but the part nobody talks about is context loss between the plan and execute phase. Opus builds a mental model of your codebase during planning, and then Codex starts fresh with just the plan text. I've been piping persistent context between models so the executor actually knows what decisions were made and why, not just the final instructions. Cuts down on the \"Codex did something technically correct but missed the point\" moments significantly.",
+        "score": 15,
+        "created_utc": 1775437609
+      },
+      {
+        "comment_id": "t1_oej7xhp",
+        "author": "Obvious_Equivalent_1",
+        "body": "As a fervent Sonnet user, is there any big consideration to only do the comparison with Codex?",
+        "score": 2,
+        "created_utc": 1775437132
+      },
+      {
+        "comment_id": "t1_oejjeu7",
+        "author": "RespectableBloke69",
+        "body": "Why do you need a skill for this workflow? This is what my workflow looks like without a skill.",
+        "score": 2,
+        "created_utc": 1775441323
+      },
+      {
+        "comment_id": "t1_oejju2g",
+        "author": "draconisx4",
+        "body": "Solid data on mixing planners and executors it's a reminder that while costs add up, this setup could tighten oversight on AI runs, helping avoid sloppy outputs in real deployments.",
+        "score": 2,
+        "created_utc": 1775441480
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-06T13:08:12Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1sdk2sj",
+    "candidate_id": "t3_1sdk2sj"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260406_002",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "ClaudeAI",
+    "title": "I'm new to Claude Code and would like to make the best out of my subscription, where can I learn alot about how to use Claude Code in more efficient ways?",
+    "source_url": "https://www.reddit.com/r/ClaudeAI/comments/1sdjzjx/im_new_to_claude_code_and_would_like_to_make_the/",
+    "author": "Mk277_",
+    "created_utc": 1775435724,
+    "body": "IDK where to look for the good videos that actually describe how to use claude code and what it could go well with to make it a better tool. I use it for both fun in projects that i make aswell as in Cybersecurity and ML/Data science.\n\nAny video i find online has a clickbait element to it assuming it'll teach you tricks where its 9 already known tricks, and the 10th is something you have to buy from the creator which sums up my luck about a deeper look into Claude Code. Can anyone recommend any good videos that actually teach you things about Claude Code?\n\nP.S I saw Anthropic themselves have courses on this, are they any good?",
+    "body_excerpt": "IDK where to look for the good videos that actually describe how to use claude code and what it could go well with to make it a better tool. I use it for both fun in projects that i make aswell as in Cybersecurity and ML/Data science. Any video i find online has a clickbait eleme",
+    "num_comments": 13,
+    "upvotes": 10,
+    "top_comments": [
+      {
+        "comment_id": "t1_oej4xqj",
+        "author": "clayingmore",
+        "body": "The Anthropic courses are definitely good.\n\nThe dirtiest of trade secrets is to just ask Claude how to get the most out of Claude Code.\n\nHow do you improve your prompt? Ask Claude. How do you improve your CLAUDE.md? Ask Claude. How do you make a good architecture spec? Ask Claude. What frameworks and dependencies will settle best within your project? Ask Claude.\n\nDon't take the responses at face value as they may be wrong, but it is great starting point. An active discussion with your LLM of choice creates a Socratic dynamic for quick learning.",
+        "score": 13,
+        "created_utc": 1775436056
+      },
+      {
+        "comment_id": "t1_oej50t8",
+        "author": "Hsoj707",
+        "body": "Best piece of advice I can give is to just start using it. Don't over think it. Start talking to it and see what it'll do for you.\n\nFor structured learning, the Claude Code in action is a good one to go through https://anthropic.skilljar.com/claude-code-in-action",
+        "score": 4,
+        "created_utc": 1775436087
+      },
+      {
+        "comment_id": "t1_oej8t1f",
+        "author": "akolomf",
+        "body": "For coding i like to keep it simple and stupid. I use this [https://github.com/RchGrav/astraeus](https://github.com/RchGrav/astraeus)  as the automatic agent Creation tool.\n\nJust create a folder for whatever project you have. Launch claude in it. Create a short [plan.md](http://plan.md) file for whatever you are planning for the project together with claude. Run /astraeus, it analyzes the projects contents and creates all necessary agents and workflows. All agents are ready to go and you can create an Implementation plan now with all the details. (after bigger changes, or like on avg once a day, you should run /astraeus again to update all agents and workflows)  \nAlso make Claude split plans into phases, and have it write sessionsummaries+Commit to git inbetween each phase.\n\nThen its basically fire and forget (i do dangerously skip permissions claude, so i dont even have to approve anything).",
+        "score": 3,
+        "created_utc": 1775437447
+      },
+      {
+        "comment_id": "t1_oejcsaw",
+        "author": "KH33tBit",
+        "body": "The way that seems to work for me so far. \n\n\\- Start a new project with Claude (Not co-work or Claude Code)  \n\\- Only use voice chat for input, this way you just word vomit what you're thinking  \n\\- Outline the thing you're trying to make or achieve to Claude  \n\\- Use Claude to write prompts for Claude Code then paste the reports and reponses back to Claude\n\nThe most powerful way I've found so far to get the most from Claude Code is to run it in VS Code with full access to the project.   \n  \nMake sure you use plug-ins as needed and ask Claude which ones to use.",
+        "score": 3,
+        "created_utc": 1775438892
+      },
+      {
+        "comment_id": "t1_oeja8ys",
+        "author": "Obvious_Equivalent_1",
+        "body": "Well you asked for simple. Then I’d say try to track the tokens ‘123.000k’ tokens next to the results because there’s where usually subagents pay off. \n\nFor example rounding up your session with syncing and verifying on docker and running test? Postfix your prompt with “..in Sonnet subagent” and all that verbose testing output will hit our usage 3x less heavy compared to Opus.",
+        "score": 2,
+        "created_utc": 1775437968
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-06T13:08:12Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1sdjzjx",
+    "candidate_id": "t3_1sdjzjx"
+  },
+  {
+    "source_id": "reddit_url_ingest_20260406_003",
+    "source": "reddit_url_ingest",
+    "source_type": "reddit_post",
+    "subreddit": "ClaudeAI",
+    "title": "I built an AI job search system with Claude Code that scored 740+ offers and landed me a job. Just open sourced it.",
+    "source_url": "https://www.reddit.com/r/ClaudeAI/comments/1sd2f37/i_built_an_ai_job_search_system_with_claude_code/",
+    "author": "Beach-Independent",
+    "created_utc": 1775392250,
+    "body": "`Edit: title should say \"scored 740+ listings\" not \"offers\": it evaluated 740+ job postings, not 740 actual job offers. my bad on the wording.`  \n  \nA few weeks ago I shared a video of this system on r/SideProject (534 upvotes). A lot of people asked for the code, so I cleaned it up and open sourced it.\n\n**What it is:** A Claude Code project that turns your terminal into a job search command center. You paste a job URL, and it evaluates the offer, generates a tailored PDF resume, and tracks everything.\n\n**How Claude helps:** Claude Code reads a CLAUDE.md with 14 skill modes and acts as the engine for everything — evaluating fit across 10 dimensions, rewriting your CV per listing, scanning 45+ company career pages, preparing STAR interview stories, even filling application forms. It's not a wrapper around an API — it's Claude Code with custom skills.\n\n**What's in the repo:**\n\n* 14 skill modes (evaluate, scan, PDF, batch, interview prep, negotiation...)\n* Go terminal dashboard (Bubble Tea) to browse your pipeline\n* 45+ companies pre-configured (Anthropic, OpenAI, ElevenLabs, Stripe...)\n* ATS-optimized PDF generation via Playwright\n* Onboarding wizard — Claude walks you through setup in 5 minutes\n* Scoring system focused on quality over quantity (this is NOT a spray-and-pray tool)\n\n**Important:** The system is designed to help you apply only where there's a real match. It scores fit so you focus on high-quality applications instead of wasting everyone's time. Always review before submitting.\n\nFree, MIT licensed, no paid tiers: [https://github.com/santifer/career-ops](https://github.com/santifer/career-ops)\n\nFull case study with architecture: [https://santifer.io/career-ops-system](https://santifer.io/career-ops-system)\n\nI used it to evaluate 740+ offers before landing my current role as Head of Applied AI. Happy to answer questions about the architecture or how to customize it for your own search.",
+    "body_excerpt": "`Edit: title should say \"scored 740+ listings\" not \"offers\": it evaluated 740+ job postings, not 740 actual job offers. my bad on the wording.` A few weeks ago I shared a video of this system on r/SideProject (534 upvotes). A lot of people asked for the code, so I cleaned it up a",
+    "num_comments": 156,
+    "upvotes": 2086,
+    "top_comments": [
+      {
+        "comment_id": "t1_oefxzmg",
+        "author": "ClaudeAI-mod-bot",
+        "body": "**TL;DR of the discussion generated automatically after 100 comments.**\n\nFirst things first: No, OP did not get 740+ job *offers*. He meant he evaluated 740+ job *listings*. The thread immediately dogpiled on that wording, and OP has since edited the post to clarify.\n\nWith that out of the way, **the consensus is that the project is awesome, but the title was major clickbait.**\n\nPeople are genuinely impressed with the open-source tool (\"career-ops\"), which uses Claude Code to act as a personal job search command center—evaluating listings, tailoring your CV, and even helping with interview prep. Several users are building similar things and see the value.\n\nThe biggest elephant in the room is **token usage**. This thing is thirsty. OP confirmed they used a Claude Max 20x plan and were strategic about their 5-hour window. For Pro users, the advice is to stick with Sonnet 4.6 to avoid burning through your quota in one go. As for results, OP says the tool helped them land ~12 first interviews by being highly selective, ultimately leading to their new job as Head of Applied AI. Other questions about how it applies (it uses Playwright to fill web forms) and if it works for non-tech roles (yes, with prompting) were also answered by OP.",
+        "score": 1,
+        "created_utc": 1775400693
+      },
+      {
+        "comment_id": "t1_oefj32f",
+        "author": "uberdev",
+        "body": "What do you mean by \"740+ offers\"? I assume you didn't go through over 740 full interview processes and get job offers at 740 companies.",
+        "score": 82,
+        "created_utc": 1775396025
+      },
+      {
+        "comment_id": "t1_oefevaq",
+        "author": "nitor999",
+        "body": "Amazing but just by looking at this i'm thinking already about my token usage",
+        "score": 124,
+        "created_utc": 1775394572
+      },
+      {
+        "comment_id": "t1_oeftimv",
+        "author": "alphaQ314",
+        "body": "You need to look up what a \"job offer\" means, buddy.",
+        "score": 30,
+        "created_utc": 1775399355
+      },
+      {
+        "comment_id": "t1_oefgsau",
+        "author": "Halfman-NoNose",
+        "body": "Well done. I’ve been building similar and have been having great results. I also then built in a /prep command before interviews for deep research in the interviewer. Additionally, added a /debrief command to literally debrief interview call transcripts (insights into both the opportunity and where I can sharpen my pitch. \n\nWill dig into yours!",
+        "score": 20,
+        "created_utc": 1775395235
+      }
+    ],
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "recommended_status": "keep",
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-06T13:08:12Z",
+    "devvit_version": "url-ingest-v1",
+    "post_id": "t3_1sd2f37",
+    "candidate_id": "t3_1sd2f37"
+  }
+]

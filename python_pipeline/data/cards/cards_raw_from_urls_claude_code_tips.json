@@ -1,0 +1,68 @@
+[
+  {
+    "card_id": "reddit_card_2026-04-06_001",
+    "source_id": "reddit_url_ingest_20260406_001",
+    "title": "I benchmarked \"Plan with Opus, Execute with Codex\" — here's the actual cost data",
+    "source_url": "https://www.reddit.com/r/ClaudeAI/comments/1sdk2sj/i_benchmarked_plan_with_opus_execute_with_codex/",
+    "subreddit": "ClaudeAI",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "We are allowing this through to the feed for those who are not yet familiar with the Megathread. To see the latest discussions about this to...",
+      "The cost data is useful but the part nobody talks about is context loss between the plan and execute phase. Opus builds a mental model of yo...",
+      "As a fervent Sonnet user, is there any big consideration to only do the comparison with Codex?",
+      "Why do you need a skill for this workflow? This is what my workflow looks like without a skill.",
+      "Solid data on mixing planners and executors it's a reminder that while costs add up, this setup could tighten oversight on AI runs, helping ..."
+    ],
+    "created_utc": 1775435969,
+    "collected_at": "2026-04-06T13:08:12Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-06_002",
+    "source_id": "reddit_url_ingest_20260406_002",
+    "title": "I'm new to Claude Code and would like to make the best out of my subscription, where can I learn alot about how to use Claude Code in more efficient ways?",
+    "source_url": "https://www.reddit.com/r/ClaudeAI/comments/1sdjzjx/im_new_to_claude_code_and_would_like_to_make_the/",
+    "subreddit": "ClaudeAI",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "The Anthropic courses are definitely good. The dirtiest of trade secrets is to just ask Claude how to get the most out of Claude Code. How d...",
+      "Best piece of advice I can give is to just start using it. Don't over think it. Start talking to it and see what it'll do for you. For struc...",
+      "For coding i like to keep it simple and stupid. I use this [https://github.com/RchGrav/astraeus](https://github.com/RchGrav/astraeus) as the...",
+      "The way that seems to work for me so far. \\- Start a new project with Claude (Not co-work or Claude Code) \\- Only use voice chat for input, ...",
+      "Well you asked for simple. Then I’d say try to track the tokens ‘123.000k’ tokens next to the results because there’s where usually subagent..."
+    ],
+    "created_utc": 1775435724,
+    "collected_at": "2026-04-06T13:08:12Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-06_003",
+    "source_id": "reddit_url_ingest_20260406_003",
+    "title": "I built an AI job search system with Claude Code that scored 740+ offers and landed me a job. Just open sourced it.",
+    "source_url": "https://www.reddit.com/r/ClaudeAI/comments/1sd2f37/i_built_an_ai_job_search_system_with_claude_code/",
+    "subreddit": "ClaudeAI",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "**TL;DR of the discussion generated automatically after 100 comments.** First things first: No, OP did not get 740+ job *offers*. He meant h...",
+      "What do you mean by \"740+ offers\"? I assume you didn't go through over 740 full interview processes and get job offers at 740 companies.",
+      "Amazing but just by looking at this i'm thinking already about my token usage",
+      "You need to look up what a \"job offer\" means, buddy.",
+      "Well done. I’ve been building similar and have been having great results. I also then built in a /prep command before interviews for deep re..."
+    ],
+    "created_utc": 1775392250,
+    "collected_at": "2026-04-06T13:08:12Z"
+  }
+]
