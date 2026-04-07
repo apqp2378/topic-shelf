@@ -1,0 +1,27 @@
+{
+  "batch_name": "python_learning_tips",
+  "generated_at": "2026-04-07T00:30:50.177683Z",
+  "source_decisions_file": "C:/Users/최상원/개인프로젝트/topic-shelf/python_pipeline/data/reviews/python_learning_tips_decisions.json",
+  "source_cards_file": "C:/Users/최상원/개인프로젝트/topic-shelf/python_pipeline/data/cards/cards_raw_from_urls_python_learning_tips.json",
+  "publish_candidate_count": 2,
+  "publish_candidates": [
+    {
+      "card_id": "reddit_card_2026-04-07_001",
+      "title": "How to learn python",
+      "source_url": "https://www.reddit.com/r/learnpython/comments/1krsx80/how_to_learn_python/",
+      "subreddit": "learnpython",
+      "decision": "publish_candidate",
+      "publish_candidate": true,
+      "review_note": "Clean beginner framing with a practical learning angle."
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_003",
+      "title": "How to learn Python correctly?",
+      "source_url": "https://www.reddit.com/r/learnpython/comments/1cbsqed/how_to_learn_python_correctly/",
+      "subreddit": "learnpython",
+      "decision": "publish_candidate",
+      "publish_candidate": true,
+      "review_note": "Useful beginner-friendly angle for a draft seed."
+    }
+  ]
+}

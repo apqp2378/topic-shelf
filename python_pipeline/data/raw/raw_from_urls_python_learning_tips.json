@@ -1,0 +1,248 @@
+[
+  {
+    "raw_id": "reddit_url_ingest_20260407_001",
+    "source": "reddit_url_ingest",
+    "subreddit": "learnpython",
+    "post_title": "How to learn python",
+    "post_url": "https://www.reddit.com/r/learnpython/comments/1krsx80/how_to_learn_python/",
+    "post_author": "Egoist_Isagi058",
+    "post_created_utc": 1747816932,
+    "post_body": "Hi everyone,\nI'm completely new to programming and want to start learning Python from scratch. I can dedicate around 2 hours daily. My goal is to build a strong foundation and eventually use Python for data science and real-world projects.\n\nWhat learning path, resources (books, websites, YouTube channels, etc.), and practice routines would you recommend for someone like me? Also, how should I structure my 2 hours each day for the best results?\n\nThanks in advance for your help!",
+    "num_comments": 55,
+    "upvotes": 31,
+    "top_comments": [
+      {
+        "comment_id": "t1_mtfz2rk",
+        "author": "Potential_Speed_7048",
+        "body": "I’m taking a course on datacamp. Kaggle has data sets to use. They also have courses. \n\nI’m bad at self paced stuff so I hired a mentor on preply. That helps me stay on track and is super affordable.\n\nI use Focusmate to study 📚. It holds me accountable. Absolutely life changing. Focusmate is just a coworking site but there are a lot of coders on there. It has inadvertently helped me with networking.",
+        "score": 13,
+        "created_utc": 1747818431
+      },
+      {
+        "comment_id": "t1_mtfx3xe",
+        "author": "51dux",
+        "body": "Here is your first challenge come back tomorrow evening in this thread knowing how to loop over a list of items and assign expressions to variables.\n\nhttps://wiki.python.org/moin/ForLoop\n\nhttps://www.learnpython.org/en/Variables_and_Types",
+        "score": 17,
+        "created_utc": 1747817201
+      },
+      {
+        "comment_id": "t1_mtfzmv1",
+        "author": "[deleted]",
+        "body": "[removed]",
+        "score": 9,
+        "created_utc": 1747818787
+      },
+      {
+        "comment_id": "t1_mtg1rmv",
+        "author": "demeschor",
+        "body": "I like CS50x, a free online course from David Malan at Harvard. The CS50 course starts off with C and later introduces Python (and some others) to give you a good grounding. There's also a python specific version too if that's what you're set on. \n\nThey have automated assignment checkers, an AI assistant to help without just giving you the answer, it's really comprehensive",
+        "score": 4,
+        "created_utc": 1747820142
+      },
+      {
+        "comment_id": "t1_mtfxufd",
+        "author": "Sea-Concept1733",
+        "body": "Here are some high-rated Python resources that you may find useful. \n\nThis site provides [Top-Rated Amazon Python Books](https://amzn.to/3EmGlHX) \n\nThe following [high-rated Python Udemy course ](https://www.jaffainc.com/Entrepreneur-courses.html#python)may be of use to you.\n\nFollowing is a great [Python YouTube Channel ](https://www.youtube.com/playlist?list=PLTjRvDozrdlw0x_FcXItVVVVh-RP-5hdP)\n\nGood luck.",
+        "score": 3,
+        "created_utc": 1747817658
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:30:16Z",
+    "recommended_status": "keep",
+    "candidate_rank": 1,
+    "post_id": "t3_1krsx80",
+    "candidate_id": "t3_1krsx80",
+    "body_excerpt": "Hi everyone, I'm completely new to programming and want to start learning Python from scratch. I can dedicate around 2 hours daily. My goal is to build a strong foundation and eventually use Python for data science and real-world projects. What learning path, resources (books, we",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 20,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_002",
+    "source": "reddit_url_ingest",
+    "subreddit": "learnpython",
+    "post_title": "How do I learn python properly?",
+    "post_url": "https://www.reddit.com/r/learnpython/comments/1pcbxw0/how_do_i_learn_python_properly/",
+    "post_author": "[deleted]",
+    "post_created_utc": 1764690645,
+    "post_body": "[deleted]",
+    "num_comments": 27,
+    "upvotes": 5,
+    "top_comments": [
+      {
+        "comment_id": "t1_nrwimt1",
+        "author": "danielroseman",
+        "body": "You don't learn Python by going through \"commands\" and learning where they're used. That's not how programming works at all. There's a reason why \"most places\" teach the way they do.\n\nThere are a bunch of good learning resources in this sub's wiki.",
+        "score": 9,
+        "created_utc": 1764691036
+      },
+      {
+        "comment_id": "t1_nrwk7vb",
+        "author": "octaveekk",
+        "body": "It might sound cliché or “pity advice,” but honestly: just start coding. Get the headache, feel stupid, Google things, break stuff, fix stuff, ask forums or AI what certain things even mean. Learning by doing is the best way to escape tutorial hell.\n\nI learned Python by myself because I wanted to fix a script that just wouldn’t work. I watched a quick 3-hour basics tutorial and then said “fuck it, let’s do this.”\n\nI kept reading the script, trying to understand it, failing over and over, feeling dumb as hell. But by trying, googling, experimenting, and asking tons of small questions to AI to understand little modules and functions, I eventually figured it out. Then I jumped into another project and felt stupid all over again. That cycle repeats… until one day things start clicking.\n\nIt’s actually simple once you get past the initial overload of information, syntax, tutorials, methods, etc. When you practice a lot, your brain adapts.\n\nThere’s a quote I love:\n“Exercising makes you feel weak while it’s making you stronger. Learning makes you feel dumb while it’s making you smarter.”\n\nGood luck with your learning journey, and welcome to the community.",
+        "score": 7,
+        "created_utc": 1764691499
+      },
+      {
+        "comment_id": "t1_nrwn8p4",
+        "author": "BranchLatter4294",
+        "body": "Practice.",
+        "score": 1,
+        "created_utc": 1764692368
+      },
+      {
+        "comment_id": "t1_nrwnvyr",
+        "author": "humanguise",
+        "body": "To start out, I would pick one of the books below:\n\n1. https://allendowney.github.io/ThinkPython/\n2. Python Programming: An Introduction to Computer Science https://share.google/RNTbFQXN0xndQTkFN\n\n\nAfter that, you read, in the order below:\n\n1. Python Distilled.\n2. Learning Python: Powerful Object-Oriented Programming.\n3. Fluent Python (Reference).\n4. Python in a Nutshell (Reference).",
+        "score": 1,
+        "created_utc": 1764692555
+      },
+      {
+        "comment_id": "t1_nrwo01e",
+        "author": "Active_Ad7650",
+        "body": "Always ask why and how, and then try to understand the reason, then implement it the next time.",
+        "score": 1,
+        "created_utc": 1764692587
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:30:16Z",
+    "recommended_status": "keep",
+    "candidate_rank": 2,
+    "post_id": "t3_1pcbxw0",
+    "candidate_id": "t3_1pcbxw0",
+    "body_excerpt": "[deleted]",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 11,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_003",
+    "source": "reddit_url_ingest",
+    "subreddit": "learnpython",
+    "post_title": "How to learn Python correctly?",
+    "post_url": "https://www.reddit.com/r/learnpython/comments/1cbsqed/how_to_learn_python_correctly/",
+    "post_author": "Rayvo1239",
+    "post_created_utc": 1713945815,
+    "post_body": "I want to learn python because I'm starting to study in autumn. I dont know how I should learn, i know some basics like variables, if, elif, else. I am not a creative person so i have no idea what I want to code so i thought a self-learn course would be nice but i dont wanna spend money to a course without knowing if its worth and tbh i dont really have the money for that xD  \n\nHow did you make your first steps in python and in coding at all?",
+    "num_comments": 65,
+    "upvotes": 120,
+    "top_comments": [
+      {
+        "comment_id": "t1_l10l9rm",
+        "author": "I-Dont-C-Sharp",
+        "body": "CS50 is very beginner friendly and goes a bit deeper than the most basic operators. It is also free.\n\nIf you finished a course like that you could try solving some [leetcode.com](https://leetcode.com) problems. Sort on acceptance rate to start easy.",
+        "score": 53,
+        "created_utc": 1713946704
+      },
+      {
+        "comment_id": "t1_l10o9to",
+        "author": "walkerakiz",
+        "body": "I would also recommend [Codedex](https://www.codedex.io/) , which is extremely beginner-friendly and presented in a game-like manner. It has an amazing community on its platform and Discord, and it is very encouraging with some monthly and small challenges. You can create projects while you learn, which is a really nice and interactive way to learn as well.",
+        "score": 22,
+        "created_utc": 1713949008
+      },
+      {
+        "comment_id": "t1_l11bh73",
+        "author": "ASIC_SP",
+        "body": "There are plenty of free resources:\n\n* [Python Programming by University of Helsinki](https://programming-24.mooc.fi/)\n* [Harvard CS50's Introduction to Programming with Python](https://cs50.harvard.edu/python/2022/)\n* [futurecoder](https://futurecoder.io/) — interactive, includes integrated debuggers, enhanced tracebacks, hints for exercises and more\n* [Think Python](https://allendowney.github.io/ThinkPython/) — gives you a solid foundation to programming, teaches debugging right the beginning, interesting exercises, etc\n* [The Python Coding Book](https://thepythoncodingbook.com/) — friendly, relaxed programming book for beginners\n* [PyFlo](https://pyflo.net/) — interactive beginners guide to becoming a Python programmer\n\nFor exercises, check out:\n\n* [Exercism](https://exercism.org/tracks/python/exercises), [Hackinscience](https://www.hackinscience.org/exercises/) and [Practicepython](https://www.practicepython.org/) — these are all beginner friendly and difficulty levels are marked\n* [Adventofcode](https://adventofcode.com/), [Codewars](https://www.codewars.com/), [Python Morsels](https://www.pythonmorsels.com/) — includes more challenging exercises for intermediate to advanced level users\n* [Checkio](https://py.checkio.org/), [Codingame](https://www.codingame.com/start), [Codecombat](https://codecombat.com/) — gaming based challenges",
+        "score": 22,
+        "created_utc": 1713962470
+      },
+      {
+        "comment_id": "t1_l10xzib",
+        "author": "Chaicowosu",
+        "body": "force yourself to be creative and learn from building projects. google whenever you hit a roadblock. then build new projects or iterate on previous ones. this will teach you how to solve problems with programming instead of memorizing syntax without purpose. a lot of online resources for beginner project ideas. i recommend *trying* to code everything yourself and only refer to resources when stuck. avoid blindly copying tutorials, it's easy but u won't learn anything substantial.",
+        "score": 11,
+        "created_utc": 1713955758
+      },
+      {
+        "comment_id": "t1_l118bze",
+        "author": "[deleted]",
+        "body": "I tried doing it correctly since day 0 but I must say is overwhelming.\n\nThe very basics are:\n\nDownload python\n\npip install poetry\n\nCreate a Projects folder in your computer\n\nFrom now on  via terminal, create your projects folders with poetry. It already setups the entire virtual environment for that folder, install the packets  such as pandas etc everytime you work on a project with poetry, thats the way. You can use pyenv/pip as well if you don't want poetry.\n\nSo you will never need to install things in your global environment (very important to avoid this)\n\nSaving ton of time: 99% of problems starting things in python is related to PATH issues. Check if PYTHON is setup in your Global/Environment Variables or anything like that. Some resources rely on PATH to work....",
+        "score": 7,
+        "created_utc": 1713961082
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T00:30:16Z",
+    "recommended_status": "keep",
+    "candidate_rank": 3,
+    "post_id": "t3_1cbsqed",
+    "candidate_id": "t3_1cbsqed",
+    "body_excerpt": "I want to learn python because I'm starting to study in autumn. I dont know how I should learn, i know some basics like variables, if, elif, else. I am not a creative person so i have no idea what I want to code so i thought a self-learn course would be nice but i dont wanna spen",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 29,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  }
+]

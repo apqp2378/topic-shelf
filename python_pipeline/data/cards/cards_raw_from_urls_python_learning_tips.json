@@ -1,0 +1,68 @@
+[
+  {
+    "card_id": "reddit_card_2026-04-07_001",
+    "source_id": "reddit_url_ingest_20260407_001",
+    "title": "How to learn python",
+    "source_url": "https://www.reddit.com/r/learnpython/comments/1krsx80/how_to_learn_python/",
+    "subreddit": "learnpython",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "I’m taking a course on datacamp. Kaggle has data sets to use. They also have courses. I’m bad at self paced stuff so I hired a mentor on pre...",
+      "Here is your first challenge come back tomorrow evening in this thread knowing how to loop over a list of items and assign expressions to va...",
+      "[removed]",
+      "I like CS50x, a free online course from David Malan at Harvard. The CS50 course starts off with C and later introduces Python (and some othe...",
+      "Here are some high-rated Python resources that you may find useful. This site provides [Top-Rated Amazon Python Books](https://amzn.to/3EmGl..."
+    ],
+    "created_utc": 1747816932,
+    "collected_at": "2026-04-07T00:30:16Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_002",
+    "source_id": "reddit_url_ingest_20260407_002",
+    "title": "How do I learn python properly?",
+    "source_url": "https://www.reddit.com/r/learnpython/comments/1pcbxw0/how_do_i_learn_python_properly/",
+    "subreddit": "learnpython",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "You don't learn Python by going through \"commands\" and learning where they're used. That's not how programming works at all. There's a reaso...",
+      "It might sound cliché or “pity advice,” but honestly: just start coding. Get the headache, feel stupid, Google things, break stuff, fix stuf...",
+      "Practice.",
+      "To start out, I would pick one of the books below: 1. https://allendowney.github.io/ThinkPython/ 2. Python Programming: An Introduction to C...",
+      "Always ask why and how, and then try to understand the reason, then implement it the next time."
+    ],
+    "created_utc": 1764690645,
+    "collected_at": "2026-04-07T00:30:16Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_003",
+    "source_id": "reddit_url_ingest_20260407_003",
+    "title": "How to learn Python correctly?",
+    "source_url": "https://www.reddit.com/r/learnpython/comments/1cbsqed/how_to_learn_python_correctly/",
+    "subreddit": "learnpython",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "CS50 is very beginner friendly and goes a bit deeper than the most basic operators. It is also free. If you finished a course like that you ...",
+      "I would also recommend [Codedex](https://www.codedex.io/) , which is extremely beginner-friendly and presented in a game-like manner. It has...",
+      "There are plenty of free resources: * [Python Programming by University of Helsinki](https://programming-24.mooc.fi/) * [Harvard CS50's Intr...",
+      "force yourself to be creative and learn from building projects. google whenever you hit a roadblock. then build new projects or iterate on p...",
+      "I tried doing it correctly since day 0 but I must say is overwhelming. The very basics are: Download python pip install poetry Create a Proj..."
+    ],
+    "created_utc": 1713945815,
+    "collected_at": "2026-04-07T00:30:16Z"
+  }
+]
