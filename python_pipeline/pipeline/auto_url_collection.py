@@ -38,6 +38,11 @@ class AutoBatchDefinition:
     max_urls: int
     recent_days: int
     sources: list[AutoSourceDefinition]
+    include_title_keywords: list[str]
+    exclude_title_keywords: list[str]
+    exclude_url_keywords: list[str]
+    allow_subreddits: list[str]
+    deny_subreddits: list[str]
     parser_fallback_enabled: bool = False
 
 
@@ -67,6 +72,11 @@ def load_auto_source_batches(config_path: Path = DEFAULT_CONFIG_PATH) -> list[Au
         enabled = bool(item.get("enabled", False))
         max_urls = parse_positive_int(item.get("max_urls"), f"batch {batch_name} max_urls")
         recent_days = parse_positive_int(item.get("recent_days"), f"batch {batch_name} recent_days")
+        include_title_keywords = parse_string_list(item.get("include_title_keywords"))
+        exclude_title_keywords = parse_string_list(item.get("exclude_title_keywords"))
+        exclude_url_keywords = parse_string_list(item.get("exclude_url_keywords"))
+        allow_subreddits = parse_string_list(item.get("allow_subreddits"))
+        deny_subreddits = parse_string_list(item.get("deny_subreddits"))
 
         sources_payload = item.get("sources")
         if not isinstance(sources_payload, list) or not sources_payload:
@@ -108,6 +118,11 @@ def load_auto_source_batches(config_path: Path = DEFAULT_CONFIG_PATH) -> list[Au
                 max_urls=max_urls,
                 recent_days=recent_days,
                 sources=sources,
+                include_title_keywords=include_title_keywords,
+                exclude_title_keywords=exclude_title_keywords,
+                exclude_url_keywords=exclude_url_keywords,
+                allow_subreddits=allow_subreddits,
+                deny_subreddits=deny_subreddits,
                 parser_fallback_enabled=parser_fallback_enabled,
             )
         )
@@ -136,6 +151,20 @@ def parse_positive_int(value: object, field_name: str) -> int:
     if parsed < 1:
         raise ValueError(f"{field_name} must be a positive integer.")
     return parsed
+
+
+def parse_string_list(value: object) -> list[str]:
+    if value in (None, ""):
+        return []
+    if not isinstance(value, list):
+        raise ValueError("Config filter values must be lists of strings.")
+
+    result: list[str] = []
+    for item in value:
+        text = str(item).strip().lower()
+        if text:
+            result.append(text)
+    return result
 
 
 def collect_batch_candidates(
@@ -173,6 +202,7 @@ def collect_batch_candidates(
             continue
 
         source_candidate_count = 0
+        source_subreddit = extract_reddit_subreddit_from_url(source.url)
         for item in feed_items:
             title = item.get("title", "").strip()
             url = item.get("url", "").strip()
@@ -188,9 +218,11 @@ def collect_batch_candidates(
                     "source_name": source.source_name,
                     "source_type": source.type,
                     "source_feed_url": source.url,
+                    "source_subreddit": source_subreddit,
                     "title": title,
                     "url": url,
                     "normalized_url": normalized_url,
+                    "subreddit": extract_reddit_subreddit_from_url(normalized_url) or source_subreddit,
                     "published_at": published_at,
                     "collected_at": fetched_at_iso,
                 }
@@ -212,6 +244,11 @@ def collect_batch_candidates(
         "enabled": batch.enabled,
         "max_urls": batch.max_urls,
         "recent_days": batch.recent_days,
+        "include_title_keywords": batch.include_title_keywords,
+        "exclude_title_keywords": batch.exclude_title_keywords,
+        "exclude_url_keywords": batch.exclude_url_keywords,
+        "allow_subreddits": batch.allow_subreddits,
+        "deny_subreddits": batch.deny_subreddits,
         "parser_fallback_enabled": batch.parser_fallback_enabled,
         "generated_at": fetched_at_iso,
         "source_summaries": source_summaries,
@@ -381,6 +418,14 @@ def normalize_reddit_path(path: str, netloc: str) -> str:
     return cleaned or "/"
 
 
+def extract_reddit_subreddit_from_url(url: str) -> str:
+    parts = urlsplit(url)
+    path_parts = [segment for segment in parts.path.split("/") if segment]
+    if len(path_parts) >= 2 and path_parts[0] == "r":
+        return path_parts[1].lower()
+    return ""
+
+
 def load_seen_urls(path: Path = DEFAULT_STATE_PATH) -> set[str]:
     if not path.exists():
         return set()
@@ -447,9 +492,14 @@ def merge_batch_candidates(
     cutoff = batch_recent_cutoff(batch, now)
     unique_candidates: list[dict[str, Any]] = []
     batch_seen: set[str] = set()
+    allow_subreddits = set(batch.allow_subreddits)
+    deny_subreddits = set(batch.deny_subreddits)
     skipped_seen = 0
     skipped_old = 0
     skipped_invalid = 0
+    skipped_title_filter = 0
+    skipped_url_filter = 0
+    skipped_subreddit_filter = 0
 
     for candidate in raw_candidates:
         if not isinstance(candidate, dict):
@@ -464,6 +514,24 @@ def merge_batch_candidates(
 
         if normalized_url in seen_urls or normalized_url in batch_seen:
             skipped_seen += 1
+            continue
+
+        title = str(candidate.get("title", "")).strip()
+        subreddit = get_candidate_subreddit(candidate)
+        if batch.include_title_keywords and not contains_any(title, batch.include_title_keywords):
+            skipped_title_filter += 1
+            continue
+        if batch.exclude_title_keywords and contains_any(title, batch.exclude_title_keywords):
+            skipped_title_filter += 1
+            continue
+        if batch.exclude_url_keywords and contains_any(normalized_url, batch.exclude_url_keywords):
+            skipped_url_filter += 1
+            continue
+        if allow_subreddits and subreddit not in allow_subreddits:
+            skipped_subreddit_filter += 1
+            continue
+        if deny_subreddits and subreddit in deny_subreddits:
+            skipped_subreddit_filter += 1
             continue
 
         published_at = parse_datetime(str(candidate.get("published_at", "")))
@@ -497,6 +565,9 @@ def merge_batch_candidates(
         "skipped_seen_count": skipped_seen,
         "skipped_old_count": skipped_old,
         "skipped_invalid_count": skipped_invalid,
+        "skipped_title_filter_count": skipped_title_filter,
+        "skipped_url_filter_count": skipped_url_filter,
+        "skipped_subreddit_filter_count": skipped_subreddit_filter,
         "emitted_urls": emitted_urls,
         "selected_candidates": final_candidates,
         "output_path": url_list_path_for_batch(batch.batch_name),
@@ -506,3 +577,26 @@ def merge_batch_candidates(
 def write_url_list_from_candidates(output_path: Path, candidates: list[dict[str, Any]]) -> None:
     lines = [str(candidate["normalized_url"]).strip() for candidate in candidates if str(candidate.get("normalized_url", "")).strip()]
     write_text_file(output_path, "\n".join(lines) + ("\n" if lines else ""))
+
+
+def contains_any(text: str, keywords: list[str]) -> bool:
+    haystack = text.lower()
+    return any(keyword in haystack for keyword in keywords)
+
+
+def get_candidate_subreddit(candidate: dict[str, Any]) -> str:
+    subreddit = str(candidate.get("subreddit", "")).strip().lower()
+    if subreddit:
+        return subreddit
+
+    normalized_url = str(candidate.get("normalized_url", "")).strip()
+    if normalized_url:
+        derived = extract_reddit_subreddit_from_url(normalized_url)
+        if derived:
+            return derived
+
+    source_feed_url = str(candidate.get("source_feed_url", "")).strip()
+    if source_feed_url:
+        return extract_reddit_subreddit_from_url(source_feed_url)
+
+    return ""

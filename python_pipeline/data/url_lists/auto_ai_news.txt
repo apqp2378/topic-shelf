@@ -1,10 +1,10 @@
 https://reddit.com/r/artificial/comments/1sej7tw/attention_is_all_you_need_but_all_you_cant_afford
 https://reddit.com/r/artificial/comments/1segneq/why_do_the_various_llm_disappoint_me_in_reading
-https://reddit.com/r/singularity/comments/1segj79/anthropic_has_now_hit_30b_in_revenue
 https://reddit.com/r/artificial/comments/1seg579/using_ai_in_your_business_without_screwing_things
-https://reddit.com/r/singularity/comments/1seflyg/13_shots_fired_into_home_of_indianapolis_city
 https://reddit.com/r/artificial/comments/1sefj36/who_needs_fancy_stuff_when_you_can_program_build
-https://reddit.com/r/singularity/comments/1sef4ws/we_can_now_simulate_a_human_brain_scientists_show
 https://reddit.com/r/artificial/comments/1seezny/three_memory_architectures_for_ai_companions
 https://reddit.com/r/artificial/comments/1seextp/if_an_ai_could_genuinely_capture_what_makes
-https://reddit.com/r/artificial/comments/1seevgd/9442_on_banking77_official_test_split_new_strong
+https://reddit.com/r/artificial/comments/1seegdp/openai_lays_out_policy_vision_for_a_world_remade
+https://reddit.com/r/artificial/comments/1seeefw/mesa_developers_decide_on_two_gen_ai_policies_for
+https://reddit.com/r/artificial/comments/1sedtfm/codegraphcontext_an_mcp_server_that_converts_your
+https://reddit.com/r/artificial/comments/1sedfh8/anthropic_have_signed_a_deal_for_multiple

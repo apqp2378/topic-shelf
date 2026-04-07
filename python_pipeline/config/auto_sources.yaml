@@ -7,6 +7,8 @@
       "enabled": true,
       "max_urls": 3,
       "recent_days": 30,
+      "allow_subreddits": ["learnpython"],
+      "exclude_title_keywords": ["weekly", "megathread", "career", "job"],
       "sources": [
         {
           "type": "rss",
@@ -21,6 +23,8 @@
       "enabled": true,
       "max_urls": 10,
       "recent_days": 14,
+      "allow_subreddits": ["artificial"],
+      "exclude_title_keywords": ["shots fired", "banking77", "indianapolis"],
       "sources": [
         {
           "type": "rss",

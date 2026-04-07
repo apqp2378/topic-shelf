@@ -97,6 +97,9 @@ def main() -> int:
         print(f"Skipped seen count: {merge_result['skipped_seen_count']}")
         print(f"Skipped old count: {merge_result['skipped_old_count']}")
         print(f"Skipped invalid count: {merge_result['skipped_invalid_count']}")
+        print(f"Skipped title filter count: {merge_result['skipped_title_filter_count']}")
+        print(f"Skipped url filter count: {merge_result['skipped_url_filter_count']}")
+        print(f"Skipped subreddit filter count: {merge_result['skipped_subreddit_filter_count']}")
 
     if emitted_urls:
         save_seen_urls(seen_urls, args.state_path)
