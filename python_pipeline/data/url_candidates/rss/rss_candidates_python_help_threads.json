@@ -1,6 +1,6 @@
 {
-  "batch_name": "python_learning_tips",
-  "batch_mode": "production",
+  "batch_name": "python_help_threads",
+  "batch_mode": "baseline",
   "enabled": true,
   "max_urls": 3,
   "recent_days": 30,
@@ -17,7 +17,7 @@
   ],
   "deny_subreddits": [],
   "parser_fallback_enabled": false,
-  "generated_at": "2026-04-07T02:48:19.101622Z",
+  "generated_at": "2026-04-07T03:05:20.324503Z",
   "source_summaries": [
     {
       "source_name": "learnpython_rss",
@@ -30,8 +30,8 @@
   "candidate_count": 25,
   "candidates": [
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -41,11 +41,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sdj84d/ask_anything_monday_weekly_thread",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T00:00:42Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -55,11 +55,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1paxmgz/ask_anything_monday_weekly_thread",
       "subreddit": "learnpython",
       "published_at": "2025-12-01T00:01:06Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -69,11 +69,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sefuby/i_used_this_python_script_to_calculate_100",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T23:54:25Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -83,11 +83,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sebhnm/leetcode_is_it_any_good_for_practice",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T21:02:08Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -97,11 +97,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sef7mz/trying_to_understand_running_a_program_from",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T23:28:00Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -111,11 +111,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1seevxc/read_a_file_containing_0s_1s_into_a_bitarray",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T23:14:24Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -125,11 +125,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sejaye/python_for_beginners",
       "subreddit": "learnpython",
       "published_at": "2026-04-07T02:25:10Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -139,11 +139,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se18r9/from_the_perspective_of_our_code_is_it_worth_to",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T14:57:55Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -153,11 +153,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1secc8y/engineering_humanlike_browser_mechanics_in",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T21:33:55Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -167,11 +167,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sehjy4/programming_concept_understanding_struggle",
       "subreddit": "learnpython",
       "published_at": "2026-04-07T01:07:48Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -181,11 +181,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se9nnr/newbie_help",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T19:56:28Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -195,11 +195,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se8y49/beginner_excel_help",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T19:31:15Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -209,11 +209,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se8hf2/how_to_connect_to_child_windows_using_pywinauto",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T19:15:57Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -223,11 +223,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se85bu/is_there_any_way_to_make_it_so_that_i_dont_have",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T19:03:53Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -237,11 +237,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se1s9f/is_code_free_camps_pythons_curse_worth_using",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T15:17:29Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -251,11 +251,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se0mbp/library_for_understanding_user_commands",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T14:34:40Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -265,11 +265,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se0bf9/printing_value_of_dictionary_as_int",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T14:23:18Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -279,11 +279,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sdh6t7/best_nonvideo_nontextbook_way_to_learn_python",
       "subreddit": "learnpython",
       "published_at": "2026-04-05T22:32:19Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -293,11 +293,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sdy6zm/how_to_write_on_the_same_line",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T13:00:19Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -307,11 +307,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sdvwen/building_astrocalc",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T11:13:54Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -321,11 +321,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sdrxfa/downloading_python_confusion",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T07:19:59Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -335,11 +335,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sdgeo5/hey_i_study_computer_science_and_i_need_to_get",
       "subreddit": "learnpython",
       "published_at": "2026-04-05T21:59:43Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -349,11 +349,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se37n3/i_want_to_start_python_which_course_is_best_i_am",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T16:08:36Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -363,11 +363,11 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1se90l0/какое_видео_найти_на_ютубе_чтобы_выучить_python",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T19:33:34Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     },
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "source_name": "learnpython_rss",
       "source_type": "rss",
       "source_feed_url": "https://www.reddit.com/r/learnpython/.rss",
@@ -377,7 +377,7 @@
       "normalized_url": "https://reddit.com/r/learnpython/comments/1sdx9yr/complete_beginner_learning_python_need_a_clear",
       "subreddit": "learnpython",
       "published_at": "2026-04-06T12:19:44Z",
-      "collected_at": "2026-04-07T02:48:19.101622Z"
+      "collected_at": "2026-04-07T03:05:20.324503Z"
     }
   ]
 }

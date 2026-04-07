@@ -2,8 +2,8 @@
   "parser_fallback_enabled": false,
   "batches": [
     {
-      "batch_name": "python_learning_tips",
-      "batch_mode": "production",
+      "batch_name": "python_help_threads",
+      "batch_mode": "baseline",
       "enabled": true,
       "max_urls": 3,
       "recent_days": 30,
