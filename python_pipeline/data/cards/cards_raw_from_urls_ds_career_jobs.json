@@ -1,0 +1,222 @@
+[
+  {
+    "card_id": "reddit_card_2026-04-07_001",
+    "source_id": "reddit_url_ingest_20260407_001",
+    "title": "Graduating Soon — Any Tips for Landing an Entry-Level Data Science Job?",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1ljsd1j/graduating_soon_any_tips_for_landing_an/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "&gt;completed 2–3 relevant tech internships First and most effective strategy is to reach out/call back all your past internships and see if...",
+      "narrow familiar sulky glorious beneficial pause slap aware history toy *This post was mass deleted and anonymized with [Redact](https://reda...",
+      "My tips will be make sure all the jobs you are applying to are on the company website not LinkedIn easy apply and also make sure you check y...",
+      "I manage a data science org with about a dozen folks. My biggest piece of advice: you have to be really explicit on what your masters of dat...",
+      "DS job market is rough right now. You should be open to non-DS roles that gets you into a large company that offers you mobility. I started ..."
+    ],
+    "created_utc": 1750813181,
+    "collected_at": "2026-04-07T01:01:53Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_002",
+    "source_id": "reddit_url_ingest_20260407_002",
+    "title": "How do I prepare for my data science job as a new grad?",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1n4n1qz/how_do_i_prepare_for_my_data_science_job_as_a_new/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "Perhaps the most jarring (yet also liberating) realization I had after finishing my bachelors and entering the workforce 15 years ago was: n...",
+      "Usually the company will have a short “settling in” period. I would suggest just going through the motions and not worrying too much. There’...",
+      "&gt; What can I do in this month to make sure I do a good job? Read a good book, take a long walk, meditate, eat some good food. Your succes...",
+      "Get absolutely hyped that you found a job as a new grad is probably my first step. Then realize that you got a job that PhDs also get for a ...",
+      "data analysis is sql. learn sql. even if you don't work with it, learn sql so you know when someone is fucking up and giving you bad data. e..."
+    ],
+    "created_utc": 1756619820,
+    "collected_at": "2026-04-07T01:01:53Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_003",
+    "source_id": "reddit_url_ingest_20260407_003",
+    "title": "Bombed a Data Scientist Interview!",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1rxf49a/bombed_a_data_scientist_interview/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "The problem with DS is the knowledge base is so broad. Some people have 15 YOE with Scala and some have 0. Imagine an interview with a ton o...",
+      "Eventually you bomb enough technical interviews that it doesn’t upset you so much. You just accept that this isn’t the job for you and that’...",
+      "I've been a Senior DS for years. I would go down in absolute flames with a SQL interview like this. I've barely touched it in years.",
+      "Doesn't this happen all the time? I mean most of the interviews in my life I have failed. Usually it takes me 600 applications, which maybe ...",
+      "If th3y were that rude you dodged a bullet"
+    ],
+    "created_utc": 1773865281,
+    "collected_at": "2026-04-07T01:01:53Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_004",
+    "source_id": "reddit_url_ingest_20260407_004",
+    "title": "Career advice for new grads or early career data scientists/analysts looking to ride the AI wave",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1r7btpj/career_advice_for_new_grads_or_early_career_data/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "The reality is a lot of platforms have matured and the low hanging fruit on the product roadmaps were completed 10 years ago so SaaS product...",
+      "As a Gen X adjacent to data science at work. Don’t get hung up on titles, or even the specifics of what you “think” you should be doing ever...",
+      "The job market has shifted, but new grads were not rug pulled so much as the expectations changed toward people who can ship real systems an...",
+      "&gt; without much prior experience related to statistics or programming. I mean, why would you target data science without programming or st...",
+      "10+ years in DS here, and I've spent the last few months genuinely wrestling with the same question for my own career. The LLM wave has acce..."
+    ],
+    "created_utc": 1771347768,
+    "collected_at": "2026-04-07T01:01:53Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_005",
+    "source_id": "reddit_url_ingest_20260407_005",
+    "title": "Where is Data Science interviews going?",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1m70fk3/where_is_data_science_interviews_going/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "I usually find it somewhat possible to read it out of the job description.",
+      "There's no single answer because every company defines data scientist differently and has different requirements out of the role. As the oth...",
+      "I usually find the JD helps you figure that out. Product Data Scientist - These are the SQL heavy roles. It’s almost a Data Analyst job but ...",
+      "What I've found in interviewing this year is that most companies are looking specifically for reasons to reject candidates, rather than find...",
+      "Just be good at everything and don't be bad at anything and you'll do great in any job /s"
+    ],
+    "created_utc": 1753246819,
+    "collected_at": "2026-04-07T01:01:53Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_006",
+    "source_id": "reddit_url_ingest_20260407_006",
+    "title": "How can I gain business acumen as a data scientist?",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1mpei2b/how_can_i_gain_business_acumen_as_a_data_scientist/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "Hmm, I think it's working with stakeholders. Stakeholders don't care about statistical metrics, they care about business metrics. So it gets...",
+      "im a data team lead for a large firm leading data scientists/engineers/analysts. and that is honestly the hardest part to grasp. most of my ...",
+      "You have to work there. Every industry is different. That’s why people say DS isn’t entry level.",
+      "You need to start working at a company to fully understand how a business works. I gained so much knowledge about business operations at my ...",
+      "You don’t get business acumen from more Kaggle medals—you get it from training your brain to think in “impact per dollar” instead of “model ..."
+    ],
+    "created_utc": 1755114298,
+    "collected_at": "2026-04-07T01:01:53Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_007",
+    "source_id": "reddit_url_ingest_20260407_007",
+    "title": "How can I *give* a good data science/machine learning interview?",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1mhikh4/how_can_i_give_a_good_data_sciencemachine/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "When you’re checking someone’s technical aptitude for Data Science/ML roles, you have to be able to tie the questions you ask to the actual ...",
+      "Asking trivia (what is r-squared, defined classification v clustering) are rarely good interview questions. Good performance on them does no...",
+      "amusing brave piquant existence dinner innate longing grandfather nail practice *This post was mass deleted and anonymized with [Redact](htt...",
+      "As a general rule, I think you, as a junior yourself, should be careful about asking questions that are too open-ended. There are three reas...",
+      "I was not senior either, and I never quizzed people like that. All interviews go two ways imo. A technical interview doesn’t mean it’s not s..."
+    ],
+    "created_utc": 1754325757,
+    "collected_at": "2026-04-07T01:01:53Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_008",
+    "source_id": "reddit_url_ingest_20260407_008",
+    "title": "How different are Data Scientists vs Senior Data Scientists technical interviews?",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1q22kk7/how_different_are_data_scientists_vs_senior_data/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "My title is technically senior applied scientist and I can only speak to one company. The difference between entry level and senior intervie...",
+      "It varies a ton, but from my limited experience on both sides it seems like for the senior level there will be more ambiguity and less detai...",
+      "Depends on the company but IME, pretty much. I recently went through a technical screen for a FAANG senior role and there was a more theoret...",
+      "I've experienced both interviewing and being interviewed for DS roles, and I'd say the bar is noticeable higher at senior level. There was a...",
+      "For companies using question banks, like FAANG, the interviews are the same but the level of answer is different, particularly for 'product ..."
+    ],
+    "created_utc": 1767370135,
+    "collected_at": "2026-04-07T01:01:53Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_009",
+    "source_id": "reddit_url_ingest_20260407_009",
+    "title": "How to prepare for AI Engineering interviews?",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1ovf9k2/how_to_prepare_for_ai_engineering_interviews/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "[removed]",
+      "LLM case studies are fundamentally about demonstrating you can think through trade-offs and build practical systems, not just recite model a...",
+      "First of all do you have fuckin interest in what I call it \"inference engineering\" If not then it's not for you.",
+      "AI Engineer interviews are shifting toward *LLM systems thinking* rather than just ML modeling. Focus your prep on: * **LLM fundamentals:** ...",
+      "It's going to depend on the company. Some companies just call AI Engineer a SWE for an AI project, so it's going to be a SWE/MLE interview. ..."
+    ],
+    "created_utc": 1762976623,
+    "collected_at": "2026-04-07T01:01:53Z"
+  },
+  {
+    "card_id": "reddit_card_2026-04-07_010",
+    "source_id": "reddit_url_ingest_20260407_010",
+    "title": "How to take the next step?",
+    "source_url": "https://www.reddit.com/r/datascience/comments/1rsdlu2/how_to_take_the_next_step/",
+    "subreddit": "datascience",
+    "status": "keep",
+    "score": 0,
+    "reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "review_note": "",
+    "top_comment_snippets": [
+      "I work as a data scientist at a fortune 50 company (10 YOE in industry). The way I made the jump was a combination of: 1. Great job market 2...",
+      "Masters aren't all that important. Most masters programmes are cash cows rather than serious degrees, and the industry knows this. Either go...",
+      "Masters definitely isn't the baseline everywhere - plenty of folks at big tech DS teams have just a BS. What actually moves the needle is a ...",
+      "Work experience and job title matters the most, followed by intangibles like specific work projects and industry. Having a PhD can be worth ...",
+      "tbh the side project thing is way more valuable than most people realize"
+    ],
+    "created_utc": 1773375983,
+    "collected_at": "2026-04-07T01:01:53Z"
+  }
+]

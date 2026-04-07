@@ -1,0 +1,822 @@
+[
+  {
+    "raw_id": "reddit_url_ingest_20260407_001",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "Graduating Soon — Any Tips for Landing an Entry-Level Data Science Job?",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1ljsd1j/graduating_soon_any_tips_for_landing_an/",
+    "post_author": "Odd_Artist4319",
+    "post_created_utc": 1750813181,
+    "post_body": "Hey everyone — I'm finishing up my MSc in Data Science this fall (Fall 2025). I also have a BSc in Computer Science and completed 2–3 relevant tech internships.\n\nI’m starting to plan my job hunt and would love to hear from working data scientists or others in the field:\n\n* Should I be applying in bulk to everything I qualify for, or focus on tailoring my resume with ATS keywords?\n* Are there other strategies that helped you break into the field?\n* What do you wish someone had told you when you were job hunting?\n* Is it even heard of fresh graduates landing data roles?\n\nI know the market’s tough right now, so I want to be as strategic as possible. Any advice is appreciated — thanks!",
+    "num_comments": 113,
+    "upvotes": 192,
+    "top_comments": [
+      {
+        "comment_id": "t1_mzm8flw",
+        "author": "forbiscuit",
+        "body": "&gt;completed 2–3 relevant tech internships\n\nFirst and most effective strategy is to reach out/call back all your past internships and see if they're interested in hiring you back.",
+        "score": 238,
+        "created_utc": 1750813538
+      },
+      {
+        "comment_id": "t1_mzm9wh8",
+        "author": "KingReoJoe",
+        "body": "narrow familiar sulky glorious beneficial pause slap aware history toy\n\n *This post was mass deleted and anonymized with [Redact](https://redact.dev/home)*",
+        "score": 161,
+        "created_utc": 1750814042
+      },
+      {
+        "comment_id": "t1_mzmd4oy",
+        "author": "olasunbo",
+        "body": "My tips will be make sure all the jobs you are applying to are on the company website not LinkedIn easy apply and also make sure you check your resume score using online resources like resumeworded.",
+        "score": 66,
+        "created_utc": 1750815152
+      },
+      {
+        "comment_id": "t1_mzmqxo8",
+        "author": "DataDrivenPirate",
+        "body": "I manage a data science org with about a dozen folks. My biggest piece of advice: you have to be really explicit on what your masters of data science actually taught you, preferably via demonstrated projects. I've seen garbage tier masters of data science programs from well known universities, and I've seen outstanding quality from land grant universities. There is substantially less variation amount masters of statistics candidates in my experience, and so unfortunately those tend to get weighted more heavily. Ultimately I'd rely more on experience, but education is very important if you don't have full time employment experience. \n\nFor anyone lurking: I would strongly recommend a masters of statistics or a masters of computer science instead of a masters of data science. It is easier to build depth via formal education and build breath via job experience.",
+        "score": 69,
+        "created_utc": 1750819935
+      },
+      {
+        "comment_id": "t1_mzn6b8y",
+        "author": "mediocrity4",
+        "body": "DS job market is rough right now. You should be open to non-DS roles that gets you into a large company that offers you mobility. \n\nI started my career in an inbound call center and did cold calling for a bit. Since I was in the front lines, once I pivoted into an analyst role I was light years better than my DS colleagues at storytelling. Got into FAANG in about 8 years of my career change",
+        "score": 48,
+        "created_utc": 1750826151
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 1,
+    "post_id": "t3_1ljsd1j",
+    "candidate_id": "t3_1ljsd1j",
+    "body_excerpt": "Hey everyone — I'm finishing up my MSc in Data Science this fall (Fall 2025). I also have a BSc in Computer Science and completed 2–3 relevant tech internships. I’m starting to plan my job hunt and would love to hear from working data scientists or others in the field: * Should I",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 37,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_002",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "How do I prepare for my data science job as a new grad?",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1n4n1qz/how_do_i_prepare_for_my_data_science_job_as_a_new/",
+    "post_author": "ExcitingCommission5",
+    "post_created_utc": 1756619820,
+    "post_body": "I just graduated from my bachelors in May. Recently, I’ve been fortunate enough to receive an offer as a data scientist I at a unicorn where most of the people on the ds team have PhDs. My job starts in a month and I’m having massive imposter syndrome, especially since my coding skills are kinda shit. I can barely do leetcode mediums. The job description is also super vague, only mentioning ML models and data analysis, so idk what specific things I should brush up on. What can I do in this month to make sure I do a good job?",
+    "num_comments": 36,
+    "upvotes": 108,
+    "top_comments": [
+      {
+        "comment_id": "t1_nbmcctq",
+        "author": "plhardman",
+        "body": "Perhaps the most jarring (yet also liberating) realization I had after finishing my bachelors and entering the workforce 15 years ago was: nobody has any clue what they’re doing a lot of the time, and everyone’s just muddling through. \n\nThat imposter syndrome you’re feeling is natural, because there is a ton that you don’t know, because you’re just starting out. And that’s ok! Focus on making yourself useful, being curious, and learning as much as you can from those around you. \n\nAs for tangible skills: data visualization and communication (both written and verbal) are crucial. Nobody will give a shit frankly if you know how to invert a binary tree on leetcode or whatever. You’re gonna be solving practical business problems, so being able to effectively talk about those problems and your ideas on how to solve them will be essential. \n\nYou’ll do great, good luck!",
+        "score": 162,
+        "created_utc": 1756621024
+      },
+      {
+        "comment_id": "t1_nbmb5m5",
+        "author": "DashboardNight",
+        "body": "Usually the company will have a short “settling in” period. I would suggest just going through the motions and not worrying too much. There’s not much more you can do if you don’t know what you’ll be working on. Considering they already have a full-fledged DS team, they should be able to understand your qualities and what tasks suit you.",
+        "score": 30,
+        "created_utc": 1756620370
+      },
+      {
+        "comment_id": "t1_nbnvtru",
+        "author": "redisburning",
+        "body": "&gt; What can I do in this month to make sure I do a good job?\n\nRead a good book, take a long walk, meditate, eat some good food.\n\nYour success in this job is a combination of things you can control and things you can't (e.g. how good is your manager, do the people around you have an investment in your success, will a meteor strike the earth, etc.). Those things you can control are more about your openness to learning, attitude, pleasantness to work with, etc.\n\nAll of those things are easier when you're feeling less stressed and less tired.\n\n&gt; I’m having massive imposter syndrome\n\nThat never goes away completely. Best you can do is accept these folks saw something in you and work every day on improving.\n\n&gt; idk what specific things I should brush up on\n\nSend the hiring manager or recruiter (or tech lead, if you were provided contact info) an email with this specific question \"is there anything you'd like me to prep on before starting?\". That's not a question for us to answer, or for you to guess at.\n\nI guess in the absence of that, personally I'd see if you can get set up to contribute to some sort of OSS project that's on github so you can get some reps in with the git CLI and playing nice with others. Documentation only changes are fine for this.",
+        "score": 17,
+        "created_utc": 1756648592
+      },
+      {
+        "comment_id": "t1_nboaodr",
+        "author": "OmnipresentCPU",
+        "body": "Get absolutely hyped that you found a job as a new grad is probably my first step.\n\nThen realize that you got a job that PhDs also get for a reason. I have a bachelor’s in finance and have worked on teams with PhDs in pure math, and I’ve had to answer questions for them because we were working on lending which I have subject matter expertise in. \n\nJust calm down and realize they invited you for a reason and if you end up on a team of PhDs you earned that spot just as much as them.",
+        "score": 7,
+        "created_utc": 1756653111
+      },
+      {
+        "comment_id": "t1_nbmzqdn",
+        "author": "S-Kenset",
+        "body": "data analysis is sql. learn sql. even if you don't work with it, learn sql so you know when someone is fucking up and giving you bad data. even if your company works entirely on excel, learn sql anyways because it's in demand.",
+        "score": 19,
+        "created_utc": 1756634622
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 2,
+    "post_id": "t3_1n4n1qz",
+    "candidate_id": "t3_1n4n1qz",
+    "body_excerpt": "I just graduated from my bachelors in May. Recently, I’ve been fortunate enough to receive an offer as a data scientist I at a unicorn where most of the people on the ds team have PhDs. My job starts in a month and I’m having massive imposter syndrome, especially since my coding",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 28,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_003",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "Bombed a Data Scientist Interview!",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1rxf49a/bombed_a_data_scientist_interview/",
+    "post_author": "tits_mcgee_92",
+    "post_created_utc": 1773865281,
+    "post_body": "I had an interview for a Data Science position. For reference, I've worked in Analytics/Science-adjacent fields for 8 years now. I've mainly been in mid-level roles, and honestly, it's been fine.\n\nThis was for a senior level position and... I bombed the technical portion. Holy cow - it was rough!\n\nI answered behavioral questions well, gave them examples of projects, and everything started going smooth until....\n\nThey started asking me SQL questions and how to optimize queries. I started doing good, but then my mind started going completely blank with the scenarios they asked. They wanted windows functions scenarios, which made sense, but I wasn't explaining it well. I know what and how to use them, but I could not make it make sense.\n\nAnd then when I wasn't explaining it well my ears started turning red. I apologized, got back on track, and then bombed a query where multiple CTEs were needed.\n\nThe Director said \"Okay, let's take a step back. Can you even explain what the difference between WHERE and HAVING is?\" It was so rude, so blunt, and I immediately knew I was coming off as someone who didn't know SQL. I told him, and then he said \"Okay then.\"\n\nHe asked me another question and I said \"HUH\" real loud for some reason. My stomach started hurting like crazy and it was growling.\n\nThey asked me some data modeling questions and that was fairly straightforward. Nothing actually came across as what the role was posted as though.\n\nAnyway, I left the interview and my stomach was hurting. I thought I could make it but I asked the security guard if I could turn around and use the restroom. I had to walk past the people again as they were coming out of the room, and they looked like they didn't even want to share eye contact lmao!\n\nI expect a rejection email. I tell you this to know anxiety can get the best of you sometimes with data science interviews, and sometimes they're not exactly data science related (even though SQL and modeling are very important). A lot of posts here are from people who come across as perfect, and maybe they are, but I'm sure as hell not and I wanted to show that it can happen to anyone!",
+    "num_comments": 119,
+    "upvotes": 322,
+    "top_comments": [
+      {
+        "comment_id": "t1_ob6qlht",
+        "author": "Trick-Interaction396",
+        "body": "The problem with DS is the knowledge base is so broad. Some people have 15 YOE with Scala and some have 0. Imagine an interview with a ton of Scala questions. That doesn't mean the candidate is stupid or unqualified.",
+        "score": 173,
+        "created_utc": 1773867005
+      },
+      {
+        "comment_id": "t1_ob6mukf",
+        "author": "Lady_Data_Scientist",
+        "body": "Eventually you bomb enough technical interviews that it doesn’t upset you so much. You just accept that this isn’t the job for you and that’s ok. Make a note of what to practice for next time.",
+        "score": 278,
+        "created_utc": 1773865954
+      },
+      {
+        "comment_id": "t1_ob6vgvr",
+        "author": "ghostofkilgore",
+        "body": "I've been a Senior DS for years. I would go down in absolute flames with a SQL interview like this. I've barely touched it in years.",
+        "score": 65,
+        "created_utc": 1773868378
+      },
+      {
+        "comment_id": "t1_ob6ngd3",
+        "author": "neuro-psych-amateur",
+        "body": "Doesn't this happen all the time? I mean most of the interviews in my life I have failed. Usually it takes me 600 applications, which maybe leads to 20-25 interviews, and then hopefully my offer.\nI am a bit surprised that you describe the situation as if it's unusual. I mean it's usually the other way around. You fail most interviews and hopefully do well on 1 out of 25.\nIt's all random. Like it could just happen that you get your period on the day of your interview and you are in awful pain. Or your baby wakes up 3 times per night and basically you end up sleeping 3 hours in total before the interview. Happens all the time to me.",
+        "score": 113,
+        "created_utc": 1773866124
+      },
+      {
+        "comment_id": "t1_ob6of24",
+        "author": "1Lincoyan",
+        "body": "If th3y were that rude you dodged a bullet",
+        "score": 94,
+        "created_utc": 1773866398
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 3,
+    "post_id": "t3_1rxf49a",
+    "candidate_id": "t3_1rxf49a",
+    "body_excerpt": "I had an interview for a Data Science position. For reference, I've worked in Analytics/Science-adjacent fields for 8 years now. I've mainly been in mid-level roles, and honestly, it's been fine. This was for a senior level position and... I bombed the technical portion. Holy cow",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 66,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_004",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "Career advice for new grads or early career data scientists/analysts looking to ride the AI wave",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1r7btpj/career_advice_for_new_grads_or_early_career_data/",
+    "post_author": "vanisle_kahuna",
+    "post_created_utc": 1771347768,
+    "post_body": "From what I'm starting to see in the job market, it seems to me that the demand for \"traditional\" data science or machine learning roles seem be decreasing and shifting towards these new LLM-adjacent roles like AI/ML engineers. I think the main caveat to this assumption are DS roles that require strong domain knowledge to begin with and are more so looking to add data science best practices and problem framing to a team (think fields like finance or life sciences). Honestly it's not hard to see why as someone with strong domain knowledge and basic statistics can now build reasonable predictive models and run an analysis by querying an LLM for the code, check their assumptions with it, run tests and evals, etc. \n\nHaving said that, I'm curious what the subs advice would be for new grads (or early career DS) who graduated around the time of the ChatGPT genesis to maximize their chance of breaking into data? Assume these new grads are bootcamp graduates or did a Bachelors/Masters in a generic data science program (analysis in a notebook, model development, feature engineering, etc) without much prior experience related to statistics or programming. Asking new DS to pivot and target these roles just doesn't seem feasible because a lot of the time the requirements are often a strong software engineering background as a bare minimum.\n\nGiven the field itself is rapidly shifting with the advances in AI we're seeing (increased LLM capabilities, multimodality, agents, etc), what would be your advice for new grads to break into data/AI? Did this cohort of new grads get rug-pulled? Or is there still a play here for them to upskill in other areas like data/analytics engineering to increase their chances of success?",
+    "num_comments": 44,
+    "upvotes": 68,
+    "top_comments": [
+      {
+        "comment_id": "t1_o5wbsd0",
+        "author": "RobfromHB",
+        "body": "The reality is a lot of platforms have matured and the low hanging fruit on the product roadmaps were completed 10 years ago so SaaS products started making in house analytics tools and focusing integrations with other systems (ex: connect your random ERP to Hub Spot or whatever). This was happening before LLMs took off and the current AI cycle just accelerated it. The writing was on the wall already for data analytics work.\n\nThe advice for new grads is still kind of the same as it was when the labor market got saturated around COVID, show people what you can build. No one cares about Titanic dataset tutorials or a portfolio of Jupyter notebooks with 30 pages of “report”. People want to see a unique insight on novel data, a project that conveys a sense of architecture, or some job experience that goes beyond homework. New grads and soon to be grads should be hammering every internship possible and working on projects that aren’t just resume padding.",
+        "score": 75,
+        "created_utc": 1771349033
+      },
+      {
+        "comment_id": "t1_o5x78sy",
+        "author": "kjwikle",
+        "body": "As a Gen X adjacent to data science at work. Don’t get hung up on titles, or even the specifics of what you “think” you should be doing every day. Try and learn about the business where you work, or if it’s research/non profit/academic, learn about what actually goes on, when people ask you to help them with something, set boundaries, but help, you will learn more and probably be more effective long term than if you are too rigid and only want “strict” data science, math, modeling problems. If you’re seen as someone who can solve a problem with data you’re likely to be asked about math/modeling and other problems later. I work at a major manufacturing company. The grads we hired who dug in and tried to help build solutions with python/r did great, the ones who only wanted to build models struggled. Data science as a title was very popular for 10+ yrs but the work they did was more of a combination of bi/data engineering/data science. \n\nI’ve been in analytics for about 17 yrs.",
+        "score": 25,
+        "created_utc": 1771357812
+      },
+      {
+        "comment_id": "t1_o5z6u9i",
+        "author": "msn018",
+        "body": "The job market has shifted, but new grads were not rug pulled so much as the expectations changed toward people who can ship real systems and create measurable business impact. Instead of targeting the old notebook focused data scientist role, focus on strong SQL, data modeling, basic software engineering practices, cloud fundamentals, and the ability to deploy and monitor simple pipelines. Pair that with either domain expertise in industries like finance or healthcare or practical LLM application skills such as building RAG systems, designing evaluations, and tracking cost and performance. Use platforms like Snowflake, BigQuery, dbt, StrataScratch, and AWS to build data skills, and tools like OpenAI, Hugging Face, LangChain, and Pinecone to experiment with AI applications. If you position yourself as someone who can turn messy data into reliable assets and deliver AI enabled features end to end, you can stay competitive even without a deep ML engineering background.",
+        "score": 8,
+        "created_utc": 1771379674
+      },
+      {
+        "comment_id": "t1_o5yzzhb",
+        "author": "hockey3331",
+        "body": "&gt; without much prior experience related to statistics or programming. \n\n\nI mean, why would you target data science without programming or statistics? Its really tough to avoid both.\n\n\nShort term, the play is to get into a company that is tech-illeterate and be their in-house expert. Then you use AI to deliver much faster than anyone else and get surface info on a ton of topics that nobody dreams of touching. You look like a rock star and start being trusted with your own initiatives and gain valuable experience in the real world - working at the stats/programming on the way.\n\n\nThats the most straightforward shot. Less competition too because talented and experienced DS practitioners are avoiding those places like the plague.",
+        "score": 8,
+        "created_utc": 1771377574
+      },
+      {
+        "comment_id": "t1_o65wsfk",
+        "author": "Ill-Deer722",
+        "body": "10+ years in DS here, and I've spent the last few months genuinely wrestling with the same question for my own career. The LLM wave has accelerated something that was already quietly happening. DS has always sat in an awkward middle ground, technical but we're not engineers, business-facing but without the visibility of other functions to go up the chain.\n\nMy honest advice for new grads: if hardcore engineering isn't your thing, lean into what LLMs can't easily replicate: stakeholder management, problem framing, translating ambiguous business questions into something tractable. The PM-adjacent path in AI products will need people who are technically literate but also genuinely good with people. That will be a gap down the line. If you enjoy the algorithm development, then lean into AI engineering roles.\n\nThe ceiling in large DS orgs was always real. The difference now is the timeline has compressed: so being intentional about which direction you grow early matters more than it used to.",
+        "score": 4,
+        "created_utc": 1771464246
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 4,
+    "post_id": "t3_1r7btpj",
+    "candidate_id": "t3_1r7btpj",
+    "body_excerpt": "From what I'm starting to see in the job market, it seems to me that the demand for \"traditional\" data science or machine learning roles seem be decreasing and shifting towards these new LLM-adjacent roles like AI/ML engineers. I think the main caveat to this assumption are DS ro",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 18,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_005",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "Where is Data Science interviews going?",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1m70fk3/where_is_data_science_interviews_going/",
+    "post_author": "drewm8080",
+    "post_created_utc": 1753246819,
+    "post_body": "As a data scientist myself, I’ve been working on a lot of RAG + LLM things and focused mostly on SWE related things. However, when I interview at jobs I notice every single data scientist job is completely different and it makes it hard to prepare for. Sometimes I get SQL questions, other times I could get ML, Leetcode, pandas data frames, probability and Statistics etc and it makes it a bit overwhelming to prepare for every single interview because they all seem very different. \n\nHas anyone been able to figure out like some sort of data science path to follow? I like how things like Neetcode are very structured to follow, but fail to find a data science equivalent.",
+    "num_comments": 52,
+    "upvotes": 191,
+    "top_comments": [
+      {
+        "comment_id": "t1_n4ntfgr",
+        "author": "friend_of_kalman",
+        "body": "I usually find it somewhat possible to read it out of the job description.",
+        "score": 141,
+        "created_utc": 1753247470
+      },
+      {
+        "comment_id": "t1_n4nu2s9",
+        "author": "marrone12",
+        "body": "There's no single answer because every company defines data scientist differently and has different requirements out of the role. As the other commenter said, the job description should hopefully give you a clue. That being said, SQL is almost mandatory at the vast majority of roles -- you should be an expert at it. I always ask a SQL question when I hire people as all of our data is in SQL. Probability theory is good to know, I've been asked about that at most interviews.\n\nI just hired a data scientist where I needed them to be good at sql, GLM/probabilistic modeling and ML, and excel. It was what we needed at the company even if it's not a standard mix of skills.",
+        "score": 66,
+        "created_utc": 1753247787
+      },
+      {
+        "comment_id": "t1_n4nurue",
+        "author": "Motor_Zookeepergame1",
+        "body": "I usually find the JD helps you figure that out.\n\nProduct Data Scientist - These are the SQL heavy roles. It’s almost a Data Analyst job but FAANG calls it a Data Scientist. \n\nApplied Scientist/Data Scientist (ML) - These are usually what most people would think of as Data Science. It’s a mix of DE and ML and stats etc \n\nML Engineer - This is as close to SWE as you can get along with ML Depth \n\nAI Engineer/GenAI Engineer - LLMs + DL + SWE \n\nWhile this is a generalization, I find that most job descriptions help clear this up from the get go.\n\nEDIT: I do ML in the Telecom industry. I always expect a certain level of SQL proficiency when I Interview candidates even for ML heavy roles. I think it’s a non-negotiable.",
+        "score": 62,
+        "created_utc": 1753248130
+      },
+      {
+        "comment_id": "t1_n4q249u",
+        "author": "madbadanddangerous",
+        "body": "What I've found in interviewing this year is that most companies are looking specifically for reasons to reject candidates, rather than finding reasons to hire them. And it is very easy to devise a test or set of questions that will convince you a candidate isn't good enough.\n\nOne example of this from a previous company I worked at was when my boss rejected a candidate because they couldn't define the differences between a few SQL variants. Why does that matter? We needed someone to build some data engineering pipelines for us. If they knew MSSQL but we needed them to know TSQL, well, we could train them or give them an hour to get up to speed. \n\nIt's hard to internalize this because so much is riding on our interview performance and whether or not we get an offer, but we have no control over what the company will ask or how they will approach the process. We can't prepare for literally every concept, tool, eventuality, so if a company is set on rejecting us, we just have to let it happen and not internalize it as being due to our inadequate preparation. \n\nThat's not to say you shouldn't prepare, because of course you should. But also don't expect to know everything or that hitting some goal in terms of your prep means you will pass the interview",
+        "score": 9,
+        "created_utc": 1753282655
+      },
+      {
+        "comment_id": "t1_n4o9o7p",
+        "author": "[deleted]",
+        "body": "Just be good at everything and don't be bad at anything and you'll do great in any job /s",
+        "score": 25,
+        "created_utc": 1753256078
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 5,
+    "post_id": "t3_1m70fk3",
+    "candidate_id": "t3_1m70fk3",
+    "body_excerpt": "As a data scientist myself, I’ve been working on a lot of RAG + LLM things and focused mostly on SWE related things. However, when I interview at jobs I notice every single data scientist job is completely different and it makes it hard to prepare for. Sometimes I get SQL questio",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 24,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_006",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "How can I gain business acumen as a data scientist?",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1mpei2b/how_can_i_gain_business_acumen_as_a_data_scientist/",
+    "post_author": "Odd_Artist4319",
+    "post_created_utc": 1755114298,
+    "post_body": "I can build models, but can I build profits? That’s the gap I’m trying to close.\n\nI’m doing my Master’s in Data Science with a BSc in Computer Science. My technical skills are strong, but I lack business acumen. In interviews, I’ve noticed many questions aren’t just about models or algorithms, but about how those translate into profits or measurable business value.\n\nSenior data scientists seem to connect their work to revenue, retention, or strategy with ease, while I still default to thinking in terms of accuracy and technical metrics. How did you learn to bridge that gap? Did you focus on general business knowledge, industry-specific skills, or hands-on projects?\n\nI want to speak the “language of the business” so my work is not just technically solid but strategically impactful.",
+    "num_comments": 53,
+    "upvotes": 105,
+    "top_comments": [
+      {
+        "comment_id": "t1_n8iyyxg",
+        "author": "lakeland_nz",
+        "body": "Hmm,\n\nI think it's working with stakeholders.  Stakeholders don't care about statistical metrics, they care about business metrics. So it gets gently beaten into you - you'll see a blank stare every time you present numbers they can't use, and you adapt.  \n\nIt's not just a simple translation either, for example companies always have to do something.  I'll happily put a model into production if it will help 'on the balance of probability', so far short of statistically significant.  Especially if the factors line up with my intuition.  \n\nBasically spend your time explaining what's going on to nontechnical people, and you'll learn to approach problems and present results in the language of what matters to them.   That's not 'general business knowledge', 'industry-specific skills' or 'hands-on projects' or rather it's all of those, but it'd be quite possible to be doing all three without getting very far.  \n\nDefine your success in terms of how much the business stakeholders trust you.",
+        "score": 49,
+        "created_utc": 1755115116
+      },
+      {
+        "comment_id": "t1_n8iyyqi",
+        "author": "titaniumsack",
+        "body": "im a data team lead for a large firm leading data scientists/engineers/analysts. and that is honestly the hardest part to grasp. most of my guys started as interns and young professionals and thats what they lack the most in general. this is why when we hire we dont look for experience, but rather communication, hobbies, and soft skills.\n\ni think what makes it click the most is just a change in mindset, start being curious about those topics and how you can bring value, and eventually it will become second nature.\n\ni have actually writen books about this level of thinking and data, systems, and optimization, let me know if you have any questions.",
+        "score": 79,
+        "created_utc": 1755115114
+      },
+      {
+        "comment_id": "t1_n8j8dh1",
+        "author": "Trick-Interaction396",
+        "body": "You have to work there. Every industry is different. That’s why people say DS isn’t entry level.",
+        "score": 18,
+        "created_utc": 1755117758
+      },
+      {
+        "comment_id": "t1_n8izph3",
+        "author": "[deleted]",
+        "body": "You need to start working at a company to fully understand how a business works. I gained so much knowledge about business operations at my first company I worked at. I currently build economic and ML models at my current job but I learned from working.\n\nIf you want to start learning, read a public company 10-K statement in the industry you are interested in. Understand the term EBITDA, credit/debit, debt, stock prices, operating expenses, etc. \n\nHere is [Meta's 10-K](https://d18rn0p25nwr6d.cloudfront.net/CIK-0001326801/a8eb8302-b52c-4db5-964f-a2d796c05f4b.pdf)",
+        "score": 17,
+        "created_utc": 1755115329
+      },
+      {
+        "comment_id": "t1_n8jhh4a",
+        "author": "Thin_Rip8995",
+        "body": "You don’t get business acumen from more Kaggle medals—you get it from training your brain to think in “impact per dollar” instead of “model accuracy.”\n\nEasiest way to build it:\n\n* **Sit in on non-tech meetings**—sales calls, marketing reviews, ops updates. Listen for how they define success and the numbers they track.\n* **Pick one industry** you care about and learn its key levers (in e-commerce: CAC, LTV, churn; in SaaS: ARR, MRR, retention; in manufacturing: throughput, defect rate, downtime).\n* **Reframe every model** you build in business terms—“This fraud detection pipeline reduces false negatives by X, saving $Y per quarter” instead of “AUC improved by 0.05.”\n* **Pair with a product manager** on a side project—they live in the space between user needs, business goals, and technical delivery.\n* **Read earnings calls &amp; annual reports** for companies in your target sector. It’s a crash course in how execs talk about strategy and metrics.\n\nOnce you can explain your model’s value in the same language a CFO or CMO uses, you’ve crossed the line from “data scientist” to “profit scientist.”\n\n[The NoFluffWisdom Newsletter](https://NoFluffWisdom.com/Subscribe) has some sharp takes on turning model outputs into business outcomes worth a peek!",
+        "score": 18,
+        "created_utc": 1755120330
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 6,
+    "post_id": "t3_1mpei2b",
+    "candidate_id": "t3_1mpei2b",
+    "body_excerpt": "I can build models, but can I build profits? That’s the gap I’m trying to close. I’m doing my Master’s in Data Science with a BSc in Computer Science. My technical skills are strong, but I lack business acumen. In interviews, I’ve noticed many questions aren’t just about models o",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 35,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_007",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "How can I *give* a good data science/machine learning interview?",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1mhikh4/how_can_i_give_a_good_data_sciencemachine/",
+    "post_author": "ProbaDude",
+    "post_created_utc": 1754325757,
+    "post_body": "I'm around 6 months into my first non intern job and am the only data scientist/MLE in my company. My company has decided they want to bring on some much needed help (thank god) and want me to do \"the more technical side\" of the interview (with others taking care of the behavioral etc)\n\nI do have some questions in mind specific to my job for what I want in a colleague but I still feel a bit underprepared. My plan is to ask the 'basic' questions that I got asked in every interview (classification vs clustering, what is r^2, etc) before asking them how they would solve some of the problems I'm actually working on\n\nBut like that's all I have in the pipeline at the moment, and I'd really like to avoid this becoming the blind interviewing the blind moment.  \n\nDoes anyone have any good tips on how to do the interviews, what to look for or what to include? Thank you!!!!\n\nEDIT: In reply to the DMs, we are not accepting any new applicants at this time 😅",
+    "num_comments": 39,
+    "upvotes": 172,
+    "top_comments": [
+      {
+        "comment_id": "t1_n6wft40",
+        "author": "Motor_Zookeepergame1",
+        "body": "When you’re checking someone’s technical aptitude for Data Science/ML roles, you have to be able to tie the questions you ask to the actual work you do, rather than just asking for definitions.\n\nFor example, if my team is building classifiers, I’d ask things like “How does changing the threshold affect Precision and Recall” rather than just asking for definitions of Precision and Recall. But to answer that question, they’d have to know what those definitions are. \n\nSo tie your questions to the job description. This is how you would keep it fair. There’s so much theory that’s asked in these interviews that’s honestly quite meaningless because you’re never going to be using it.",
+        "score": 119,
+        "created_utc": 1754326818
+      },
+      {
+        "comment_id": "t1_n6wf9tq",
+        "author": "RB_7",
+        "body": "Asking trivia (what is r-squared, defined classification v clustering) are rarely good interview questions. Good performance on them does not usually correlate well to strong candidates.\n\nGenerally, the best way to design an interview is to create an open-ended question in a specifically scoped technical domain that you know well. For example, if you work on fraud detection systems, you might ask \"Tell me how you would design a fraud detection system\" - and that's it, that's the whole interview. You could talk about this for an hour at least.\n\nIf you are looking for more insight into the candidate as an engineer, you could clarify that you want a systems view, so how the feature store works, where model artifacts are stored and how they are served, how data for observability gets emitted etc.\n\nIf you want a more modeling focused view, then ask the candidate to think through data collection, featurization, choice of model, how to evaluate the model, etc. Prepare follow-up questions for each stage depending on what the candidate might say, but also use your judgement - remember this should be in a domain you know well.",
+        "score": 48,
+        "created_utc": 1754326670
+      },
+      {
+        "comment_id": "t1_n6wibs8",
+        "author": "KingReoJoe",
+        "body": "amusing brave piquant existence dinner innate longing grandfather nail practice\n\n *This post was mass deleted and anonymized with [Redact](https://redact.dev/home)*",
+        "score": 13,
+        "created_utc": 1754327509
+      },
+      {
+        "comment_id": "t1_n6wleen",
+        "author": "Ragefororder1846",
+        "body": "As a general rule, I think you, as a junior yourself, should be careful about asking questions that are too open-ended. There are three reasons for this:\n\n1. You may not yet be experienced enough to recognize the differences between actually smart answers and answers that just sound smart\n\n2. You will be inclined to hire someone that thinks the same way you do. This can be dangerous since the way you think about DS/ML right now may not be the way a more experienced person would think about it (or the way you will think about it in ten years)\n\n3. You will be letting your personal biases have a large degree of control over the interview process\n\nInstead, I would split apart the traits you want your ideal candidate to have and test them separately.\n\nWant domain knowledge? Come up with 2/3 multiple-choice questions about your domain. Want SWE skills? Have them do a straightfoward coding problem with a clear correct solution. Want DS skills? Ask those basic stats/ML questions you were discussing earlier. \n\nThe absolute worst thing you can do is to recommend a candidate that isn't right for the job and so you should do everything to focus on weeding out people who are bad with simpler questions instead of separating the good from the great with more complex questions.",
+        "score": 12,
+        "created_utc": 1754328345
+      },
+      {
+        "comment_id": "t1_n6xsue0",
+        "author": "theeeiceman",
+        "body": "I was not senior either, and I never quizzed people like that. All interviews go two ways imo. A technical interview doesn’t mean it’s not still a behavioral evaluation from their end, and I wouldn’t appreciate being “quizzed” if I was in their shoes.\n\nI’d introduce myself and my role so they knew how technical I was. Then I’d ask them to explain a project from their resume/of their choice. It’s conversational, it’s a low pressure way to fish out how competent they are. This worked at all experience levels, in my experience. \n\nI asked follow ups that peaked my interest, relative to the needs of the role. Then asked more direct questions on if they had experience with certain things - just to get a feel for how far along they are. “I haven’t used that before” was a perfectly valid answer and did not immediately kill anyone’s chances. Purely diagnostic.\n\nI didn’t ask much about general programming experience tbh. I mean, if they can explain in depth a statistical model that they built, then they presumably had the programming ability to actually build it. \n\nIf you’re looking for an MLE maybe this is a different story. but that’s how I approached DS/DA interviews.",
+        "score": 4,
+        "created_utc": 1754340742
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 7,
+    "post_id": "t3_1mhikh4",
+    "candidate_id": "t3_1mhikh4",
+    "body_excerpt": "I'm around 6 months into my first non intern job and am the only data scientist/MLE in my company. My company has decided they want to bring on some much needed help (thank god) and want me to do \"the more technical side\" of the interview (with others taking care of the behaviora",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 24,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_008",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "How different are Data Scientists vs Senior Data Scientists technical interviews?",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1q22kk7/how_different_are_data_scientists_vs_senior_data/",
+    "post_author": "LebrawnJames416",
+    "post_created_utc": 1767370135,
+    "post_body": "Hello everyone!\n\n  \nI am preparing for a technical interview for a Senior DS role and wanted to hear from those that have gone through the process, is it much different? Do you prepare in the same way? Leet code and general ML and experimentation knowledge?",
+    "num_comments": 38,
+    "upvotes": 62,
+    "top_comments": [
+      {
+        "comment_id": "t1_nx9vqr5",
+        "author": "Commercial_Note_210",
+        "body": "My title is technically senior applied scientist and I can only speak to one company. The difference between entry level and senior interviews is not the interview topics for the most part. Senior one may include a system design that the entry ones don't, but otherwise, it's just higher expectations. The coding interviews don't get you a senior offers - it's peoples judgment that you are senior based on showing real life experience.",
+        "score": 59,
+        "created_utc": 1767370569
+      },
+      {
+        "comment_id": "t1_nxa4y7d",
+        "author": "redcascade",
+        "body": "It varies a ton, but from my limited experience on both sides it seems like for the senior level there will be more ambiguity and less detail given for the case studies. You’ll be expected to ask the right questions to figure things out rather than just being given a concrete case that you just need to solve. \n\nThere won’t necessarily be a higher bar for stats or coding knowledge (you’ll be expected to know both decently well for either level). Again it varies a lot and I have less insight into coding interviews as I haven’t been on both sides. Expect it to be more “We need to figure out X, how should we start and what should we do?” rather than “How do you solve X problem?”.",
+        "score": 15,
+        "created_utc": 1767373146
+      },
+      {
+        "comment_id": "t1_nx9wx29",
+        "author": "save_the_panda_bears",
+        "body": "Depends on the company but IME, pretty much. I recently went through a technical screen for a FAANG senior role and there was a more theoretical round on experimentation round and a coding round consisting of a fairly straightforward metric definition/SQL question and a LC easy/medium question.\n\nYou may also get some more domain specific questions than a non senior. We asked a few causal inference (SCM) related questions when I was doing technical screens last fall, but it was very clearly listed as a requirement in the JD.",
+        "score": 7,
+        "created_utc": 1767370900
+      },
+      {
+        "comment_id": "t1_nxafzfk",
+        "author": "KitchenTaste7229",
+        "body": "I've experienced both interviewing and being interviewed for DS roles, and I'd say the bar is noticeable higher at senior level. There was a deeper dive into past projects, with interviewers probing why/how you chose certain models, handled ambiguity, demonstrated influence from end to end. LeetCode is still relevant, but generally more emphasis is placed on system design and cases (some companies have a separate round for this) to really zero in on your ability to articulate trade-offs. There's also advanced ML &amp; stats knowledge typically not covered for more junior roles, iirc. Prep is definitely more different, and I can share some resources if you'd like.",
+        "score": 7,
+        "created_utc": 1767376249
+      },
+      {
+        "comment_id": "t1_nxa35fa",
+        "author": "Single_Vacation427",
+        "body": "For companies using question banks, like FAANG, the interviews are the same but the level of answer is different, particularly for 'product sense' type scenarios. Also, behavioral interviews will expect you to talk more about impact at a different level than if it were a more junior role.",
+        "score": 5,
+        "created_utc": 1767372645
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 8,
+    "post_id": "t3_1q22kk7",
+    "candidate_id": "t3_1q22kk7",
+    "body_excerpt": "Hello everyone! I am preparing for a technical interview for a Senior DS role and wanted to hear from those that have gone through the process, is it much different? Do you prepare in the same way? Leet code and general ML and experimentation knowledge?",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 21,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_009",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "How to prepare for AI Engineering interviews?",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1ovf9k2/how_to_prepare_for_ai_engineering_interviews/",
+    "post_author": "alpha_centauri9889",
+    "post_created_utc": 1762976623,
+    "post_body": "I am a DS with 2 yrs exp. I have worked with both traditional ML and GenAI. I have been seeing different posts regarding AI Engineer interviews which are highly focused towards LLM based case studies. To be honest, I don't have much clue regarding how to answer them. Can anyone suggest how to prepare for LLM based case studies that are coming up in AI Engineer interviews? How to think about LLMs from a system perspective?",
+    "num_comments": 23,
+    "upvotes": 17,
+    "top_comments": [
+      {
+        "comment_id": "t1_noixojw",
+        "author": "[deleted]",
+        "body": "[removed]",
+        "score": 33,
+        "created_utc": 1762982933
+      },
+      {
+        "comment_id": "t1_nono6kr",
+        "author": "akornato",
+        "body": "LLM case studies are fundamentally about demonstrating you can think through trade-offs and build practical systems, not just recite model architectures. When interviewers present these cases, they want to see you discuss prompt engineering strategies, when to use RAG versus fine-tuning, how to handle context windows and token limits, cost optimization across different providers, evaluation metrics for LLM outputs, and failure modes like hallucinations. They're testing if you understand that building with LLMs means orchestrating multiple components - vector databases, caching layers, fallback strategies, monitoring systems - not just calling an API. Start working through real scenarios: design a customer support chatbot, build a document Q&amp;A system, create a code generation tool. Force yourself to articulate the full system - data pipelines, embedding strategies, retrieval methods, prompt templates, output parsing, and how you'd measure success.\n\nYour two years of DS experience already gives you the analytical thinking needed, and your GenAI exposure means you're not starting from zero. The gap is mainly in production systems thinking rather than ML fundamentals. Practice common [AI Engineer interview questions](https://www.interviews.chat/questions/ai-engineer) focusing on system design with LLMs, read through case studies from companies like OpenAI, Anthropic, and LangChain's documentation, and actually build a small end-to-end project that you can discuss in detail. Get comfortable explaining why you'd choose GPT-4 over Claude or vice versa for specific use cases, how you'd handle rate limits and retries, and what your testing strategy would be for non-deterministic outputs. The transition from DS to AI Engineer is absolutely doable - you just need to shift from model-centric thinking to systems-centric thinking.",
+        "score": 6,
+        "created_utc": 1763052229
+      },
+      {
+        "comment_id": "t1_noj10mh",
+        "author": "Artistic-Comb-5932",
+        "body": "First of all do you have fuckin interest in what I call it \"inference engineering\" \n\nIf not then it's not for you.",
+        "score": 11,
+        "created_utc": 1762983936
+      },
+      {
+        "comment_id": "t1_nol0unp",
+        "author": "Pale-Example5467",
+        "body": "AI Engineer interviews are shifting toward *LLM systems thinking* rather than just ML modeling. Focus your prep on:\n\n* **LLM fundamentals:** tokenization, embeddings, context windows, prompting, fine-tuning, RAG, and evals.\n* **System design for LLMs:** how to build scalable pipelines — retrieval, caching, monitoring, and cost/perf tradeoffs.\n* **Case studies:** practice reasoning through how you’d design a chatbot, summarization tool, or agentic workflow — outline data flow, model choice, latency, and feedback loops.\n* **Hands-on:** build small projects with LangChain, LlamaIndex, or OpenAI’s APIs — interviewers love seeing applied understanding.\n\nThink of it less like “model training” and more like “LLM application engineering.”",
+        "score": 11,
+        "created_utc": 1763009810
+      },
+      {
+        "comment_id": "t1_noipu8m",
+        "author": "Single_Vacation427",
+        "body": "It's going to depend on the company. Some companies just call AI Engineer a SWE for an AI project, so it's going to be a SWE/MLE interview. Others are going to have a take home. \n\nTo be honest, I wouldn't do it because the interviews are going to be all over the place. I would just prepare for MLE interviews if you want to do that and focus on that. Even if they vary, at least they don't vary as much.",
+        "score": 3,
+        "created_utc": 1762980568
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 9,
+    "post_id": "t3_1ovf9k2",
+    "candidate_id": "t3_1ovf9k2",
+    "body_excerpt": "I am a DS with 2 yrs exp. I have worked with both traditional ML and GenAI. I have been seeing different posts regarding AI Engineer interviews which are highly focused towards LLM based case studies. To be honest, I don't have much clue regarding how to answer them. Can anyone s",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 13,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  },
+  {
+    "raw_id": "reddit_url_ingest_20260407_010",
+    "source": "reddit_url_ingest",
+    "subreddit": "datascience",
+    "post_title": "How to take the next step?",
+    "post_url": "https://www.reddit.com/r/datascience/comments/1rsdlu2/how_to_take_the_next_step/",
+    "post_author": "[deleted]",
+    "post_created_utc": 1773375983,
+    "post_body": "Going on 1YOE as a data scientist at a small consulting company. Have a STEM degree but no masters.\n\nCurrent role is as a contractor, so around full time work, but I am looking to transition into something more stable.\n\nIs making the jump to a bigger companies DS team possible without a masters? Feels like thats the new baseline. Not super excited about going back to school, but had no luck applying to other positions.\n\nI went to a great university but its not American, so little alumni network or brand recognition in the USA",
+    "num_comments": 32,
+    "upvotes": 33,
+    "top_comments": [
+      {
+        "comment_id": "t1_oa65ksp",
+        "author": "Minute_Birthday8285",
+        "body": "I work as a data scientist at a fortune 50 company (10 YOE in industry). The way I made the jump was a combination of:\n\n1. Great job market\n2. Immense amount of time and effort spent searching and refining my resume\n3. Side project\n\nThe side project I did was the first thing that was talked about in every interview with their DS teams.",
+        "score": 30,
+        "created_utc": 1773376357
+      },
+      {
+        "comment_id": "t1_oa7j4uq",
+        "author": "Tundur",
+        "body": "Masters aren't all that important. Most masters programmes are cash cows rather than serious degrees, and the industry knows this. Either go to an absolutely elite school or save your time and money. Plenty of places will hire off a BSc.\n\n\nA masters from a school that's known to be mediocre can even be a *negative*, because it makes you look like a sucker.",
+        "score": 9,
+        "created_utc": 1773402572
+      },
+      {
+        "comment_id": "t1_oa6splz",
+        "author": "Ghost-Rider_117",
+        "body": "Masters definitely isn't the baseline everywhere - plenty of folks at big tech DS teams have just a BS. What actually moves the needle is a strong portfolio of impactful projects and being able to talk through your work clearly in interviews. The non-American school thing is real but you can offset it by getting your name out through Kaggle, GitHub, or even writing about your projects. networking on LinkedIn with DS people at target companies also helps more than most expect.",
+        "score": 4,
+        "created_utc": 1773388882
+      },
+      {
+        "comment_id": "t1_oa695p2",
+        "author": "ClimateAgitated119",
+        "body": "Work experience and job title matters the most, followed by intangibles like specific work projects and industry. Having a PhD can be worth 2-4 years of experience for early career hires. There is little difference between a master's and a bachelor's degree",
+        "score": 6,
+        "created_utc": 1773378045
+      },
+      {
+        "comment_id": "t1_oa9bwki",
+        "author": "TurbulentJelly1738",
+        "body": "tbh the side project thing is way more valuable than most people realize",
+        "score": 1,
+        "created_utc": 1773422598
+      }
+    ],
+    "devvit_score": 0,
+    "devvit_reason_tags": [
+      "url_seeded_ingestion"
+    ],
+    "moderator_status": "keep",
+    "review_note": "",
+    "collected_at": "2026-04-07T01:01:53Z",
+    "recommended_status": "keep",
+    "candidate_rank": 10,
+    "post_id": "t3_1rsdlu2",
+    "candidate_id": "t3_1rsdlu2",
+    "body_excerpt": "Going on 1YOE as a data scientist at a small consulting company. Have a STEM degree but no masters. Current role is as a contractor, so around full time work, but I am looking to transition into something more stable. Is making the jump to a bigger companies DS team possible with",
+    "devvit_version": "url-ingest-v1",
+    "fetch_mode": "public",
+    "comment_fetch_mode": "initial_only",
+    "comment_fetch_count": 13,
+    "comment_fetch_depth": 0,
+    "comment_cap": 5,
+    "morechildren_enabled": false,
+    "morechildren_request_limit": 0,
+    "morechildren_max_batches": 0,
+    "request_timeout_seconds": 20.0,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_seconds": 0.25
+    },
+    "ratelimit_snapshot": {},
+    "morechildren_ratelimit_snapshot": {},
+    "expandable_comment_ids": [],
+    "expandable_comment_ids_found": [],
+    "expandable_comment_ids_requested": [],
+    "morechildren_expansion_attempted": false,
+    "morechildren_expansion_succeeded": false
+  }
+]

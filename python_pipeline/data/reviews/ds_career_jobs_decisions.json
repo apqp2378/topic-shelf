@@ -1,0 +1,77 @@
+{
+  "batch_name": "ds_career_jobs",
+  "source_cards_file": "C:/Users/최상원/개인프로젝트/topic-shelf/python_pipeline/data/cards/cards_raw_from_urls_ds_career_jobs.json",
+  "reviewed_at": "2026-04-07T01:02:12.854897Z",
+  "decisions": [
+    {
+      "card_id": "reddit_card_2026-04-07_001",
+      "title": "Graduating Soon — Any Tips for Landing an Entry-Level Data Science Job?",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_002",
+      "title": "How do I prepare for my data science job as a new grad?",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_003",
+      "title": "Bombed a Data Scientist Interview!",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_004",
+      "title": "Career advice for new grads or early career data scientists/analysts looking to ride the AI wave",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_005",
+      "title": "Where is Data Science interviews going?",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_006",
+      "title": "How can I gain business acumen as a data scientist?",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_007",
+      "title": "How can I *give* a good data science/machine learning interview?",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_008",
+      "title": "How different are Data Scientists vs Senior Data Scientists technical interviews?",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_009",
+      "title": "How to prepare for AI Engineering interviews?",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    },
+    {
+      "card_id": "reddit_card_2026-04-07_010",
+      "title": "How to take the next step?",
+      "decision": "hold",
+      "publish_candidate": false,
+      "review_note": ""
+    }
+  ]
+}

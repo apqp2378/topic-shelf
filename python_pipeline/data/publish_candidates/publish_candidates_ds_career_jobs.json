@@ -1,0 +1,8 @@
+{
+  "batch_name": "ds_career_jobs",
+  "generated_at": "2026-04-07T01:02:22.006151Z",
+  "source_decisions_file": "C:/Users/최상원/개인프로젝트/topic-shelf/python_pipeline/data/reviews/ds_career_jobs_decisions.json",
+  "source_cards_file": "C:/Users/최상원/개인프로젝트/topic-shelf/python_pipeline/data/cards/cards_raw_from_urls_ds_career_jobs.json",
+  "publish_candidate_count": 0,
+  "publish_candidates": []
+}
