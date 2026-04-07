@@ -48,6 +48,17 @@ then turns that input into raw JSON, normalized records, cards, and optional dow
 3. Export the keep set as raw JSON.
 4. Run the Python pipeline on that raw JSON.
 
+## Batch Selection
+
+- Production batches are narrow, practical, tips-oriented URL lists that are likely to produce publish candidates and blog draft seeds.
+- Baseline batches can be broader or news-oriented when the goal is coverage, monitoring, or a low-yield comparison set.
+- A small batch size, roughly 3 to 10 URLs, is the safest default for validation runs.
+- Success means the batch moves cleanly through `raw JSON -> normalized -> cards -> review sidecars -> publish_candidates -> blog_draft_seeds`.
+- Keep using `reddit_public` for near-term validation while it is passing preflight and ingest cleanly.
+- The RSS helper stage can generate `auto_*.txt` URL lists, but it does not replace the manual URL-list workflow.
+- Use `python_pipeline/data/url_lists/claude_code_tips.txt` as the canonical example URL-list file.
+- Do not reintroduce `my_threads.txt`.
+
 ## Where To Read Next
 
 - `python_pipeline/README.md`

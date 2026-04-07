@@ -1,0 +1,52 @@
+{
+  "parser_fallback_enabled": false,
+  "batches": [
+    {
+      "batch_name": "python_learning_tips",
+      "batch_mode": "production",
+      "enabled": true,
+      "max_urls": 3,
+      "recent_days": 30,
+      "sources": [
+        {
+          "type": "rss",
+          "url": "https://www.reddit.com/r/learnpython/.rss",
+          "source_name": "learnpython_rss"
+        }
+      ]
+    },
+    {
+      "batch_name": "ai_news",
+      "batch_mode": "baseline",
+      "enabled": true,
+      "max_urls": 10,
+      "recent_days": 14,
+      "sources": [
+        {
+          "type": "rss",
+          "url": "https://www.reddit.com/r/artificial/.rss",
+          "source_name": "artificial_rss"
+        },
+        {
+          "type": "rss",
+          "url": "https://www.reddit.com/r/singularity/.rss",
+          "source_name": "singularity_rss"
+        }
+      ]
+    },
+    {
+      "batch_name": "ds_career_jobs",
+      "batch_mode": "baseline",
+      "enabled": false,
+      "max_urls": 10,
+      "recent_days": 30,
+      "sources": [
+        {
+          "type": "rss",
+          "url": "https://www.reddit.com/r/datascience/.rss",
+          "source_name": "datascience_rss"
+        }
+      ]
+    }
+  ]
+}
